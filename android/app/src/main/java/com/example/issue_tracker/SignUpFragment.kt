@@ -88,6 +88,7 @@ class SignUpFragment : Fragment() {
 
     private val passwordListener = object : TextWatcher {
         override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+
         }
 
         override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
@@ -100,9 +101,21 @@ class SignUpFragment : Fragment() {
                         binding.passwordTextInputLayout.error = "비밀번호를 입력해주세요."
                         passwordFlag = false
                     }
-                    else -> {
+                    s.isNotEmpty() -> {
                         binding.passwordTextInputLayout.error = null
                         passwordFlag = true
+                        when {
+                            binding.passwordRecheckTextInputLayout.editText?.text.toString() != ""
+                                    && binding.passwordRecheckTextInputLayout.editText?.text.toString() != binding.passwordTextInputLayout.editText?.text.toString() -> {
+                                binding.passwordRecheckTextInputLayout.error = "비밀번호가 일치하지 않습니다"
+                                passwordCheckFlag = false
+                                passwordFlag = true
+                            }
+                            else -> {
+                                binding.passwordRecheckTextInputLayout.error = null
+                                passwordCheckFlag = true
+                            }
+                        }
                     }
                 }
                 flagCheck()
