@@ -43,15 +43,6 @@ class SignUpFragment : Fragment() {
         }
 
         binding.passwordTextInputLayout.editText?.addTextChangedListener(passwordListener)
-        binding.passwordTextInputEditText.hint = resources.getString(R.string.password_hint)
-        binding.passwordTextInputEditText.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                binding.passwordTextInputEditText.hint = ""
-            } else {
-                binding.passwordTextInputEditText.hint =
-                    resources.getString(R.string.password_hint)
-            }
-        }
 
         binding.passwordRecheckTextInputLayout.editText?.addTextChangedListener(
             passwordRecheckListener

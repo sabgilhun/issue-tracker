@@ -3,8 +3,7 @@
     <string name="hello_sing_up_fragment">Hello sing up fragment</string>
     <string name="main_text">회원가입</string>
     <string name="id">아이디</string>
-    <string name="id_hint">영문, 소문자, 숫자, 특수기호 : 5 ~ 20자</string>
-    <string name="password_hint">영문 대/소문자, 숫자, 특수문자(!@#$$%) 8~16자</string>
+    <string name="id_hint">이메일을 입력해주세요.</string>
     <string name="password">비밀번호</string>
     <string name="password_recheck">비밀번호 재확인</string>
     <string name="name">이름</string>
