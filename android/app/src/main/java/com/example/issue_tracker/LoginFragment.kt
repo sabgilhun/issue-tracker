@@ -14,12 +14,6 @@ import com.example.issue_tracker.databinding.FragmentLoginBinding
 class LoginFragment : Fragment() {
 
     lateinit var binding: FragmentLoginBinding
-    lateinit var activityContext: Context
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        activityContext = context
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +30,7 @@ class LoginFragment : Fragment() {
             findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
         }
         binding.btnSingIn.setOnClickListener {
-            val intent = Intent(activityContext, IssueActivity::class.java)
+            val intent = Intent(context, IssueActivity::class.java)
             startActivity(intent)
         }
     }

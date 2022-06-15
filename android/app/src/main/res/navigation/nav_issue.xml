@@ -17,7 +17,7 @@
         tools:layout="@layout/fragment_account" />
     <fragment
         android:id="@+id/labelFragment"
-        android:name="com.example.issue_tracker.LabelFragment"
+        android:name="com.example.issue_tracker.label.LabelFragment"
         android:label="fragment_label"
         tools:layout="@layout/fragment_label" />
     <fragment
