@@ -34,7 +34,7 @@
     </style>
 
     <style name="Subtitle1.14.gray">
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/gray02</item>
     </style>
 
 
@@ -47,11 +47,11 @@
     </style>
 
     <style name="Subtitle1.18.gray">
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/gray02</item>
     </style>
 
     <style name="Subtitle1.16.gray">
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/gray02</item>
     </style>
 
 
@@ -86,6 +86,6 @@
     </style>
 
     <style name="Subtitle2.grey03">
-        <item name="android:textColor">@color/gray</item>
+        <item name="android:textColor">@color/gray02</item>
     </style>
 </resources>

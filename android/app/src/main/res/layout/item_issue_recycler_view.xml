@@ -4,7 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="issue"
+            type="com.example.issue_tracker.Issue" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +20,7 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="6dp"
             android:drawablePadding="6dp"
-            android:text="마일스톤"
+            android:text="@{issue.mileStone}"
             android:textSize="12sp"
             app:drawableStartCompat="@drawable/ic_baseline_outlined_flag_20"
             app:drawableTint="@color/gray02"
@@ -32,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="제목"
+            android:text="@{issue.title}"
             app:layout_constraintStart_toStartOf="@+id/tv_item_issue_mile_stone"
             app:layout_constraintTop_toBottomOf="@+id/tv_item_issue_mile_stone"
             tools:text="제목" />
@@ -42,6 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="2"
+            android:text="@{issue.contents}"
             android:layout_marginTop="4dp"
             tools:text="이슈에 대한 설명"
             app:layout_constraintStart_toStartOf="@+id/tv_item_issue_title"
@@ -54,6 +57,7 @@
             app:layout_constraintStart_toStartOf="@+id/tv_item_issue_contents"
             app:layout_constraintTop_toBottomOf="@+id/tv_item_issue_contents"
             tools:text="Label"
+            android:text="@{issue.label.labelContents}"
             android:layout_marginTop="10dp"
             android:background="@drawable/shape_issue_label"
             android:paddingStart="10dp"

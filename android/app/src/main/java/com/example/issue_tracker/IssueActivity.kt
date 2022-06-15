@@ -2,15 +2,20 @@ package com.example.issue_tracker
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
 import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.issue_tracker.databinding.ActivityIssueBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class IssueActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityIssueBinding
+    private val viewModel: IssueViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,5 +28,4 @@ class IssueActivity : AppCompatActivity() {
         binding.issueBottomNavigation.setupWithNavController(findNavController(R.id.nav_issue_fragment))
 
     }
-
 }
