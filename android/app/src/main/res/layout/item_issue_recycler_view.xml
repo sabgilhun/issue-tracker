@@ -46,6 +46,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:maxLines="2"
+            android:paddingStart="0dp"
+            android:paddingEnd="10dp"
             android:text="@{issue.contents}"
             app:layout_constraintStart_toStartOf="@+id/tv_item_issue_title"
             app:layout_constraintTop_toBottomOf="@+id/tv_item_issue_title"
