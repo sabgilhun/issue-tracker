@@ -9,8 +9,8 @@ import javax.persistence.*;
 @Getter
 @Entity
 public class User {
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long userId;
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY) @Column(name = "user_id")
+    private Long id;
     private String email;
     private String password;
     @Enumerated(EnumType.STRING)
