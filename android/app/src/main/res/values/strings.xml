@@ -30,4 +30,6 @@
     <string name="label_btn_issue_filter">btn_issue_filter</string>
     <string name="label_issue">이슈</string>
     <string name="label_issue_search">issue_search</string>
+    <string name="labellist_title">레이블</string>
+    <string name="add_new_label_title">새로운 레이블</string>
 </resources>
