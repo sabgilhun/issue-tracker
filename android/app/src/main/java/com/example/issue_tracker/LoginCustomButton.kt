@@ -31,7 +31,7 @@ class LoginCustomButton(context: Context, attrs: AttributeSet) : ConstraintLayou
     }
 
     private fun setButtonText(text: String) {
-        binding.tvButtonLogin.text = text
+        binding.tvButtonTitle.text = text
     }
 
     fun setButtonImage(@IdRes resourceID: Int) {
