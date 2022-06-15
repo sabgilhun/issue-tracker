@@ -1,12 +1,10 @@
 package com.example.issue_tracker
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
-import androidx.lifecycle.ViewModel
 import androidx.navigation.findNavController
-import androidx.navigation.ui.NavigationUI
 import androidx.navigation.ui.setupWithNavController
 import com.example.issue_tracker.databinding.ActivityIssueBinding
 import dagger.hilt.android.AndroidEntryPoint
