@@ -7,7 +7,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @NoArgsConstructor
@@ -18,26 +20,21 @@ public class Issue {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "issue_id")
     private Long id;
-    @Column(name = "issue_name")
-    private String name;
+    private String title;
+    private String description;
     @ManyToOne
     @JoinColumn(name = "milestone_id")
     private Milestone milestone;
     @ManyToOne
     @JoinColumn(name = "author_id")
     private User author;
-    @ManyToMany
-    @JoinTable(name = "issue_assignee",
-            joinColumns = @JoinColumn(name = "issue_id"),
-            inverseJoinColumns = @JoinColumn(name = "user_id"))
-    private List<User> assignees;
-    @ManyToMany
-    @JoinTable(name = "issue_label",
-            joinColumns = @JoinColumn(name = "issue_id"),
-            inverseJoinColumns = @JoinColumn(name = "label_id"))
-    private List<Label> labels;
-    private String title;
-    private String description;
+    @OneToMany(mappedBy = "issue")
+    private List<Assignment> assignments = new ArrayList<>();
+    @OneToMany(mappedBy = "issue")
+    private List<Comment> comments = new ArrayList<>();
+    @ManyToOne @JoinColumn(name = "label_id")
+    private Label label;
     private boolean isOpened;
     private LocalDateTime createdAt;
+    private LocalDateTime modifiedAt;
 }

@@ -13,6 +13,7 @@ public class User {
     private Long id;
     private String email;
     private String password;
+    private String profileImageUrl;
     @Enumerated(EnumType.STRING)
     private OauthClient oauthClient;
 }
