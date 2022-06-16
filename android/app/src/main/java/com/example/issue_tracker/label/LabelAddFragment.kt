@@ -21,6 +21,7 @@ class LabelAddFragment : Fragment() {
 
     private lateinit var binding: FragmentLabelAddBinding
     private val viewModel: LabelAddViewModel by viewModels()
+    private val findNavControl = findNavController()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -59,13 +60,7 @@ class LabelAddFragment : Fragment() {
     private fun setClickListener() {
         binding.btnLabelSave.setOnClickListener {
             viewModel.saveLabel()
-            viewLifecycleOwner.repeatOnLifecycleExtension {
-                viewModel.labelList.collect { labelList ->
-                    val bundle = bundleOf("label" to labelList)
-                    Log.d("LabelAddFragment", labelList.size.toString())
-                    findNavController().navigate(R.id.action_labelAddFragment_to_labelFragment, bundle)
-                }
-            }
+            findNavControl.navigate(R.id.action_labelAddFragment_to_labelFragment)
         }
     }
 

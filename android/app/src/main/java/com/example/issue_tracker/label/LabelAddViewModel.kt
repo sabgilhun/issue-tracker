@@ -9,10 +9,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
 @HiltViewModel
-class LabelAddViewModel @Inject constructor() : ViewModel() {
-
-    private val _labelList = MutableStateFlow<MutableList<Label>>(mutableListOf())
-    val labelList = _labelList.asStateFlow()
+class LabelAddViewModel @Inject constructor(
+    private val labelRepository: LabelRepository
+) : ViewModel() {
 
     private val _label = MutableStateFlow(Label(null, INITIAL_TITLE, null, INITIAL_COLOR))
     val label = _label.asStateFlow()
@@ -41,7 +40,7 @@ class LabelAddViewModel @Inject constructor() : ViewModel() {
     }
 
     fun saveLabel() {
-        _labelList.setList(_label.value)
+        labelRepository.setLabelList(_label.value)
     }
 
     private fun convertIntToHex(number: Int): String {
