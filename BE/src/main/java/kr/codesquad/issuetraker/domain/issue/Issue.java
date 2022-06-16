@@ -35,4 +35,5 @@ public class Issue {
     private boolean isOpened;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
+    private boolean isDeleted;
 }

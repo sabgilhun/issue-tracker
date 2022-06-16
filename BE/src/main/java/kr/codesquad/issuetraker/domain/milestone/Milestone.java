@@ -26,4 +26,5 @@ public class Milestone {
     private LocalDate dueDate;
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
+    private boolean isDeleted;
 }
