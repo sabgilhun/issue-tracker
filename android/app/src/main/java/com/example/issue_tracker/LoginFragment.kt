@@ -26,8 +26,9 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val navigationControl = findNavController()
         binding.btnToSignUp.setOnClickListener {
-            findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
+            navigationControl.navigate(R.id.action_loginFragment_to_signUpFragment)
         }
         binding.btnSingIn.setOnClickListener {
             val intent = Intent(context, IssueActivity::class.java)
