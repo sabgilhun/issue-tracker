@@ -31,19 +31,8 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.nextButton.isEnabled = false
-
         binding.idTextInputLayout.editText?.addTextChangedListener(idListener)
-        binding.idTextInputEditText.hint = resources.getString(R.string.id_hint)
-        binding.idTextInputEditText.setOnFocusChangeListener { _, hasFocus ->
-            if (hasFocus) {
-                binding.idTextInputEditText.hint = ""
-            } else {
-                binding.idTextInputEditText.hint = resources.getString(R.string.id_hint)
-            }
-        }
-
         binding.passwordTextInputLayout.editText?.addTextChangedListener(passwordListener)
-
         binding.passwordRecheckTextInputLayout.editText?.addTextChangedListener(
             passwordRecheckListener
         )

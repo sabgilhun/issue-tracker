@@ -18,7 +18,6 @@ class IssueActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_issue)
-        setContentView(binding.root)
     }
 
     override fun onStart() {

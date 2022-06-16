@@ -5,9 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.issue_tracker.databinding.ItemIssueRecyclerViewBinding
+import androidx.recyclerview.widget.ListAdapter
 
-class IssueAdapter : androidx.recyclerview.widget.ListAdapter<Issue, IssueAdapter.IssueViewHolder>(
-    HistoryDiffCallback
+class IssueAdapter : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(
+    IssueDiffCallback
 ) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IssueViewHolder {
@@ -29,7 +30,7 @@ class IssueAdapter : androidx.recyclerview.widget.ListAdapter<Issue, IssueAdapte
     }
 }
 
-object HistoryDiffCallback : DiffUtil.ItemCallback<Issue>() {
+object IssueDiffCallback : DiffUtil.ItemCallback<Issue>() {
     override fun areItemsTheSame(oldItem: Issue, newItem: Issue): Boolean {
         return oldItem.issueId == newItem.issueId
     }

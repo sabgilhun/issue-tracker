@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 class IssueFragment : Fragment() {
 
     lateinit var binding: FragmentIssueBinding
+    lateinit var adapter: IssueAdapter
     private val viewModel: IssueViewModel by activityViewModels()
 
     override fun onCreateView(
@@ -31,12 +32,12 @@ class IssueFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewModel.getIssue()
-        binding.rvIssue.adapter = IssueAdapter().apply {
-            viewLifecycleOwner.lifecycleScope.launch {
-                viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    viewModel.mileStone.collect {
-                        submitList(it)
-                    }
+        adapter = IssueAdapter()
+        binding.rvIssue.adapter = adapter
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.mileStone.collect {
+                    adapter.submitList(it)
                 }
             }
         }
