@@ -11,7 +11,7 @@
 
         <variable
             name="viewModel"
-            type="com.example.issue_tracker.label.LabelViewModel" />
+            type="com.example.issue_tracker.label.LabelAddViewModel" />
 
     </data>
 
@@ -42,8 +42,6 @@
                     android:background="@android:color/transparent"
                     android:contentDescription="@string/go_back"
                     android:src="@drawable/ic_baseline_navigate_before_24"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
                     app:tint="@color/white" />
 
                 <TextView
@@ -51,12 +49,19 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     android:text="@string/add_new_label_title"
                     android:textColor="@color/white"
-                    android:textSize="24sp"
-                    app:layout_constraintStart_toEndOf="@id/iv_go_back"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:textSize="24sp" />
+
+                <Button
+                    android:id="@+id/btn_label_save"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:backgroundTint="@android:color/transparent"
+                    android:outlineProvider="none"
+                    android:text="@string/label_save" />
 
             </androidx.appcompat.widget.Toolbar>
 
@@ -80,8 +85,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="26dp"
             android:background="@android:color/transparent"
-            android:text="@={viewModel.labelTitle}"
             android:hint="@string/label_title_required"
+            android:maxLines="1"
+            android:text="@={viewModel.labelTitle}"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/tv_label_title"
             app:layout_constraintTop_toBottomOf="@id/add_label_app_bar_layout" />
@@ -105,6 +111,8 @@
             android:layout_marginTop="26dp"
             android:background="@android:color/transparent"
             android:hint="@string/label_optional_description"
+            android:maxLines="1"
+            android:text="@={viewModel.labelDescription}"
             android:textSize="14sp"
             app:layout_constraintStart_toEndOf="@id/tv_label_description"
             app:layout_constraintTop_toBottomOf="@id/it_label_title" />
@@ -137,12 +145,11 @@
             android:layout_marginTop="26dp"
             android:layout_marginEnd="16dp"
             android:background="@android:color/transparent"
+            android:contentDescription="@string/change_random_color"
             android:onClick="@{()->viewModel.randomColor()}"
             android:src="@drawable/ic_rotate"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/it_label_description"
-            android:contentDescription="@string/change_random_color"
-            />
+            app:layout_constraintTop_toBottomOf="@id/it_label_description" />
 
         <View
             android:layout_width="match_parent"

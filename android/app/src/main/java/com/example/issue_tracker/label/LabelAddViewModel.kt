@@ -1,31 +1,25 @@
 package com.example.issue_tracker.label
 
-import android.graphics.Color
-import android.util.Log
-import androidx.databinding.BaseObservable
-import androidx.databinding.Bindable
-import androidx.databinding.ObservableField
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.issue_tracker.BR
 import com.example.issue_tracker.Label
+import com.example.issue_tracker.common.setList
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LabelViewModel @Inject constructor() : ViewModel() {
+class LabelAddViewModel @Inject constructor() : ViewModel() {
 
     private val _labelList = MutableStateFlow<MutableList<Label>>(mutableListOf())
+    val labelList = _labelList.asStateFlow()
 
-    private val _labelColor = MutableStateFlow(Label(null, INITIAL_TITLE, null, INITIAL_COLOR))
-    val labelColor = _labelColor.asStateFlow()
+    private val _label = MutableStateFlow(Label(null, INITIAL_TITLE, null, INITIAL_COLOR))
+    val label = _label.asStateFlow()
 
     val labelTitle = MutableStateFlow(INITIAL_TITLE)
+
+    val labelDescription = MutableStateFlow(INITIAL_DESCRIPTION)
 
     fun randomColor() {
         val randomA = 255
@@ -43,7 +37,11 @@ class LabelViewModel @Inject constructor() : ViewModel() {
         randomColorStringBuilder.append(colorG)
         randomColorStringBuilder.append(colorB)
 
-        _labelColor.value = Label(null, labelTitle.value, null, randomColorStringBuilder.toString())
+        _label.value = Label(null, labelTitle.value, labelDescription.value, randomColorStringBuilder.toString())
+    }
+
+    fun saveLabel() {
+        _labelList.setList(_label.value)
     }
 
     private fun convertIntToHex(number: Int): String {
@@ -53,6 +51,8 @@ class LabelViewModel @Inject constructor() : ViewModel() {
     companion object {
         const val INITIAL_COLOR = "#FFFFFFFF"
         const val INITIAL_TITLE = "label"
+        const val INITIAL_DESCRIPTION = "label 에 설명을 추가해주세요"
+
     }
 
 }
