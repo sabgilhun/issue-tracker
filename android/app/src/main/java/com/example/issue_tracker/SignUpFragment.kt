@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.issue_tracker.databinding.FragmentSignUpBinding
-import java.util.regex.Pattern
 
 
 class SignUpFragment : Fragment() {

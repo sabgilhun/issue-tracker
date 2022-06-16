@@ -1,8 +1,6 @@
 package com.example.issue_tracker
 
 import android.os.Bundle
-import android.util.Log
-import android.view.MotionEvent
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil

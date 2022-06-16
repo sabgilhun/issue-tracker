@@ -1,7 +1,6 @@
 package com.example.issue_tracker
 
 import android.graphics.Canvas
-import android.util.Log
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.*
