@@ -33,5 +33,9 @@
         android:id="@+id/labelAddFragment"
         android:name="com.example.issue_tracker.label.LabelAddFragment"
         android:label="fragment_label_add"
-        tools:layout="@layout/fragment_label_add" />
+        tools:layout="@layout/fragment_label_add" >
+        <action
+            android:id="@+id/action_labelAddFragment_to_labelFragment"
+            app:destination="@id/labelFragment" />
+    </fragment>
 </navigation>
