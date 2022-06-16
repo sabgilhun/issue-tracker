@@ -19,9 +19,6 @@ public class Milestone {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "milestone_id")
     private Long id;
-    @ManyToOne
-    @JoinColumn(name = "author_id")
-    private User Author;
     private String title;
     private String description;
     @OneToMany(mappedBy = "milestone")
