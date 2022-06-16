@@ -3,9 +3,9 @@ package com.example.issue_tracker
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.issue_tracker.databinding.ItemIssueRecyclerViewBinding
-import androidx.recyclerview.widget.ListAdapter
 
 class IssueAdapter : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(
     IssueDiffCallback

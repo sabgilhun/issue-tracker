@@ -36,7 +36,7 @@ class IssueFragment : Fragment() {
         binding.rvIssue.adapter = adapter
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.mileStone.collect {
+                viewModel.issue.collect {
                     adapter.submitList(it)
                 }
             }

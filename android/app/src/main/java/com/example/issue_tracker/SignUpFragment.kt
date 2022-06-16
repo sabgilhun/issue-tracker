@@ -132,12 +132,14 @@ class SignUpFragment : Fragment() {
 
     // 이메일 정규식 확인
     private fun checkEmailRegex(id: String): Boolean {
-        val emailValidation =
-            "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$"
-        return Pattern.matches(emailValidation, id)
+        return emailValidation.matches(id)
     }
 
     fun flagCheck() {
         binding.nextButton.isEnabled = idFlag && passwordFlag && passwordCheckFlag
+    }
+
+    companion object {
+        private val emailValidation = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$".toRegex()
     }
 }
