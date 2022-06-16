@@ -38,4 +38,5 @@
     <string name="label_title_required">필수 입력</string>
     <string name="label_background_color">배경색</string>
     <string name="go_back">뒤로가기</string>
+    <string name="change_random_color">색상변경</string>
 </resources>
