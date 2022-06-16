@@ -29,8 +29,6 @@ public class Issue {
     @JoinColumn(name = "author_id")
     private User author;
     @OneToMany(mappedBy = "issue")
-    private List<Assignment> assignments = new ArrayList<>();
-    @OneToMany(mappedBy = "issue")
     private List<Comment> comments = new ArrayList<>();
     @ManyToOne @JoinColumn(name = "label_id")
     private Label label;
