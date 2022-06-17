@@ -23,13 +23,13 @@ public class IssueController {
     }
 
     @PostMapping
-    public ResponseEntity<NewIssueResponseDto> createIssue(@ModelAttribute NewIssueRequestDto requestDto) {
+    public ResponseEntity<NewIssueResponseDto> createIssue(@RequestBody NewIssueRequestDto requestDto) {
         return ResponseEntity.ok(issueService.createIssue(requestDto));
     }
 
     @GetMapping("/{issueId}")
     public ResponseEntity<IssueDetailResponseDto> loadIssueDetails(@PathVariable Long issueId) {
-        return ResponseEntity.ok(issueService.getIssueDetail(issueId))
+        return ResponseEntity.ok(issueService.getIssueDetail(issueId));
     }
 
 }
