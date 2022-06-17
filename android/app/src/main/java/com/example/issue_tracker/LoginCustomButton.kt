@@ -3,6 +3,7 @@ package com.example.issue_tracker
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
@@ -31,10 +32,10 @@ class LoginCustomButton(context: Context, attrs: AttributeSet) : ConstraintLayou
     }
 
     private fun setButtonText(text: String) {
-        binding.tvButtonLogin.text = text
+        binding.tvButtonTitle.text = text
     }
 
-    fun setButtonImage(@IdRes resourceID: Int) {
+    fun setButtonImage(@DrawableRes resourceID: Int) {
         binding.ivBtnImage.setImageResource(resourceID)
     }
 
