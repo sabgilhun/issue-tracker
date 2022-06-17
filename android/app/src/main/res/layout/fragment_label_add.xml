@@ -7,18 +7,18 @@
 
         <variable
             name="label"
-            type="com.example.issue_tracker.Label" />
+            type="com.example.issue_tracker.model.Label" />
 
         <variable
             name="viewModel"
-            type="com.example.issue_tracker.label.LabelAddViewModel" />
+            type="com.example.issue_tracker.ui.label.LabelAddViewModel" />
 
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".label.LabelAddFragment">
+        tools:context=".ui.label.LabelAddFragment">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/add_label_app_bar_layout"
@@ -160,7 +160,7 @@
             android:background="@drawable/label_preview_background"
             app:layout_constraintTop_toBottomOf="@id/tv_background_color_number" />
 
-        <com.example.issue_tracker.label.CustomLabel
+        <com.example.issue_tracker.ui.label.CustomLabel
             android:id="@+id/custom_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

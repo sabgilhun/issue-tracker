@@ -1,4 +1,4 @@
-package com.example.issue_tracker.label
+package com.example.issue_tracker.repository
 
 import dagger.Binds
 import dagger.Module

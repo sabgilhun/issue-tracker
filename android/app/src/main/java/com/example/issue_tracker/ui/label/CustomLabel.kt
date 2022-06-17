@@ -1,14 +1,12 @@
-package com.example.issue_tracker.label
+package com.example.issue_tracker.ui.label
 
 import android.content.Context
-import android.graphics.*
-import android.graphics.drawable.GradientDrawable
+import android.graphics.BlendMode
+import android.graphics.BlendModeColorFilter
+import android.graphics.Color
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import androidx.annotation.ColorInt
-import androidx.annotation.ColorRes
 import androidx.constraintlayout.widget.ConstraintLayout
-import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import androidx.databinding.DataBindingUtil
 import com.example.issue_tracker.R
@@ -52,5 +50,4 @@ class CustomLabel(context: Context, attributeSet: AttributeSet) :
 
         binding.customLabelLayout.background = drawable
     }
-
 }

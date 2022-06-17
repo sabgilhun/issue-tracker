@@ -11,7 +11,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".LoginActivity">
+        tools:context=".ui.LoginActivity">
 
         <ImageView
             android:id="@+id/ic_issue_tracker"
@@ -85,7 +85,7 @@
             app:layout_constraintStart_toEndOf="@id/btn_sing_in"
             app:layout_constraintTop_toBottomOf="@id/password_input_edit_layout" />
 
-        <com.example.issue_tracker.LoginCustomButton
+        <com.example.issue_tracker.ui.login.LoginCustomButton
             android:id="@+id/cb_github_login"
             android:layout_width="199dp"
             android:layout_height="48dp"
@@ -96,7 +96,7 @@
             app:buttonImage="@{R.drawable.custom_github_logo}"
             app:text="깃헙 계정으로 로그인" />
 
-        <com.example.issue_tracker.LoginCustomButton
+        <com.example.issue_tracker.ui.login.LoginCustomButton
             android:id="@+id/cb_google_login"
             android:layout_width="199dp"
             android:layout_height="48dp"

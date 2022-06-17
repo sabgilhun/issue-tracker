@@ -1,6 +1,4 @@
-package com.example.issue_tracker
-
-import java.io.Serializable
+package com.example.issue_tracker.model
 
 data class Issue(
     val issueId: Int,
@@ -15,4 +13,4 @@ data class Label(
     val labelTitle: String?,
     val labelContents: String?,
     val labelColor: String?
-): Serializable
+)

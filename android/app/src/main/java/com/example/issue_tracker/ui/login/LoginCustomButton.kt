@@ -1,12 +1,12 @@
-package com.example.issue_tracker
+package com.example.issue_tracker.ui.login
 
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.annotation.DrawableRes
-import androidx.annotation.IdRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.databinding.DataBindingUtil
+import com.example.issue_tracker.R
 import com.example.issue_tracker.databinding.CustomButtonBinding
 
 class LoginCustomButton(context: Context, attrs: AttributeSet) : ConstraintLayout(context, attrs) {

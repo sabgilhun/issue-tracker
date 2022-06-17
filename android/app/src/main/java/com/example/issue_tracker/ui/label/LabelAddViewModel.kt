@@ -1,10 +1,11 @@
-package com.example.issue_tracker.label
+package com.example.issue_tracker.ui.label
 
 import androidx.lifecycle.ViewModel
-import com.example.issue_tracker.Label
-import com.example.issue_tracker.common.setList
+import com.example.issue_tracker.model.Label
+import com.example.issue_tracker.repository.LabelRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 
@@ -13,12 +14,12 @@ class LabelAddViewModel @Inject constructor(
     private val labelRepository: LabelRepository
 ) : ViewModel() {
 
-    private val _label = MutableStateFlow(Label(null, INITIAL_TITLE, null, INITIAL_COLOR))
-    val label = _label.asStateFlow()
+    private val _label: MutableStateFlow<Label> = MutableStateFlow(Label(null, "", null, INITIAL_COLOR))
+    val label: StateFlow<Label> = _label.asStateFlow()
 
-    val labelTitle = MutableStateFlow(INITIAL_TITLE)
+    val labelTitle: MutableStateFlow<String> = MutableStateFlow("")
 
-    val labelDescription = MutableStateFlow(INITIAL_DESCRIPTION)
+    val labelDescription: MutableStateFlow<String> = MutableStateFlow("")
 
     fun randomColor() {
         val randomA = 255
@@ -49,9 +50,5 @@ class LabelAddViewModel @Inject constructor(
 
     companion object {
         const val INITIAL_COLOR = "#FFFFFFFF"
-        const val INITIAL_TITLE = "label"
-        const val INITIAL_DESCRIPTION = "label 에 설명을 추가해주세요"
-
     }
-
 }

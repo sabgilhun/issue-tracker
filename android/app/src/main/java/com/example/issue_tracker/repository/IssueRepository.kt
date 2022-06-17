@@ -1,5 +1,7 @@
-package com.example.issue_tracker
+package com.example.issue_tracker.repository
 
+import com.example.issue_tracker.model.Issue
+import com.example.issue_tracker.model.Label
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject

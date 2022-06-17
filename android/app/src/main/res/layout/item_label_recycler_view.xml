@@ -8,14 +8,14 @@
 
         <variable
             name="label"
-            type="com.example.issue_tracker.Label" />
+            type="com.example.issue_tracker.model.Label" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="87dp">
 
-        <com.example.issue_tracker.label.CustomLabel
+        <com.example.issue_tracker.ui.label.CustomLabel
             android:id="@+id/cl_label_item"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

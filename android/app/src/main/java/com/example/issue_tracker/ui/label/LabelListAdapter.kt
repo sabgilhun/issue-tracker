@@ -1,14 +1,12 @@
-package com.example.issue_tracker.label
+package com.example.issue_tracker.ui.label
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.issue_tracker.Issue
-import com.example.issue_tracker.Label
 import com.example.issue_tracker.databinding.ItemLabelRecyclerViewBinding
+import com.example.issue_tracker.model.Label
 
 class LabelListAdapter : ListAdapter<Label, LabelListAdapter.LabelViewHolder>(LabelDiffCallback) {
 
@@ -40,5 +38,4 @@ class LabelListAdapter : ListAdapter<Label, LabelListAdapter.LabelViewHolder>(La
             }
         }
     }
-
 }
