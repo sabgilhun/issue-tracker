@@ -8,12 +8,12 @@ import kr.codesquad.issuetraker.domain.milestone.Milestone;
 import kr.codesquad.issuetraker.domain.milestone.MilestoneRepository;
 import kr.codesquad.issuetraker.domain.user.User;
 import kr.codesquad.issuetraker.domain.user.UserRepository;
-import kr.codesquad.issuetraker.dto.CreateIssueResponseDto;
+import kr.codesquad.issuetraker.dto.NewIssueResponseDto;
+import kr.codesquad.issuetraker.dto.IssueDetailResponseDto;
 import kr.codesquad.issuetraker.dto.IssueListResponseDto;
 import kr.codesquad.issuetraker.dto.NewIssueRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.ModelAttribute;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -34,7 +34,7 @@ public class IssueService {
                 .collect(Collectors.toList());
     }
 
-    public CreateIssueResponseDto createIssue(NewIssueRequestDto requestDto) {
+    public NewIssueResponseDto createIssue(NewIssueRequestDto requestDto) {
         User author = userRepository.findById(requestDto.getAuthorId()).orElseThrow(() -> new RuntimeException());
         User assignee = userRepository.findById(requestDto.getAssigneeId()).orElseThrow(() -> new RuntimeException());
         Label label = labelRepository.findById(requestDto.getLabelId()).orElseThrow(() -> new RuntimeException());
@@ -52,6 +52,12 @@ public class IssueService {
                 .build();
 
         Issue savedIssue = issueRepository.save(newIssue);
-        return new CreateIssueResponseDto(savedIssue.getId());
+        return new NewIssueResponseDto(savedIssue.getId());
     }
+
+    public IssueDetailResponseDto getIssueDetail(Long issueId) {
+        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
+        return IssueDetailResponseDto.of(issue);
+    }
+
 }

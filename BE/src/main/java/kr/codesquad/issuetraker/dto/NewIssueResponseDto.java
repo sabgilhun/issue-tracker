@@ -3,6 +3,6 @@ package kr.codesquad.issuetraker.dto;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
-public class CreateIssueResponseDto {
+public class NewIssueResponseDto {
     private Long issueId;
 }
