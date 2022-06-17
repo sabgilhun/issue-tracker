@@ -2,8 +2,10 @@ package kr.codesquad.issuetraker.dto;
 
 import kr.codesquad.issuetraker.domain.user.User;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 @AllArgsConstructor
+@Getter
 public class UserInfoDto {
     private Long userId;
     private String displayName;

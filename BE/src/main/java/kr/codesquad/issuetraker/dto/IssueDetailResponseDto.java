@@ -4,10 +4,12 @@ import kr.codesquad.issuetraker.domain.issue.Issue;
 import kr.codesquad.issuetraker.domain.label.Label;
 import kr.codesquad.issuetraker.domain.milestone.Milestone;
 import lombok.Builder;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
 @Builder
+@Getter
 public class IssueDetailResponseDto {
     private Long issueId;
     private MilestoneInfoDto milestone;
