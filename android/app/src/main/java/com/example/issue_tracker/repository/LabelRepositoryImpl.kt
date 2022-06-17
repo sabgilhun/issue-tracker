@@ -15,7 +15,7 @@ class LabelRepositoryImpl @Inject constructor() : LabelRepository {
         _labelList.setList(labelList)
     }
 
-    override fun getLabelList(): Flow<MutableList<Label>> {
+    override fun getLabelList(): Flow<List<Label>> {
         return _labelList
     }
 }

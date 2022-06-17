@@ -7,5 +7,5 @@ interface LabelRepository {
 
     fun setLabelList(labelList: Label)
 
-    fun getLabelList(): Flow<MutableList<Label>>
+    fun getLabelList(): Flow<List<Label>>
 }
