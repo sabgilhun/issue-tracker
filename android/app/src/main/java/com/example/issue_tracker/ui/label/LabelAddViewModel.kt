@@ -41,6 +41,10 @@ class LabelAddViewModel @Inject constructor(
     }
 
     fun saveLabel() {
+        if(_label.value.labelColor == INITIAL_COLOR) {
+            labelRepository.setLabelList(Label(null, labelTitle.value, labelDescription.value, INITIAL_COLOR))
+            return
+        }
         labelRepository.setLabelList(_label.value)
     }
 
@@ -49,6 +53,6 @@ class LabelAddViewModel @Inject constructor(
     }
 
     companion object {
-        const val INITIAL_COLOR = "#FFFFFFFF"
+        const val INITIAL_COLOR = "#FF828282"
     }
 }
