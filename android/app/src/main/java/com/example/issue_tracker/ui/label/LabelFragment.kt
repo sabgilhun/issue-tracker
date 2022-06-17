@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.issue_tracker.R
 import com.example.issue_tracker.common.repeatOnLifecycleExtension
@@ -31,11 +32,11 @@ class LabelFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val findNavController = findNavController()
         binding.rvLabelList.adapter = adapter
 
         setRecyclerViewAdapter()
-        setClickListener()
+        setClickListener(findNavController)
     }
 
     private fun setRecyclerViewAdapter() {
@@ -46,9 +47,9 @@ class LabelFragment : Fragment() {
         }
     }
 
-    private fun setClickListener() {
+    private fun setClickListener(findNavController: NavController) {
         binding.ibAddNewLabel.setOnClickListener {
-            findNavController().navigate(R.id.action_labelFragment_to_labelAddFragment)
+            findNavController.navigate(R.id.action_labelFragment_to_labelAddFragment)
         }
     }
 }

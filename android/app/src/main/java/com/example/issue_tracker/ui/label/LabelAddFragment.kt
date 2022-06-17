@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.issue_tracker.R
 import com.example.issue_tracker.common.repeatOnLifecycleExtension
@@ -30,12 +31,13 @@ class LabelAddFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         binding.viewModel = viewModel
+
+        val findNavController = findNavController()
 
         labelColorChange()
         labelTextChange()
-        setClickListener()
+        setClickListener(findNavController)
     }
 
     private fun labelColorChange() {
@@ -54,11 +56,10 @@ class LabelAddFragment : Fragment() {
         }
     }
 
-    private fun setClickListener() {
+    private fun setClickListener(findNavController: NavController) {
         binding.btnLabelSave.setOnClickListener {
             viewModel.saveLabel()
-            findNavController().navigate(R.id.action_labelAddFragment_to_labelFragment)
+            findNavController.navigate(R.id.action_labelAddFragment_to_labelFragment)
         }
     }
-
 }

@@ -14,12 +14,12 @@ class LabelAddViewModel @Inject constructor(
     private val labelRepository: LabelRepository
 ) : ViewModel() {
 
-    private val _label: MutableStateFlow<Label> = MutableStateFlow(Label(null, INITIAL_TITLE, null, INITIAL_COLOR))
+    private val _label: MutableStateFlow<Label> = MutableStateFlow(Label(null, "", null, INITIAL_COLOR))
     val label: StateFlow<Label> = _label.asStateFlow()
 
-    val labelTitle: MutableStateFlow<String> = MutableStateFlow(INITIAL_TITLE)
+    val labelTitle: MutableStateFlow<String> = MutableStateFlow("")
 
-    val labelDescription: MutableStateFlow<String> = MutableStateFlow(INITIAL_DESCRIPTION)
+    val labelDescription: MutableStateFlow<String> = MutableStateFlow("")
 
     fun randomColor() {
         val randomA = 255
@@ -50,8 +50,5 @@ class LabelAddViewModel @Inject constructor(
 
     companion object {
         const val INITIAL_COLOR = "#FFFFFFFF"
-        const val INITIAL_TITLE = "label"
-        const val INITIAL_DESCRIPTION = "label 에 설명을 추가해주세요"
-
     }
 }
