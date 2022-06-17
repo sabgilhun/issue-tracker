@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface IssueRepository extends JpaRepository<Issue, Long> {
-    @Query(value = "SELECT IS FROM Issue as IS where IS.isDeleted = FALSE")
+    @Query(value = "SELECT i FROM Issue i where i.isDeleted = FALSE")
     public List<Issue> findAllAvailableIssues();
 }
