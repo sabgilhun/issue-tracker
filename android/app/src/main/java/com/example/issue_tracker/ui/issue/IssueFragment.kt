@@ -1,4 +1,4 @@
-package com.example.issue_tracker
+package com.example.issue_tracker.ui.issue
 
 import android.annotation.SuppressLint
 import android.os.Bundle
@@ -8,13 +8,12 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
+import com.example.issue_tracker.R
+import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentIssueBinding
+import com.example.issue_tracker.ui.common.SwipeHelperCallback
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 class IssueFragment : Fragment() {
 
@@ -22,7 +21,6 @@ class IssueFragment : Fragment() {
     lateinit var adapter: IssueAdapter
     private val viewModel: IssueViewModel by activityViewModels()
 
-    @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -57,11 +55,9 @@ class IssueFragment : Fragment() {
             false
         }
 
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.issue.collect {
-                    adapter.submitList(it)
-                }
+        viewLifecycleOwner.repeatOnLifecycleExtension {
+            viewModel.issue.collect {
+                adapter.submitList(it)
             }
         }
     }

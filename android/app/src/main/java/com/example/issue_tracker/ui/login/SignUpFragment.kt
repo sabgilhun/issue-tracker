@@ -1,4 +1,4 @@
-package com.example.issue_tracker
+package com.example.issue_tracker.ui.login
 
 import android.os.Bundle
 import android.text.Editable
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import com.example.issue_tracker.R
 import com.example.issue_tracker.databinding.FragmentSignUpBinding
 
 

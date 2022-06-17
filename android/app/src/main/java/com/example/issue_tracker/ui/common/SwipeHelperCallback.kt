@@ -1,10 +1,12 @@
-package com.example.issue_tracker
+package com.example.issue_tracker.ui.common
 
 import android.graphics.Canvas
 import android.view.View
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.ItemTouchHelper.*
 import androidx.recyclerview.widget.RecyclerView
+import com.example.issue_tracker.R
+import com.example.issue_tracker.ui.issue.IssueAdapter
 import kotlin.math.min
 
 
@@ -35,7 +37,9 @@ class SwipeHelperCallback(private val issueAdapter: IssueAdapter) : ItemTouchHel
     }
 
     // swipe_view 반환 -> swipe_view 만 이동할 수 있게 해줌
-    private fun getView(viewHolder: RecyclerView.ViewHolder) : View = viewHolder.itemView.findViewById(R.id.cv_swipe_view)
+    private fun getView(viewHolder: RecyclerView.ViewHolder) : View = viewHolder.itemView.findViewById(
+        R.id.cv_swipe_view
+    )
     private fun getTag(viewHolder: RecyclerView.ViewHolder) : Boolean =  viewHolder.itemView.tag as? Boolean ?: false
     private fun setTag(viewHolder: RecyclerView.ViewHolder, isClamped: Boolean) { viewHolder.itemView.tag = isClamped }
 
