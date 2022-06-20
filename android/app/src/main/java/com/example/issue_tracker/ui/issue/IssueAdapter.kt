@@ -27,6 +27,10 @@ class IssueAdapter : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(
         RecyclerView.ViewHolder(binding.root) {
         fun bind(issue: Issue) {
             binding.issue = issue
+            if(!issue.isSwiped) { binding.cvSwipeView.translationX = 0f }
+            else {
+                binding.cvSwipeView.translationX = binding.root.width * -1f / 10 * 3
+            }
             binding.tvCloseIssue.setOnClickListener {
                 // TODO 닫기 버튼 클릭 시 로직 구현
                 Log.d("테스트", "3번")
