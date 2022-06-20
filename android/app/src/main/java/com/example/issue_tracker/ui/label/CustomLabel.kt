@@ -39,8 +39,8 @@ class CustomLabel(context: Context, attributeSet: AttributeSet) :
         binding.tvCustomLabelTitle.text = text
     }
 
-    fun setLabelColor(color: String?) {
-        val parsedColor = color.let { Color.parseColor(it) }
+    fun setLabelColor(color: String) {
+        val parsedColor = Color.parseColor(color)
         val mode = BlendMode.DST_OVER
 
         val drawable = context.getDrawable(R.drawable.custom_label_background)

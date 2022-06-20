@@ -55,7 +55,7 @@ class IssueFragment : Fragment() {
             false
         }
 
-        viewLifecycleOwner.repeatOnLifecycleExtension {
+        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
             viewModel.issue.collect {
                 adapter.submitList(it)
             }
