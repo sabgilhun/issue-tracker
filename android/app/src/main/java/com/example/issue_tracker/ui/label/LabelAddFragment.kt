@@ -8,6 +8,7 @@ import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.issue_tracker.R
@@ -43,7 +44,7 @@ class LabelAddFragment : Fragment() {
     }
 
     private fun labelColorChange() {
-        viewLifecycleOwner.repeatOnLifecycleExtension {
+        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
             viewModel.label.collect {
                 binding.label = it
             }
@@ -51,7 +52,7 @@ class LabelAddFragment : Fragment() {
     }
 
     private fun labelTextChange() {
-        viewLifecycleOwner.repeatOnLifecycleExtension {
+        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
             viewModel.labelTitle.collect {
                 binding.customLabel.setLabelTitle(it)
             }

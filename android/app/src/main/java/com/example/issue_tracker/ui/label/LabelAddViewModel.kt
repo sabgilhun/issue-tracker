@@ -30,22 +30,23 @@ class LabelAddViewModel @Inject constructor(
         val colorR = convertIntToHex(randomR)
         val colorG = convertIntToHex(randomG)
         val colorB = convertIntToHex(randomB)
-        val randomColorStringBuilder = StringBuilder("")
-        randomColorStringBuilder.append("#")
-        randomColorStringBuilder.append(colorA)
-        randomColorStringBuilder.append(colorR)
-        randomColorStringBuilder.append(colorG)
-        randomColorStringBuilder.append(colorB)
+        val randomColorString = buildString {
+            append("#")
+            append(colorA)
+            append(colorR)
+            append(colorG)
+            append(colorB)
+        }
 
-        _label.value = Label(null, labelTitle.value, labelDescription.value, randomColorStringBuilder.toString())
+        _label.value = Label(null, labelTitle.value, labelDescription.value, randomColorString)
     }
 
     fun saveLabel() {
         if(_label.value.labelColor == INITIAL_COLOR) {
-            labelRepository.setLabelList(Label(null, labelTitle.value, labelDescription.value, INITIAL_COLOR))
+            labelRepository.addLabelList(Label(null, labelTitle.value, labelDescription.value, INITIAL_COLOR))
             return
         }
-        labelRepository.setLabelList(_label.value)
+        labelRepository.addLabelList(_label.value)
     }
 
     private fun convertIntToHex(number: Int): String {
