@@ -37,7 +37,8 @@ public class Issue {
     private User assignee;
     @OneToMany(mappedBy = "issue")
     private List<Comment> comments = new ArrayList<>();
-    @ManyToOne @JoinColumn(name = "label_id")
+    @ManyToOne
+    @JoinColumn(name = "label_id")
     private Label label;
     private boolean isOpened = true;
     private LocalDateTime createdAt;
