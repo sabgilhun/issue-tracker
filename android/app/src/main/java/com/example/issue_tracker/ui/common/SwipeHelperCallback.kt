@@ -7,10 +7,14 @@ import androidx.recyclerview.widget.ItemTouchHelper.*
 import androidx.recyclerview.widget.RecyclerView
 import com.example.issue_tracker.R
 import com.example.issue_tracker.ui.issue.IssueAdapter
+import com.example.issue_tracker.ui.issue.IssueViewModel
 import kotlin.math.min
 
 
-class SwipeHelperCallback(private val issueAdapter: IssueAdapter) : ItemTouchHelper.Callback() {
+class SwipeHelperCallback(
+    private val issueAdapter: IssueAdapter,
+    private val viewModel: IssueViewModel,
+) : ItemTouchHelper.Callback() {
 
     // swipe_view 를 swipe 했을 때 <닫기> 화면이 보이도록 고정하기 위한 변수들
     private var currentPosition: Int? = null    // 현재 선택된 recycler view 의 position
@@ -20,7 +24,7 @@ class SwipeHelperCallback(private val issueAdapter: IssueAdapter) : ItemTouchHel
 
     override fun getMovementFlags(
         recyclerView: RecyclerView,
-        viewHolder: RecyclerView.ViewHolder
+        viewHolder: RecyclerView.ViewHolder,
     ): Int {
         // 드래그 방향 : 위, 아래 인식
         // 스와이프 방향 : 왼쪽, 오른쪽 인식
@@ -31,17 +35,23 @@ class SwipeHelperCallback(private val issueAdapter: IssueAdapter) : ItemTouchHel
     override fun onMove(
         recyclerView: RecyclerView,
         viewHolder: RecyclerView.ViewHolder,
-        target: RecyclerView.ViewHolder
+        target: RecyclerView.ViewHolder,
     ): Boolean {
         return false // 드래그는 구현하지 않을 것이기 때문에 false 리턴
     }
 
     // swipe_view 반환 -> swipe_view 만 이동할 수 있게 해줌
-    private fun getView(viewHolder: RecyclerView.ViewHolder) : View = viewHolder.itemView.findViewById(
-        R.id.cv_swipe_view
-    )
-    private fun getTag(viewHolder: RecyclerView.ViewHolder) : Boolean =  viewHolder.itemView.tag as? Boolean ?: false
-    private fun setTag(viewHolder: RecyclerView.ViewHolder, isClamped: Boolean) { viewHolder.itemView.tag = isClamped }
+    private fun getView(viewHolder: RecyclerView.ViewHolder): View =
+        viewHolder.itemView.findViewById(
+            R.id.cv_swipe_view
+        )
+
+    private fun getTag(viewHolder: RecyclerView.ViewHolder): Boolean =
+        viewModel.getIsSwiped(viewHolder.adapterPosition)
+
+    private fun setTag(viewHolder: RecyclerView.ViewHolder, isClamped: Boolean) {
+        viewModel.setIsSwiped(viewHolder.adapterPosition, isClamped)
+    }
 
     override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
         // 스와이프 후 <닫기> 버튼 눌러야 삭제 되도록 해야하므로 이 부분은 건드리지 않는다.
@@ -54,14 +64,16 @@ class SwipeHelperCallback(private val issueAdapter: IssueAdapter) : ItemTouchHel
     // drag 된 view 가 drop 되었거나, swipe 가 cancel 되거나 complete 되었을 때 호출
     override fun clearView(recyclerView: RecyclerView, viewHolder: RecyclerView.ViewHolder) {
         currentDx = 0f                                      // 현재 x 위치 초기화
-        previousPosition = viewHolder.adapterPosition       // 드래그 또는 스와이프 동작이 끝난 view 의 position 기억하기
+        previousPosition =
+            viewHolder.adapterPosition       // 드래그 또는 스와이프 동작이 끝난 view 의 position 기억하기
         getDefaultUIUtil().clearView(getView(viewHolder))
     }
 
     // ItemTouchHelper 가 ViewHolder 를 스와이프 되었거나 드래그 되었을 때 호출
     override fun onSelectedChanged(viewHolder: RecyclerView.ViewHolder?, actionState: Int) {
         viewHolder?.let {
-            currentPosition = viewHolder.adapterPosition    // 현재 드래그 또는 스와이프 중인 view 의 position 기억하기
+            currentPosition =
+                viewHolder.adapterPosition    // 현재 드래그 또는 스와이프 중인 view 의 position 기억하기
             getDefaultUIUtil().onSelected(it.itemView)
         }
     }
@@ -70,8 +82,8 @@ class SwipeHelperCallback(private val issueAdapter: IssueAdapter) : ItemTouchHel
     private fun clampViewPositionHorizontal(
         dX: Float,
         isClamped: Boolean,
-        isCurrentlyActive: Boolean
-    ) : Float {
+        isCurrentlyActive: Boolean,
+    ): Float {
         // RIGHT 방향으로 swipe 막기
         val max = 0f
 
@@ -80,7 +92,7 @@ class SwipeHelperCallback(private val issueAdapter: IssueAdapter) : ItemTouchHel
             // 현재 swipe 중이면 swipe 되는 영역 제한
             if (isCurrentlyActive)
             // 오른쪽 swipe 일 때
-                if (dX < 0) dX/3 - clamp
+                if (dX < 0) dX / 3 - clamp
                 // 왼쪽 swipe 일 때
                 else dX - clamp
             // swipe 중이 아니면 고정시키기
@@ -101,12 +113,14 @@ class SwipeHelperCallback(private val issueAdapter: IssueAdapter) : ItemTouchHel
         dX: Float,
         dY: Float,
         actionState: Int,
-        isCurrentlyActive: Boolean
+        isCurrentlyActive: Boolean,
     ) {
         if (actionState == ACTION_STATE_SWIPE) {
             val view = getView(viewHolder)
             val isClamped = getTag(viewHolder)    // 고정할지 말지 결정, true : 고정함 false : 고정 안 함
-            val newX = clampViewPositionHorizontal(dX, isClamped, isCurrentlyActive)  // newX 만큼 이동(고정 시 이동 위치/고정 해제 시 이동 위치 결정)
+            val newX = clampViewPositionHorizontal(dX,
+                isClamped,
+                isCurrentlyActive)  // newX 만큼 이동(고정 시 이동 위치/고정 해제 시 이동 위치 결정)
 
             // 고정시킬 시 애니메이션 추가
             if (newX == -clamp) {
@@ -139,7 +153,9 @@ class SwipeHelperCallback(private val issueAdapter: IssueAdapter) : ItemTouchHel
     }
 
     // view 가 swipe 되었을 때 고정될 크기 설정
-    fun setClamp(clamp: Float) { this.clamp = clamp }
+    fun setClamp(clamp: Float) {
+        this.clamp = clamp
+    }
 
     // 다른 View 가 swipe 되거나 터치되면 고정 해제
     fun removePreviousClamp(recyclerView: RecyclerView) {

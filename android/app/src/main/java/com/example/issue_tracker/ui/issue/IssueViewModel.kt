@@ -12,7 +12,8 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class IssueViewModel @Inject constructor(private val issueRepository: IssueRepository) : ViewModel() {
+class IssueViewModel @Inject constructor(private val issueRepository: IssueRepository) :
+    ViewModel() {
 
     private val _issue = MutableStateFlow<MutableList<Issue>>(mutableListOf())
     val issue: StateFlow<MutableList<Issue>> = _issue
@@ -26,4 +27,12 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
             }
         }
     }
+
+    fun setIsSwiped(index: Int, isSwiped: Boolean) {
+        _issue.value[index].isSwiped = isSwiped
+    }
+
+    fun getIsSwiped(index: Int): Boolean =
+        _issue.value[index].isSwiped
+
 }
