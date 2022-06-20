@@ -38,7 +38,7 @@ class IssueFragment : Fragment() {
 
         viewModel.getIssue()
         adapter = IssueAdapter()
-        val swipeHelperCallback = SwipeHelperCallback(adapter).apply {
+        val swipeHelperCallback = SwipeHelperCallback(adapter, viewModel).apply {
             setClamp(resources.displayMetrics.widthPixels.toFloat() / 4)
         }
         binding.rvIssue.adapter = adapter

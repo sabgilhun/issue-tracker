@@ -25,6 +25,7 @@ class IssueAdapter : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(
 
     class IssueViewHolder(private val binding: ItemIssueRecyclerViewBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
         fun bind(issue: Issue) {
             binding.issue = issue
             binding.tvCloseIssue.setOnClickListener {

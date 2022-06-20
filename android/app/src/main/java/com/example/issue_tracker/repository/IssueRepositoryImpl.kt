@@ -40,6 +40,90 @@ class IssueRepositoryImpl @Inject constructor(): IssueRepository {
                 "#D5D5DB"
             )
         )
-        return mutableListOf(firstIssue, secondIssue)
+        val secondIssue2 = Issue(
+            2,
+            "코코아 코스",
+            "ios 이슈트래커",
+            "2022년 8월 12일 월요일 부터 10월 1일 금요일 까지",
+            Label(
+                2,
+                "fix",
+                "fix",
+                "#D5D5DB"
+            )
+        )
+        val secondIssue3 = Issue(
+            2,
+            "코코아 코스",
+            "ios 이슈트래커",
+            "2022년 8월 12일 월요일 부터 10월 1일 금요일 까지",
+            Label(
+                2,
+                "fix",
+                "fix",
+                "#D5D5DB"
+            )
+        )
+        val secondIssue4 = Issue(
+            2,
+            "코코아 코스",
+            "ios 이슈트래커",
+            "2022년 8월 12일 월요일 부터 10월 1일 금요일 까지",
+            Label(
+                2,
+                "fix",
+                "fix",
+                "#D5D5DB"
+            )
+        )
+        val secondIssue5 = Issue(
+            2,
+            "코코아 코스",
+            "ios 이슈트래커",
+            "2022년 8월 12일 월요일 부터 10월 1일 금요일 까지",
+            Label(
+                2,
+                "fix",
+                "fix",
+                "#D5D5DB"
+            )
+        )
+        val secondIssue6 = Issue(
+            2,
+            "코코아 코스",
+            "ios 이슈트래커",
+            "2022년 8월 12일 월요일 부터 10월 1일 금요일 까지",
+            Label(
+                2,
+                "fix",
+                "fix",
+                "#D5D5DB"
+            )
+        )
+        val secondIssue7 = Issue(
+            2,
+            "코코아 코스",
+            "ios 이슈트래커",
+            "2022년 8월 12일 월요일 부터 10월 1일 금요일 까지",
+            Label(
+                2,
+                "fix",
+                "fix",
+                "#D5D5DB"
+            )
+        )
+        val secondIssue8 = Issue(
+            2,
+            "코코아 코스",
+            "ios 이슈트래커",
+            "2022년 8월 12일 월요일 부터 10월 1일 금요일 까지",
+            Label(
+                2,
+                "fix",
+                "fix",
+                "#D5D5DB"
+            )
+        )
+        return mutableListOf(firstIssue, secondIssue, secondIssue2, secondIssue3, secondIssue4, secondIssue5, secondIssue6, secondIssue7, secondIssue8)
     }
 }

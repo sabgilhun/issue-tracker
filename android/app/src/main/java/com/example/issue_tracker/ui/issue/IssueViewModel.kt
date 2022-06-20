@@ -27,4 +27,12 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
             }
         }
     }
+
+    fun changeIssueSwiped(index: Int, isSwiped: Boolean) {
+        _issue.value[index].isSwiped = isSwiped
+    }
+
+    fun getIssueSwiped(index: Int): Boolean {
+        return _issue.value[index].isSwiped
+    }
 }
