@@ -5,7 +5,8 @@ data class Issue(
     val mileStone: String,
     val title: String,
     val contents: String,
-    val label: Label
+    val label: Label,
+    var isSwiped: Boolean = false
 )
 
 data class Label(

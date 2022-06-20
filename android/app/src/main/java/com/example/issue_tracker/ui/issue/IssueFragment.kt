@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
+import androidx.lifecycle.Lifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.issue_tracker.R
 import com.example.issue_tracker.common.repeatOnLifecycleExtension
@@ -37,7 +38,7 @@ class IssueFragment : Fragment() {
 
         viewModel.getIssue()
         adapter = IssueAdapter()
-        val swipeHelperCallback = SwipeHelperCallback(adapter).apply {
+        val swipeHelperCallback = SwipeHelperCallback(adapter, viewModel).apply {
             setClamp(resources.displayMetrics.widthPixels.toFloat() / 4)
         }
         binding.rvIssue.adapter = adapter
