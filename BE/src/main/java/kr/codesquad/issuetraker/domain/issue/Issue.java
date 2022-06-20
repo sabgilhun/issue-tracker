@@ -36,7 +36,7 @@ public class Issue {
     @JoinColumn(name = "assignee_id")
     private User assignee;
     @OneToMany(mappedBy = "issue")
-    private List<Comment> comments = new ArrayList<>();
+    private final List<Comment> comments = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "label_id")
     private Label label;
