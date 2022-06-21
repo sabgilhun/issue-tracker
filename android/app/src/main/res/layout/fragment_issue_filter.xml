@@ -46,15 +46,14 @@
                     android:text="@string/label_filter_title"
                     tools:text="필터" />
 
-                <TextView
-                    android:id="@+id/tv_issue_filter_toolbar_apply"
-                    style="@style/Subtitle1.white"
+                <Button
+                    android:id="@+id/btn_issue_filter_apply"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
-                    android:layout_marginEnd="20dp"
                     android:text="@string/label_filter_apply"
-                    tools:text="적용" />
+                    android:backgroundTint="@android:color/transparent"
+                    android:outlineProvider="none" />
 
             </com.google.android.material.appbar.MaterialToolbar>
 

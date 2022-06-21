@@ -15,3 +15,13 @@ data class Label(
     val labelContents: String?,
     val labelColor: String?
 )
+
+data class MileStone(
+    val mileStoneId: Int?,
+    val title: String?,
+    val description: String?,
+    val dueDate: String?,
+    val openedIssueCount: Int = 0,
+    val closedIssueCount: Int = 0,
+    val progress: Int = 0,
+)
