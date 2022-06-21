@@ -1,5 +1,7 @@
 package kr.codesquad.issuetraker.sevice;
 
+import kr.codesquad.issuetraker.domain.issue.Comment;
+import kr.codesquad.issuetraker.domain.issue.CommentRepository;
 import kr.codesquad.issuetraker.domain.issue.Issue;
 import kr.codesquad.issuetraker.domain.issue.IssueRepository;
 import kr.codesquad.issuetraker.domain.label.Label;
@@ -20,6 +22,7 @@ import java.util.stream.Collectors;
 @Service
 public class IssueService {
     private final IssueRepository issueRepository;
+    private final CommentRepository commentRepository;
     private final UserRepository userRepository;
     private final MilestoneRepository milestoneRepository;
     private final LabelRepository labelRepository;
@@ -88,5 +91,12 @@ public class IssueService {
         Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
         issue.markAsDeleted();
         return new GeneralResponseDto(200, "이슈가 삭제되었습니다.");
+    }
+
+    public List<CommentListResponseDto> getAllComments(Long issueId) {
+        List<Comment> comments = commentRepository.findAll();
+        return comments.stream()
+                .map(CommentListResponseDto::of)
+                .collect(Collectors.toList());
     }
 }

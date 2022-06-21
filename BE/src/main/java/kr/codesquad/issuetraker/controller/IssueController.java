@@ -43,4 +43,9 @@ public class IssueController {
     public ResponseEntity<GeneralResponseDto> deleteIssue(@PathVariable Long issueId) {
         return ResponseEntity.ok(issueService.deleteIssue(issueId));
     }
+
+    @GetMapping("/{issueId}/comments")
+    public ResponseEntity<List<CommentListResponseDto>> loadAllComments(@PathVariable Long issueId) {
+        return ResponseEntity.ok(issueService.getAllComments(issueId));
+    }
 }
