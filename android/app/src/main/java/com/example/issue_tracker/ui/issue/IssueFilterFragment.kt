@@ -39,19 +39,23 @@ class IssueFilterFragment : Fragment() {
             statusPopupMenu.setOnMenuItemClickListener { item ->
                 when (item.itemId) {
                     R.id.open_issue -> {
-                        viewModel.setStatusTitle("열린 이슈")
+                        viewModel.setStatusChoose("열린 이슈")
                         binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
                     }
                     R.id.issue_i_worte -> {
-                        viewModel.setStatusTitle("내가 작성한 이슈")
+                        viewModel.setStatusChoose("내가 작성한 이슈")
                         binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
                     }
                     R.id.issue_for_me -> {
-                        viewModel.setStatusTitle("나에게 할당된 이슈")
+                        viewModel.setStatusChoose("나에게 할당된 이슈")
+                        binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
+                    }
+                    R.id.issue_i_comment -> {
+                        viewModel.setStatusChoose("내가 댓글을 남긴 이슈")
                         binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
                     }
                     R.id.closed_issue -> {
-                        viewModel.setStatusTitle("닫힌 이슈")
+                        viewModel.setStatusChoose("닫힌 이슈")
                         binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
                     }
                 }
@@ -60,18 +64,52 @@ class IssueFilterFragment : Fragment() {
             statusPopupMenu.show()
         }
 
+        binding.tvFilterChooseWriter.text = viewModel.writerChoose.value
+
+        binding.tvFilterChooseLabel.text = viewModel.labelChoose.value
         binding.ibFilterButtonLabel.setOnClickListener {
             val labelPopupMenu = PopupMenu(requireContext(), it)
             for (i in 0 until viewModel.labelList.value.size) {
                 labelPopupMenu.menu.add(Menu.NONE, i, i, viewModel.labelList.value[i].labelTitle)
             }
+            labelPopupMenu.setOnMenuItemClickListener { item ->
+                var flag = true
+                while (flag) {
+                    for (i in 0 until viewModel.labelList.value.size) {
+                        if (item.itemId == i) {
+                            viewModel.labelList.value[i].labelTitle?.let { title->
+                                viewModel.setLabelChoose(title)
+                            }
+                            binding.tvFilterChooseLabel.text = viewModel.labelChoose.value
+                            flag = false
+                        }
+                    }
+                }
+                false
+            }
             labelPopupMenu.show()
         }
 
+        binding.tvFilterChooseMileStone.text = viewModel.mileStoneChoose.value
         binding.ibFilterButtonMileStone.setOnClickListener {
             val mileStonePopupMenu = PopupMenu(requireContext(), it)
             for (i in 0 until viewModel.labelList.value.size) {
                 mileStonePopupMenu.menu.add(Menu.NONE, i, i, viewModel.mileStoneList.value[i].title)
+            }
+            mileStonePopupMenu.setOnMenuItemClickListener { item ->
+                var flag = true
+                while (flag) {
+                    for (i in 0 until viewModel.mileStoneList.value.size) {
+                        if (item.itemId == i) {
+                            viewModel.mileStoneList.value[i].title?.let { title ->
+                                viewModel.setMileStoneChoose(title)
+                            }
+                            binding.tvFilterChooseMileStone.text = viewModel.mileStoneChoose.value
+                            flag = false
+                        }
+                    }
+                }
+                false
             }
             mileStonePopupMenu.show()
         }
