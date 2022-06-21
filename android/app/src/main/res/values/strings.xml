@@ -40,4 +40,7 @@
     <string name="go_back">뒤로가기</string>
     <string name="change_random_color">색상변경</string>
     <string name="label_save">저장</string>
+    <string name="label_filter_title">필터</string>
+    <string name="label_filter_apply">적용</string>
+    <string name="label_filter_button">filter_button</string>
 </resources>

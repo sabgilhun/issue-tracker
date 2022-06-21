@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.issue.IssueFilterFragment">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/abb_bar_issue_filter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/primary_blue"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/tb_issue_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="80dp">
+
+                <ImageButton
+                    android:id="@+id/btn_issue_filter"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_gravity="start"
+                    android:background="@android:color/transparent"
+                    android:contentDescription="@string/label_btn_issue_filter"
+                    android:src="@drawable/ic_baseline_clear_26"
+                    app:tint="@color/white" />
+
+                <TextView
+                    android:id="@+id/tv_issue_filter_toolbar_title"
+                    style="@style/Subtitle1.white.bold.20"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="36dp"
+                    android:text="@string/label_filter_title"
+                    tools:text="필터" />
+
+                <TextView
+                    android:id="@+id/tv_issue_filter_toolbar_apply"
+                    style="@style/Subtitle1.white"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="20dp"
+                    android:text="@string/label_filter_apply"
+                    tools:text="적용" />
+
+            </com.google.android.material.appbar.MaterialToolbar>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <com.example.issue_tracker.ui.issue.CustomIssue
+            android:id="@+id/custom_view_issue_filter_state"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/abb_bar_issue_filter"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:issueTitle="상태"
+            app:issueChoose="열린이슈" />
+
+        <com.example.issue_tracker.ui.issue.CustomIssue
+            android:id="@+id/custom_view_issue_filter_writer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/custom_view_issue_filter_state"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:issueTitle="작성자"
+            app:issueChoose="열린이슈" />
+
+        <com.example.issue_tracker.ui.issue.CustomIssue
+            android:id="@+id/custom_view_issue_filter_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/custom_view_issue_filter_writer"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:issueTitle="레이블"
+            app:issueChoose="열린이슈" />
+
+        <com.example.issue_tracker.ui.issue.CustomIssue
+            android:id="@+id/custom_view_issue_filter_mile_stone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/custom_view_issue_filter_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:issueTitle="마일스톤"
+            app:issueChoose="열린이슈" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
