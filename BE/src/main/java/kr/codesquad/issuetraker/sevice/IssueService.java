@@ -57,7 +57,7 @@ public class IssueService {
         return IssueDetailResponseDto.of(issue);
     }
 
-    public ModificationResponseDto modifyIssueContent(Long issueId, IssueModificationRequestDto requestDto) {
+    public GeneralResponseDto modifyIssueContent(Long issueId, IssueModificationRequestDto requestDto) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
 
         Milestone milestone = milestoneRepository.findById(requestDto.getMileStoneId()).orElseThrow(() -> new RuntimeException());
@@ -75,12 +75,18 @@ public class IssueService {
                 .build();
 
         issue.modifyContentsWith(modificationFieldsDto);
-        return new ModificationResponseDto(200, "이슈 수정이 완료되었습니다.");
+        return new GeneralResponseDto(200, "이슈 수정이 완료되었습니다.");
     }
 
-    public ModificationResponseDto changeIssueStatus(Long issueId) {
+    public GeneralResponseDto changeIssueStatus(Long issueId) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
         issue.toggleIsOpened();
-        return new ModificationResponseDto(200, "이슈 상태가 변경되었습니다.");
+        return new GeneralResponseDto(200, "이슈 상태가 변경되었습니다.");
+    }
+
+    public GeneralResponseDto deleteIssue(Long issueId) {
+        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
+        issue.markAsDeleted();
+        return new GeneralResponseDto(200, "이슈가 삭제되었습니다.");
     }
 }

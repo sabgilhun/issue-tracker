@@ -61,5 +61,7 @@ public class Issue {
     }
 
 
-
+    public void markAsDeleted() {
+        isDeleted = true;
+    }
 }

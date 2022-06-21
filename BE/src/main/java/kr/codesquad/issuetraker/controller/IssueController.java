@@ -30,12 +30,17 @@ public class IssueController {
     }
 
     @PatchMapping("/{issueId}")
-    public ResponseEntity<ModificationResponseDto> modifyIssueContent(@PathVariable Long issueId, @RequestBody IssueModificationRequestDto requestDto) {
+    public ResponseEntity<GeneralResponseDto> modifyIssueContent(@PathVariable Long issueId, @RequestBody IssueModificationRequestDto requestDto) {
         return ResponseEntity.ok(issueService.modifyIssueContent(issueId, requestDto));
     }
 
     @PatchMapping("/{issueId}/status")
-    public ResponseEntity<ModificationResponseDto> changeIssueStatus(@PathVariable Long issueId) {
+    public ResponseEntity<GeneralResponseDto> changeIssueStatus(@PathVariable Long issueId) {
         return ResponseEntity.ok(issueService.changeIssueStatus(issueId));
+    }
+
+    @DeleteMapping("/{issueId}")
+    public ResponseEntity<GeneralResponseDto> deleteIssue(@PathVariable Long issueId) {
+        return ResponseEntity.ok(issueService.deleteIssue(issueId));
     }
 }
