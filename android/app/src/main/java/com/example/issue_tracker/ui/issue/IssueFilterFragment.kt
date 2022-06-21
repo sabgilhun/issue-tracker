@@ -18,7 +18,7 @@ class IssueFilterFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_issue, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_issue_filter, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }

@@ -9,6 +9,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavController
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.issue_tracker.R
 import com.example.issue_tracker.common.repeatOnLifecycleExtension
@@ -35,7 +37,8 @@ class IssueFragment : Fragment() {
     @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val findNavController = findNavController()
+        goToFilter(findNavController)
         viewModel.getIssue()
         adapter = IssueAdapter()
         val swipeHelperCallback = SwipeHelperCallback(adapter, viewModel).apply {
@@ -43,13 +46,6 @@ class IssueFragment : Fragment() {
         }
         binding.rvIssue.adapter = adapter
         ItemTouchHelper(swipeHelperCallback).attachToRecyclerView(binding.rvIssue)
-
-//        view.setOnTouchListener { _, motionEvent ->
-//            if (motionEvent.action == MotionEvent.ACTION_DOWN) {
-//                swipeHelperCallback.removePreviousClamp(binding.rvIssue)
-//            }
-//            false
-//        }
 
         binding.rvIssue.setOnTouchListener { _, _ ->
             swipeHelperCallback.removePreviousClamp(binding.rvIssue)
@@ -60,6 +56,12 @@ class IssueFragment : Fragment() {
             viewModel.issue.collect {
                 adapter.submitList(it)
             }
+        }
+    }
+
+    private fun goToFilter(findNavController: NavController) {
+        binding.btnIssueFilter.setOnClickListener {
+            findNavController.navigate(R.id.action_issueFragment_to_issueFilterFragment)
         }
     }
 }
