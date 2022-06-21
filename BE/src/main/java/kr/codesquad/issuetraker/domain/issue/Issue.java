@@ -56,6 +56,10 @@ public class Issue {
         assignee = modificationFieldsDto.getAssignee();
     }
 
+    public void toggleIsOpened() {
+        isOpened = !isOpened;
+    }
+
 
 
 }

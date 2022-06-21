@@ -77,4 +77,10 @@ public class IssueService {
         issue.modifyContentsWith(modificationFieldsDto);
         return new ModificationResponseDto(200, "이슈 수정이 완료되었습니다.");
     }
+
+    public ModificationResponseDto changeIssueStatus(Long issueId) {
+        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
+        issue.toggleIsOpened();
+        return new ModificationResponseDto(200, "이슈 상태가 변경되었습니다.");
+    }
 }
