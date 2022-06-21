@@ -32,10 +32,31 @@ class IssueFilterFragment : Fragment() {
         val findNavController = findNavController()
         goBackIssue(findNavController)
         viewModel.addDummyData()
-
+        binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
         binding.ibFilterButtonStatus.setOnClickListener {
             val statusPopupMenu = PopupMenu(requireContext(), it)
             statusPopupMenu.menuInflater.inflate(R.menu.issue_filter_status_menu, statusPopupMenu.menu)
+            statusPopupMenu.setOnMenuItemClickListener { item ->
+                when (item.itemId) {
+                    R.id.open_issue -> {
+                        viewModel.setStatusTitle("열린 이슈")
+                        binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
+                    }
+                    R.id.issue_i_worte -> {
+                        viewModel.setStatusTitle("내가 작성한 이슈")
+                        binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
+                    }
+                    R.id.issue_for_me -> {
+                        viewModel.setStatusTitle("나에게 할당된 이슈")
+                        binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
+                    }
+                    R.id.closed_issue -> {
+                        viewModel.setStatusTitle("닫힌 이슈")
+                        binding.tvFilterChooseStatus.text = viewModel.statusChoose.value
+                    }
+                }
+                false
+            }
             statusPopupMenu.show()
         }
 
