@@ -54,14 +54,17 @@ public class Issue {
         label = modificationFieldsDto.getLabel();
         author = modificationFieldsDto.getAuthor();
         assignee = modificationFieldsDto.getAssignee();
+        modifiedAt = LocalDateTime.now();
     }
 
     public void toggleIsOpened() {
         isOpened = !isOpened;
+        modifiedAt = LocalDateTime.now();
     }
 
 
     public void markAsDeleted() {
         isDeleted = true;
+        modifiedAt = LocalDateTime.now();
     }
 }
