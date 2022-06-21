@@ -27,7 +27,7 @@
                 android:layout_height="80dp">
 
                 <ImageButton
-                    android:id="@+id/btn_issue_filter"
+                    android:id="@+id/btn_close_issue_filter"
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="start"
@@ -68,7 +68,7 @@
             app:layout_constraintTop_toBottomOf="@+id/abb_bar_issue_filter"
             app:layout_constraintEnd_toEndOf="parent"
             app:issueTitle="상태"
-            app:issueChoose="열린이슈" />
+            app:issueChoose="선택" />
 
         <com.example.issue_tracker.ui.issue.CustomIssue
             android:id="@+id/custom_view_issue_filter_writer"
@@ -78,7 +78,7 @@
             app:layout_constraintTop_toBottomOf="@+id/custom_view_issue_filter_state"
             app:layout_constraintEnd_toEndOf="parent"
             app:issueTitle="작성자"
-            app:issueChoose="열린이슈" />
+            app:issueChoose="선택" />
 
         <com.example.issue_tracker.ui.issue.CustomIssue
             android:id="@+id/custom_view_issue_filter_label"
@@ -88,7 +88,7 @@
             app:layout_constraintTop_toBottomOf="@+id/custom_view_issue_filter_writer"
             app:layout_constraintEnd_toEndOf="parent"
             app:issueTitle="레이블"
-            app:issueChoose="열린이슈" />
+            app:issueChoose="선택" />
 
         <com.example.issue_tracker.ui.issue.CustomIssue
             android:id="@+id/custom_view_issue_filter_mile_stone"
@@ -98,7 +98,7 @@
             app:layout_constraintTop_toBottomOf="@+id/custom_view_issue_filter_label"
             app:layout_constraintEnd_toEndOf="parent"
             app:issueTitle="마일스톤"
-            app:issueChoose="열린이슈" />
+            app:issueChoose="선택" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
