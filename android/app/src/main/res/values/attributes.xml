@@ -11,6 +11,5 @@
     <declare-styleable name="CustomIssue">
         <attr name="issueTitle" format="reference|string" />
         <attr name="issueChoose" format="reference|string" />
-        <attr name="issueButton" format="reference|integer" />
     </declare-styleable>
 </resources>

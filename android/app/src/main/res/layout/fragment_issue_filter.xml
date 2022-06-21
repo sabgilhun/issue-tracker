@@ -60,45 +60,209 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <com.example.issue_tracker.ui.issue.CustomIssue
-            android:id="@+id/custom_view_issue_filter_state"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_status"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/abb_bar_issue_filter"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:issueTitle="상태"
-            app:issueChoose="선택" />
+            android:background="@color/primary_blue">
 
-        <com.example.issue_tracker.ui.issue.CustomIssue
-            android:id="@+id/custom_view_issue_filter_writer"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/custom_view_issue_filter_state"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:issueTitle="작성자"
-            app:issueChoose="선택" />
 
-        <com.example.issue_tracker.ui.issue.CustomIssue
-            android:id="@+id/custom_view_issue_filter_label"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/custom_view_issue_filter_writer"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:issueTitle="레이블"
-            app:issueChoose="선택" />
+            <TextView
+                android:id="@+id/tv_filter_title_status"
+                style="@style/Subtitle1.18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="상태" />
 
-        <com.example.issue_tracker.ui.issue.CustomIssue
-            android:id="@+id/custom_view_issue_filter_mile_stone"
+            <TextView
+                android:id="@+id/tv_filter_choose_status"
+                style="@style/Subtitle1.bold.18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="선택" />
+
+            <ImageButton
+                android:id="@+id/ib_filter_button_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:tint="@color/white"
+                android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                android:contentDescription="@string/label_filter_button" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_writer"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="80dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/custom_view_issue_filter_label"
             app:layout_constraintEnd_toEndOf="parent"
-            app:issueTitle="마일스톤"
-            app:issueChoose="선택" />
+            app:layout_constraintTop_toBottomOf="@+id/constraint_layout_status"
+            android:background="@color/primary_blue">
+
+
+            <TextView
+                android:id="@+id/tv_filter_title_writer"
+                style="@style/Subtitle1.18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="작성자" />
+
+            <TextView
+                android:id="@+id/tv_filter_choose_writer"
+                style="@style/Subtitle1.bold.18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="선택" />
+
+            <ImageButton
+                android:id="@+id/ib_filter_button_writer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:tint="@color/white"
+                android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                android:contentDescription="@string/label_filter_button" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_label"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraint_layout_writer"
+            android:background="@color/primary_blue">
+
+
+            <TextView
+                android:id="@+id/tv_filter_title_label"
+                style="@style/Subtitle1.18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="레이블" />
+
+            <TextView
+                android:id="@+id/tv_filter_choose_label"
+                style="@style/Subtitle1.bold.18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="선택" />
+
+            <ImageButton
+                android:id="@+id/ib_filter_button_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:tint="@color/white"
+                android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                android:contentDescription="@string/label_filter_button" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraint_layout_mile_stone"
+            android:layout_width="match_parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraint_layout_label"
+            android:layout_height="80dp"
+            android:background="@color/primary_blue">
+
+
+            <TextView
+                android:id="@+id/tv_filter_title_mile_stone"
+                style="@style/Subtitle1.18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="마일스톤" />
+
+            <TextView
+                android:id="@+id/tv_filter_choose_mile_stone"
+                style="@style/Subtitle1.bold.18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="120dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="선택" />
+
+            <ImageButton
+                android:id="@+id/ib_filter_button_mile_stone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:tint="@color/white"
+                android:src="@drawable/ic_baseline_arrow_drop_down_24"
+                android:contentDescription="@string/label_filter_button" />
+
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
