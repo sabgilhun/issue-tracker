@@ -21,4 +21,10 @@ abstract class RepositoryModule {
     abstract fun bindIssueRepository(
         issueRepositoryImpl: IssueRepositoryImpl
     ): IssueRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindMileStoneRepository(
+        mileStoneRepositoryImpl: MileStoneRepositoryImpl
+    ): MileStoneRepository
 }
