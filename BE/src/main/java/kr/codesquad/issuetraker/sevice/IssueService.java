@@ -8,10 +8,7 @@ import kr.codesquad.issuetraker.domain.milestone.Milestone;
 import kr.codesquad.issuetraker.domain.milestone.MilestoneRepository;
 import kr.codesquad.issuetraker.domain.user.User;
 import kr.codesquad.issuetraker.domain.user.UserRepository;
-import kr.codesquad.issuetraker.dto.NewIssueResponseDto;
-import kr.codesquad.issuetraker.dto.IssueDetailResponseDto;
-import kr.codesquad.issuetraker.dto.IssueListResponseDto;
-import kr.codesquad.issuetraker.dto.NewIssueRequestDto;
+import kr.codesquad.issuetraker.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -60,4 +57,24 @@ public class IssueService {
         return IssueDetailResponseDto.of(issue);
     }
 
+    public ModificationResponseDto modifyIssueContent(Long issueId, IssueModificationRequestDto requestDto) {
+        Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
+
+        Milestone milestone = milestoneRepository.findById(requestDto.getMileStoneId()).orElseThrow(() -> new RuntimeException());
+        Label label = labelRepository.findById(requestDto.getLabelId()).orElseThrow(() -> new RuntimeException());
+        User author = userRepository.findById(requestDto.getAuthorId()).orElseThrow(() -> new RuntimeException());
+        User assignee = userRepository.findById(requestDto.getAssigneeId()).orElseThrow(() -> new RuntimeException());
+
+        IssueModificationFieldsDto modificationFieldsDto = IssueModificationFieldsDto.builder()
+                .title(requestDto.getTitle())
+                .description(requestDto.getDescription())
+                .milestone(milestone)
+                .label(label)
+                .author(author)
+                .assignee(assignee)
+                .build();
+
+        issue.modifyContentsWith(modificationFieldsDto);
+        return new ModificationResponseDto(200, "이슈 수정이 완료되었습니다.");
+    }
 }

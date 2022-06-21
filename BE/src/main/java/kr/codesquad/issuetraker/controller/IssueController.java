@@ -1,9 +1,6 @@
 package kr.codesquad.issuetraker.controller;
 
-import kr.codesquad.issuetraker.dto.NewIssueResponseDto;
-import kr.codesquad.issuetraker.dto.IssueDetailResponseDto;
-import kr.codesquad.issuetraker.dto.IssueListResponseDto;
-import kr.codesquad.issuetraker.dto.NewIssueRequestDto;
+import kr.codesquad.issuetraker.dto.*;
 import kr.codesquad.issuetraker.sevice.IssueService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -32,4 +29,8 @@ public class IssueController {
         return ResponseEntity.ok(issueService.getIssueDetail(issueId));
     }
 
+    @PatchMapping("/{issueId}")
+    public ResponseEntity<ModificationResponseDto> modifyIssueContent(@PathVariable Long issueId, @RequestBody IssueModificationRequestDto requestDto) {
+        return ResponseEntity.ok(issueService.modifyIssueContent(issueId, requestDto));
+    }
 }

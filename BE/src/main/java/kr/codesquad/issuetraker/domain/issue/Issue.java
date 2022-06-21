@@ -3,13 +3,14 @@ package kr.codesquad.issuetraker.domain.issue;
 import kr.codesquad.issuetraker.domain.label.Label;
 import kr.codesquad.issuetraker.domain.milestone.Milestone;
 import kr.codesquad.issuetraker.domain.user.User;
+import kr.codesquad.issuetraker.dto.IssueModificationFieldsDto;
+import kr.codesquad.issuetraker.dto.IssueModificationRequestDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -44,4 +45,17 @@ public class Issue {
     private LocalDateTime createdAt;
     private LocalDateTime modifiedAt;
     private boolean isDeleted;
+
+
+    public void modifyContentsWith(IssueModificationFieldsDto modificationFieldsDto) {
+        title = modificationFieldsDto.getTitle();
+        description = modificationFieldsDto.getDescription();
+        milestone = modificationFieldsDto.getMilestone();
+        label = modificationFieldsDto.getLabel();
+        author = modificationFieldsDto.getAuthor();
+        assignee = modificationFieldsDto.getAssignee();
+    }
+
+
+
 }
