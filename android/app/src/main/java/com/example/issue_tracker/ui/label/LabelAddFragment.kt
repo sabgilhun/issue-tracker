@@ -1,6 +1,7 @@
 package com.example.issue_tracker.ui.label
 
 import android.os.Bundle
+import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -39,6 +40,7 @@ class LabelAddFragment : Fragment() {
 
         labelColorChange()
         labelTextChange()
+        setUpTextLabelError()
         setClickListener(findNavController)
 
     }
@@ -63,6 +65,12 @@ class LabelAddFragment : Fragment() {
         binding.btnLabelSave.setOnClickListener {
             viewModel.saveLabel()
             findNavController.navigate(R.id.action_labelAddFragment_to_labelFragment)
+        }
+    }
+
+    private fun setUpTextLabelError() {
+        binding.etLabelTitle.addTextChangedListener { text: Editable? ->
+            binding.btnLabelSave.isEnabled = !(text == null || text.isEmpty())
         }
     }
 }
