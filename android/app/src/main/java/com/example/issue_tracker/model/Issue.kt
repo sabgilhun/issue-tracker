@@ -23,7 +23,5 @@ data class MileStone(
     val dueDate: String?,
     val openedIssueCount: Int = 0,
     val closedIssueCount: Int = 0,
-    val progress: String = "",
-    val openedIssueLabelColor: String = "#C7EBFF",
-    val closedIssueLabelColor: String = "#CCD4FF"
+    val progress: String = ""
 )
