@@ -44,10 +44,10 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     fun changeClickedState() {
         val longClickValue = longClick.value
         _longClick.value = !longClickValue
+
         _issue.value.forEach { issue ->
             val value = issue.isLongClicked
             issue.isLongClicked = !value
         }
-        Log.d("IssueViewModel", issue.value[0].isLongClicked.toString())
     }
 }

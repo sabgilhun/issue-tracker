@@ -36,7 +36,7 @@ class IssueFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility", "NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val findNavController = findNavController()
@@ -73,6 +73,11 @@ class IssueFragment : Fragment() {
                     }
                 }
             }
+        }
+
+        binding.btnCloseLongClick.setOnClickListener {
+            viewModel.changeClickedState()
+            adapter.notifyDataSetChanged()
         }
     }
 
