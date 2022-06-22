@@ -40,7 +40,7 @@ class IssueFragment : Fragment() {
         val findNavController = findNavController()
         goToFilter(findNavController)
         viewModel.getIssue()
-        adapter = IssueAdapter()
+        adapter = IssueAdapter(viewModel)
         val swipeHelperCallback = SwipeHelperCallback(adapter, viewModel).apply {
             setClamp(resources.displayMetrics.widthPixels.toFloat() / 4)
         }
@@ -55,6 +55,16 @@ class IssueFragment : Fragment() {
         viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
             viewModel.issue.collect {
                 adapter.submitList(it)
+            }
+        }
+
+        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
+            viewModel.issue.collect {
+                it.forEach { issue ->
+                    if(issue.isLongClicked) {
+
+                    }
+                }
             }
         }
     }
