@@ -2,7 +2,6 @@ package com.example.issue_tracker.ui.issue
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,6 @@ import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentIssueBinding
 import com.example.issue_tracker.ui.common.SwipeHelperCallback
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.flow.collectLatest
 
 class IssueFragment : Fragment() {
 
