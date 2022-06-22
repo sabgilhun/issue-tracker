@@ -2,7 +2,6 @@ package com.example.issue_tracker.ui.issue
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -35,7 +34,7 @@ class IssueFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("ClickableViewAccessibility")
+    @SuppressLint("ClickableViewAccessibility", "NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val findNavController = findNavController()
@@ -55,9 +54,28 @@ class IssueFragment : Fragment() {
 
         viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
             viewModel.issue.collect {
-                Log.d("IssueFragment", it[0].isLongClicked.toString())
                 adapter.submitList(it)
             }
+        }
+
+        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
+            viewModel.longClick.collect { isLongClicked ->
+                when (isLongClicked) {
+                    true -> {
+                        binding.tbIssueFragment.visibility = View.GONE
+                        binding.tbIssueFragmentLongClick.visibility = View.VISIBLE
+                    }
+                    false -> {
+                        binding.tbIssueFragment.visibility = View.VISIBLE
+                        binding.tbIssueFragmentLongClick.visibility = View.GONE
+                    }
+                }
+            }
+        }
+
+        binding.btnCloseLongClick.setOnClickListener {
+            viewModel.changeClickedState()
+            adapter.notifyDataSetChanged()
         }
     }
 

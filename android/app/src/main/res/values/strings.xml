@@ -49,4 +49,7 @@
     <string name="select_date">날짜</string>
     <string name="open_issue_count">열린 이슈 %d개</string>
     <string name="closed_issue_count">닫힌 이슈 %d개</string>
+    <string name="label_delete_longclick">delete longClick</string>
+    <string name="label_delete_issue">delete_issue</string>
+    <string name="label_close_issue">close_issue</string>
 </resources>

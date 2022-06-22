@@ -4,8 +4,6 @@ import android.content.Context
 import android.graphics.BlendMode
 import android.graphics.BlendModeColorFilter
 import android.graphics.Color
-import android.graphics.drawable.Drawable
-import android.graphics.drawable.DrawableWrapper
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import androidx.annotation.ColorRes
