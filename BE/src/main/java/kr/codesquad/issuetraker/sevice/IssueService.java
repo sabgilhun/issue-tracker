@@ -78,18 +78,21 @@ public class IssueService {
                 .build();
 
         issue.modifyContentsWith(modificationFieldsDto);
+        issueRepository.save(issue);
         return new GeneralResponseDto(200, "이슈 수정이 완료되었습니다.");
     }
 
     public GeneralResponseDto changeIssueStatus(Long issueId) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
         issue.toggleIsOpened();
+        issueRepository.save(issue);
         return new GeneralResponseDto(200, "이슈 상태가 변경되었습니다.");
     }
 
     public GeneralResponseDto deleteIssue(Long issueId) {
         Issue issue = issueRepository.findById(issueId).orElseThrow(() -> new RuntimeException());
         issue.markAsDeleted();
+        issueRepository.save(issue);
         return new GeneralResponseDto(200, "이슈가 삭제되었습니다.");
     }
 
