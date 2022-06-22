@@ -32,7 +32,11 @@
         android:id="@+id/mileStoneFragment"
         android:name="com.example.issue_tracker.ui.milestone.MileStoneFragment"
         android:label="fragment_mile_stone"
-        tools:layout="@layout/fragment_mile_stone" />
+        tools:layout="@layout/fragment_mile_stone" >
+        <action
+            android:id="@+id/action_mileStoneFragment_to_mileStoneAddFragment"
+            app:destination="@id/mileStoneAddFragment" />
+    </fragment>
     <fragment
         android:id="@+id/labelAddFragment"
         android:name="com.example.issue_tracker.ui.label.LabelAddFragment"
@@ -50,5 +54,14 @@
         <action
             android:id="@+id/action_issueFilterFragment_to_issueFragment"
             app:destination="@id/issueFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mileStoneAddFragment"
+        android:name="com.example.issue_tracker.ui.milestone.MileStoneAddFragment"
+        android:label="MileStoneAddFragment"
+        tools:layout="@layout/fragment_mile_stone_add" >
+        <action
+            android:id="@+id/action_mileStoneAddFragment_to_mileStoneFragment"
+            app:destination="@id/mileStoneFragment" />
     </fragment>
 </navigation>
