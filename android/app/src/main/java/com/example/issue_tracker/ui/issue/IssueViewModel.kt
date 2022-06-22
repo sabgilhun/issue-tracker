@@ -1,5 +1,6 @@
 package com.example.issue_tracker.ui.issue
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issue_tracker.model.Issue
@@ -34,5 +35,13 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
 
     fun getIssueSwiped(index: Int): Boolean {
         return _issue.value[index].isSwiped
+    }
+
+    fun changeClickedState() {
+        _issue.value.forEach { issue ->
+            val value = issue.isLongClicked
+            issue.isLongClicked = !value
+        }
+        Log.d("IssueViewModel", _issue.value[0].isLongClicked.toString())
     }
 }

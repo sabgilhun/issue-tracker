@@ -6,7 +6,8 @@ data class Issue(
     val title: String,
     val contents: String,
     val label: Label,
-    var isSwiped: Boolean = false
+    var isSwiped: Boolean = false,
+    var isLongClicked: Boolean = false
 )
 
 data class Label(
