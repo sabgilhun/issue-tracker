@@ -31,6 +31,11 @@ class IssueAdapter(
         fun bind(issue: Issue) {
             binding.issue = issue
 
+            when (issue.isLongClicked) {
+                true -> binding.issueCheckBox.visibility = View.VISIBLE
+                else -> binding.issueCheckBox.visibility = View.GONE
+            }
+
             binding.tvCloseIssue.setOnClickListener {
                 // TODO 닫기 버튼 클릭 시 로직 구현
                 Log.d("테스트", "3번")
@@ -38,6 +43,7 @@ class IssueAdapter(
             binding.cvSwipeView.setOnLongClickListener {
                 Log.d("Adapter", "isClicked")
                 viewModel.changeClickedState()
+                notifyDataSetChanged()
                 false
             }
         }

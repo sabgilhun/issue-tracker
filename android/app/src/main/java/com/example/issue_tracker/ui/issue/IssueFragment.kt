@@ -2,6 +2,7 @@ package com.example.issue_tracker.ui.issue
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,17 +55,8 @@ class IssueFragment : Fragment() {
 
         viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
             viewModel.issue.collect {
+                Log.d("IssueFragment", it[0].isLongClicked.toString())
                 adapter.submitList(it)
-            }
-        }
-
-        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
-            viewModel.issue.collect {
-                it.forEach { issue ->
-                    if(issue.isLongClicked) {
-
-                    }
-                }
             }
         }
     }
