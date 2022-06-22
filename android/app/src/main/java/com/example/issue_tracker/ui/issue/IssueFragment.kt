@@ -18,6 +18,7 @@ import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentIssueBinding
 import com.example.issue_tracker.ui.common.SwipeHelperCallback
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 
 class IssueFragment : Fragment() {
 
@@ -55,8 +56,22 @@ class IssueFragment : Fragment() {
 
         viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
             viewModel.issue.collect {
-                Log.d("IssueFragment", it[0].isLongClicked.toString())
                 adapter.submitList(it)
+            }
+        }
+
+        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
+            viewModel.longClick.collect { isLongClicked ->
+                when (isLongClicked) {
+                    true -> {
+                        binding.tbIssueFragment.visibility = View.GONE
+                        binding.tbIssueFragmentLongClick.visibility = View.VISIBLE
+                    }
+                    false -> {
+                        binding.tbIssueFragment.visibility = View.VISIBLE
+                        binding.tbIssueFragmentLongClick.visibility = View.GONE
+                    }
+                }
             }
         }
     }
