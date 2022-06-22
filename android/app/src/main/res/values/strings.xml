@@ -40,6 +40,9 @@
     <string name="go_back">뒤로가기</string>
     <string name="change_random_color">색상변경</string>
     <string name="label_save">저장</string>
+    <string name="label_filter_title">필터</string>
+    <string name="label_filter_button">filter_button</string>
+    <string name="label_filter_apply">적용</string>
     <string name="add_new_mile_stone">새로운 마일스톤</string>
     <string name="pick_date">선택 사항(YYYY-MM-DD)</string>
     <string name="mile_stone_title">마일스톤</string>

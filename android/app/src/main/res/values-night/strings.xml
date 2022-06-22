@@ -3,4 +3,6 @@
     <string name="label_btn_issue_filter">btn_issue_filter</string>
     <string name="label_issue">이슈</string>
     <string name="label_issue_search">issue_search</string>
+    <string name="label_filter_title">필터</string>
+    <string name="label_filter_button">filter_button</string>
 </resources>
