@@ -1,9 +1,6 @@
 package kr.codesquad.issuetraker.sevice;
 
-import kr.codesquad.issuetraker.domain.issue.Comment;
-import kr.codesquad.issuetraker.domain.issue.CommentRepository;
-import kr.codesquad.issuetraker.domain.issue.Issue;
-import kr.codesquad.issuetraker.domain.issue.IssueRepository;
+import kr.codesquad.issuetraker.domain.issue.*;
 import kr.codesquad.issuetraker.domain.label.Label;
 import kr.codesquad.issuetraker.domain.label.LabelRepository;
 import kr.codesquad.issuetraker.domain.milestone.Milestone;
@@ -68,7 +65,7 @@ public class IssueService {
         User author = userRepository.findById(requestDto.getAuthorId()).orElseThrow(() -> new RuntimeException());
         User assignee = userRepository.findById(requestDto.getAssigneeId()).orElseThrow(() -> new RuntimeException());
 
-        IssueModificationFieldsDto modificationFieldsDto = IssueModificationFieldsDto.builder()
+        IssueModificationFields modificationFieldsDto = IssueModificationFields.builder()
                 .title(requestDto.getTitle())
                 .description(requestDto.getDescription())
                 .milestone(milestone)
