@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.issue_tracker.databinding.ItemIssueRecyclerViewBinding
 import com.example.issue_tracker.model.Issue
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class IssueAdapter(
     private val viewModel: IssueViewModel
@@ -30,8 +33,10 @@ class IssueAdapter(
             binding.issue = issue
             binding.tvCloseIssue.setOnClickListener {
                 // TODO 닫기 버튼 클릭 시 로직 구현
-                viewModel.closeIssue(issue.issueId)
-                Log.d("닫기", issue.issueId.toString())
+                CoroutineScope(Dispatchers.Main).launch {
+                    viewModel.closeIssue(issue.issueId)
+                    Log.d("닫기", issue.issueId.toString())
+                }
             }
 
             binding.cvSwipeView.setOnLongClickListener {

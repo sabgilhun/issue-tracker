@@ -2,7 +2,6 @@ package com.example.issue_tracker.ui.issue
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,7 +40,8 @@ class IssueFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val findNavController = findNavController()
-        goToFilter(findNavController)
+        goToIssueFilterFragment(findNavController)
+        goToSearchIssueFragment(findNavController)
         viewModel.getIssue()
         adapter = IssueAdapter(viewModel)
         val swipeHelperCallback = SwipeHelperCallback(adapter, viewModel).apply {
@@ -77,7 +77,7 @@ class IssueFragment : Fragment() {
 
         viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
             viewModel.closeIssue.collect {
-                Toast.makeText(requireContext(), "${viewModel.closeIssue.value} 번 이슈가 닫혔습니다.", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "$it 번 이슈가 닫혔습니다.", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -89,9 +89,15 @@ class IssueFragment : Fragment() {
         }
     }
 
-    private fun goToFilter(findNavController: NavController) {
+    private fun goToIssueFilterFragment(findNavController: NavController) {
         binding.btnIssueFilter.setOnClickListener {
             findNavController.navigate(R.id.action_issueFragment_to_issueFilterFragment)
+        }
+    }
+
+    private fun goToSearchIssueFragment(findNavController: NavController) {
+        binding.btnIssueSearch.setOnClickListener {
+            findNavController.navigate(R.id.action_issueFragment_to_issueSearchFragment)
         }
     }
 }

@@ -1,5 +1,7 @@
 package com.example.issue_tracker.ui.issue
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issue_tracker.common.addElement
@@ -8,9 +10,7 @@ import com.example.issue_tracker.common.removeElement
 import com.example.issue_tracker.model.Issue
 import com.example.issue_tracker.repository.IssueRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -22,8 +22,8 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     val issueList: StateFlow<MutableList<Issue>> = _issueList
 
     // 임시 StateFlow
-    private val _closeIssue = MutableStateFlow("")
-    val closeIssue: StateFlow<String> = _closeIssue
+    private val _closeIssue = MutableSharedFlow<String>()
+    val closeIssue: SharedFlow<String> = _closeIssue
 
     private val _checkedIssueIdList = MutableStateFlow<MutableList<Int>>(mutableListOf())
     val checkedIssueIdList: StateFlow<MutableList<Int>> = _checkedIssueIdList
@@ -44,8 +44,8 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
 
     // 이슈를 닫는 로직
     // 서버에 issueId 를 보내면 닫히고 남은 이슈 리스트를 가져오는 로직으로 변경 예정
-    fun closeIssue(issueId: Int) {
-        _closeIssue.value = issueId.toString()
+    suspend fun closeIssue(issueId: Int) {
+        _closeIssue.emit(issueId.toString())
     }
 
     // 체크박스를 통해 선택된 issueIdList 닫기를 서버에 전송하는 로직
