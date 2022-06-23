@@ -55,12 +55,7 @@ class IssueFragment : Fragment() {
         viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
             viewModel.issue.collect {
                 adapter.submitList(it)
-            }
-        }
-
-        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
-            viewModel.longClick.collect { isLongClicked ->
-                when (isLongClicked) {
+                when (it[0].isLongClicked) {
                     true -> {
                         binding.tbIssueFragment.visibility = View.GONE
                         binding.tbIssueFragmentLongClick.visibility = View.VISIBLE
@@ -75,7 +70,6 @@ class IssueFragment : Fragment() {
 
         binding.btnCloseLongClick.setOnClickListener {
             viewModel.changeClickedState()
-            adapter.notifyDataSetChanged()
         }
     }
 

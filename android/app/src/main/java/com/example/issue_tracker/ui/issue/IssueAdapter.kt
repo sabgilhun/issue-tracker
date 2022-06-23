@@ -41,7 +41,6 @@ class IssueAdapter(
 
             binding.cvSwipeView.setOnLongClickListener {
                 viewModel.changeClickedState()
-                notifyDataSetChanged()
                 false
             }
         }

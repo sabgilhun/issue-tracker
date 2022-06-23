@@ -39,12 +39,11 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     }
 
     fun changeClickedState() {
-        val longClickValue = longClick.value
-        _longClick.value = !longClickValue
 
-        _issue.value.forEach { issue ->
-            val value = issue.isLongClicked
-            issue.isLongClicked = !value
+        // 내부 값을 바꾸는 것이 아니라 issue 객체까지도 새로 만들어야 한다.
+        val list = _issue.value.map {
+            it.copy(isLongClicked = !it.isLongClicked) // 깊은 복사 후 새로 객체 만들기
         }
+        _issue.value = list.toMutableList() // 아예 새로 만든 객체를 setValue 해주어 StateFlow 가 notify 할 수 있도록 한다.
     }
 }
