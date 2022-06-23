@@ -31,7 +31,8 @@ class IssueAdapter(
             binding.issue = issue
             binding.tvCloseIssue.setOnClickListener {
                 // TODO 닫기 버튼 클릭 시 로직 구현
-                Log.d("테스트", "닫기 클릭")
+                viewModel.closeIssue(issue.issueId)
+                Log.d("닫기", issue.issueId.toString())
             }
 
             binding.cvSwipeView.setOnLongClickListener {

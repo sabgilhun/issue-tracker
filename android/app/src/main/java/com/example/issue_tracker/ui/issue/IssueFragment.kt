@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -70,6 +71,12 @@ class IssueFragment : Fragment() {
 
         binding.btnCloseLongClick.setOnClickListener {
             viewModel.changeClickedState()
+        }
+
+        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
+            viewModel.closeIssue.collect {
+                Toast.makeText(requireContext(), "${viewModel.closeIssue.value} 번 이슈가 닫혔습니다.", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
