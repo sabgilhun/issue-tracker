@@ -34,11 +34,6 @@ class IssueAdapter(
                 Log.d("테스트", "닫기 클릭")
             }
 
-            when (issue.isLongClicked) {
-                true -> binding.issueCheckBox.visibility = View.VISIBLE
-                else -> binding.issueCheckBox.visibility = View.GONE
-            }
-
             binding.cvSwipeView.setOnLongClickListener {
                 viewModel.changeClickedState()
                 false
