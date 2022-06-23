@@ -1,7 +1,11 @@
 package com.example.issue_tracker.ui.issue
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.issue_tracker.common.addElement
+import com.example.issue_tracker.common.removeElement
+import com.example.issue_tracker.model.CheckedIssue
 import com.example.issue_tracker.model.Issue
 import com.example.issue_tracker.repository.IssueRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -12,13 +16,17 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class IssueViewModel @Inject constructor(private val issueRepository: IssueRepository) : ViewModel() {
+class IssueViewModel @Inject constructor(private val issueRepository: IssueRepository) :
+    ViewModel() {
 
     private val _issueList = MutableStateFlow<MutableList<Issue>>(mutableListOf())
     val issueList: StateFlow<MutableList<Issue>> = _issueList
 
     private val _closeIssue = MutableStateFlow("")
     val closeIssue: StateFlow<String> = _closeIssue
+
+    private val _checkedIssueIdList = MutableStateFlow<MutableList<Int>>(mutableListOf())
+    val checkedIssueIdList: StateFlow<MutableList<Int>> = _checkedIssueIdList
 
     // 이슈 리스트를 가져오는 함수
     // API 로 가져와 처리하는 로직으로 변경 예정
@@ -29,9 +37,10 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
             }
         }
     }
-     // 이슈를 닫는 로직
+
+    // 이슈를 닫는 로직
     // 서버에 issueId 를 보내면 닫히고 남은 이슈 리스트를 가져오는 로직으로 변경 예정
-    fun closeIssue(issueId: Int){
+    fun closeIssue(issueId: Int) {
         _closeIssue.value = issueId.toString()
     }
 
@@ -50,5 +59,13 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
             it.copy(isLongClicked = !it.isLongClicked) // LongClicked 값만 변경 후 깊은 복사 수행하여 새로운 객체 만들기
         }
         _issueList.value = list.toMutableList() // 아예 새로 만든 객체를 setValue 해주어 StateFlow 가 notify 할 수 있도록 한다.
+    }
+
+    fun addChecked(issueId: Int) {
+        _checkedIssueIdList.addElement(issueId)
+    }
+
+    fun removeChecked(issueId: Int) {
+        _checkedIssueIdList.removeElement(issueId)
     }
 }

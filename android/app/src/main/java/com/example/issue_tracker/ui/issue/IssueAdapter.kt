@@ -2,7 +2,6 @@ package com.example.issue_tracker.ui.issue
 
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -38,6 +37,13 @@ class IssueAdapter(
             binding.cvSwipeView.setOnLongClickListener {
                 viewModel.changeClickedState()
                 false
+            }
+            
+            binding.issueCheckBox.setOnCheckedChangeListener { _, isChecked ->
+                when (isChecked) {
+                    true -> viewModel.addChecked(issue.issueId)
+                    false -> viewModel.removeChecked(issue.issueId)
+                }
             }
         }
     }
