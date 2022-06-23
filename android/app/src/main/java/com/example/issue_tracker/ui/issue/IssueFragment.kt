@@ -38,7 +38,7 @@ class IssueFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val findNavController = findNavController()
-        goToFilter(findNavController)
+        goToFragments(findNavController)
         viewModel.getIssue()
         adapter = IssueAdapter(viewModel)
         val swipeHelperCallback = SwipeHelperCallback(adapter, viewModel).apply {
@@ -79,9 +79,12 @@ class IssueFragment : Fragment() {
         }
     }
 
-    private fun goToFilter(findNavController: NavController) {
+    private fun goToFragments(findNavController: NavController) {
         binding.btnIssueFilter.setOnClickListener {
             findNavController.navigate(R.id.action_issueFragment_to_issueFilterFragment)
+        }
+        binding.fabIssueAdd.setOnClickListener {
+            findNavController.navigate(R.id.action_issueFragment_to_issueAddFragment)
         }
     }
 }
