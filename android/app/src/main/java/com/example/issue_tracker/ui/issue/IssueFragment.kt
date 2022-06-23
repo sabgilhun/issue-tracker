@@ -80,6 +80,13 @@ class IssueFragment : Fragment() {
                 Toast.makeText(requireContext(), "${viewModel.closeIssue.value} 번 이슈가 닫혔습니다.", Toast.LENGTH_SHORT).show()
             }
         }
+
+        binding.btnAppBarCloseIssue.setOnClickListener {
+            viewModel.closeIssueByCheckBox(viewModel.checkedIssueIdList.value)
+            Toast.makeText(requireContext(), "${viewModel.checkedIssueIdListTemp.value} 번 이슈가 닫혔습니다.", Toast.LENGTH_SHORT).show()
+            viewModel.clearCheckedIdList()
+            viewModel.changeClickedState()
+        }
     }
 
     private fun goToFilter(findNavController: NavController) {

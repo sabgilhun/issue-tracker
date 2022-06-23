@@ -37,3 +37,8 @@ fun <E> MutableStateFlow<MutableList<E>>.removeElement(element: E) {
     tempMutableList.remove(element)
     this.value = tempMutableList
 }
+
+fun <E> MutableStateFlow<MutableList<E>>.removeAllElement() {
+    val tempMutableList = mutableListOf<E>()
+    this.value = tempMutableList
+}

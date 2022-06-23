@@ -1,11 +1,10 @@
 package com.example.issue_tracker.ui.issue
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issue_tracker.common.addElement
+import com.example.issue_tracker.common.removeAllElement
 import com.example.issue_tracker.common.removeElement
-import com.example.issue_tracker.model.CheckedIssue
 import com.example.issue_tracker.model.Issue
 import com.example.issue_tracker.repository.IssueRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -22,11 +21,16 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     private val _issueList = MutableStateFlow<MutableList<Issue>>(mutableListOf())
     val issueList: StateFlow<MutableList<Issue>> = _issueList
 
+    // 임시 StateFlow
     private val _closeIssue = MutableStateFlow("")
     val closeIssue: StateFlow<String> = _closeIssue
 
     private val _checkedIssueIdList = MutableStateFlow<MutableList<Int>>(mutableListOf())
     val checkedIssueIdList: StateFlow<MutableList<Int>> = _checkedIssueIdList
+
+    // 임시 StateFlow
+    private val _checkedIssueIdListTemp = MutableStateFlow<List<Int>>(mutableListOf())
+    val checkedIssueIdListTemp: StateFlow<List<Int>> = _checkedIssueIdListTemp
 
     // 이슈 리스트를 가져오는 함수
     // API 로 가져와 처리하는 로직으로 변경 예정
@@ -42,6 +46,11 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     // 서버에 issueId 를 보내면 닫히고 남은 이슈 리스트를 가져오는 로직으로 변경 예정
     fun closeIssue(issueId: Int) {
         _closeIssue.value = issueId.toString()
+    }
+
+    // 체크박스를 통해 선택된 issueIdList 닫기를 서버에 전송하는 로직
+    fun closeIssueByCheckBox(issueIdList: List<Int>) {
+        _checkedIssueIdListTemp.value = issueIdList
     }
 
     fun changeIssueSwiped(index: Int, isSwiped: Boolean) {
@@ -67,5 +76,9 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
 
     fun removeChecked(issueId: Int) {
         _checkedIssueIdList.removeElement(issueId)
+    }
+
+    fun clearCheckedIdList() {
+        _checkedIssueIdList.removeAllElement()
     }
 }
