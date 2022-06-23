@@ -34,7 +34,7 @@ class IssueFragment : Fragment() {
         return binding.root
     }
 
-    @SuppressLint("ClickableViewAccessibility", "NotifyDataSetChanged")
+    @SuppressLint("ClickableViewAccessibility")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val findNavController = findNavController()
@@ -53,7 +53,7 @@ class IssueFragment : Fragment() {
         }
 
         viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
-            viewModel.issue.collect {
+            viewModel.issueList.collect {
                 adapter.submitList(it)
                 when (it[0].isLongClicked) {
                     true -> {

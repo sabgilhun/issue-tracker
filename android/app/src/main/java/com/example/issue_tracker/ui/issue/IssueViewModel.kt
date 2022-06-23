@@ -14,8 +14,8 @@ import javax.inject.Inject
 @HiltViewModel
 class IssueViewModel @Inject constructor(private val issueRepository: IssueRepository) : ViewModel() {
 
-    private val _issue = MutableStateFlow<MutableList<Issue>>(mutableListOf())
-    val issue: StateFlow<MutableList<Issue>> = _issue
+    private val _issueList = MutableStateFlow<MutableList<Issue>>(mutableListOf())
+    val issueList: StateFlow<MutableList<Issue>> = _issueList
 
     private val _longClick = MutableStateFlow(false)
     val longClick: StateFlow<Boolean> = _longClick
@@ -25,25 +25,25 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     fun getIssue() {
         viewModelScope.launch {
             issueRepository.getIssue().collect { issue ->
-                _issue.value = issue
+                _issueList.value = issue
             }
         }
     }
 
     fun changeIssueSwiped(index: Int, isSwiped: Boolean) {
-        _issue.value[index].isSwiped = isSwiped
+        _issueList.value[index].isSwiped = isSwiped
     }
 
     fun getIssueSwiped(index: Int): Boolean {
-        return _issue.value[index].isSwiped
+        return _issueList.value[index].isSwiped
     }
 
     fun changeClickedState() {
 
         // 내부 값을 바꾸는 것이 아니라 issue 객체까지도 새로 만들어야 한다.
-        val list = _issue.value.map {
-            it.copy(isLongClicked = !it.isLongClicked) // 깊은 복사 후 새로 객체 만들기
+        val list = _issueList.value.map {
+            it.copy(isLongClicked = !it.isLongClicked) // LongClicked 값만 변경 후 깊은 복사 수행하여 새로운 객체 만들기
         }
-        _issue.value = list.toMutableList() // 아예 새로 만든 객체를 setValue 해주어 StateFlow 가 notify 할 수 있도록 한다.
+        _issueList.value = list.toMutableList() // 아예 새로 만든 객체를 setValue 해주어 StateFlow 가 notify 할 수 있도록 한다.
     }
 }
