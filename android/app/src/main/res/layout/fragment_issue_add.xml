@@ -93,8 +93,8 @@
             android:id="@+id/et_issue_title"
             android:layout_width="0dp"
             android:layout_height="40dp"
-            android:layout_marginTop="12dp"
             android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
             android:background="@android:color/transparent"
             android:hint="@string/add_new_issue_title"
             android:maxLines="1"
@@ -106,22 +106,43 @@
             android:id="@+id/view_issue_bottom"
             android:layout_width="0dp"
             android:layout_height="2dp"
-            android:layout_marginTop="8dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:background="@color/gray01"
-            app:layout_constraintTop_toBottomOf="@id/et_issue_title"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/et_issue_title" />
+
+        <ScrollView
+            android:id="@+id/scroll_view_issue_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:layout_marginBottom="12dp"
+            app:layout_constraintBottom_toTopOf="@id/constraint_layout_issue_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/view_issue_bottom">
+
+            <EditText
+                android:id="@+id/et_issue_content"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:background="@android:color/transparent"
+                android:gravity="top" />
+        </ScrollView>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraint_layout_assigned"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/gray05"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent">
+            app:layout_constraintStart_toStartOf="parent">
 
 
             <TextView
@@ -167,9 +188,9 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/gray05"
+            app:layout_constraintBottom_toTopOf="@id/constraint_layout_assigned"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/constraint_layout_assigned">
+            app:layout_constraintStart_toStartOf="parent">
 
 
             <TextView
@@ -216,9 +237,9 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:background="@color/gray05"
+            app:layout_constraintBottom_toTopOf="@id/constraint_layout_issue_mile_stone"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/constraint_layout_issue_mile_stone">
+            app:layout_constraintStart_toStartOf="parent">
 
 
             <TextView
