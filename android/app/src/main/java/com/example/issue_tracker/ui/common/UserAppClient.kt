@@ -14,6 +14,7 @@ import kotlin.coroutines.suspendCoroutine
  * 미설치 시 카카오 계정 로그인을 시도한다.
  *
  * 카카오톡 로그인에 실패하면 사용자가 의도적으로 로그인 취소한 경우를 제외하고는 카카오 계정 로그인을 서브로 실행한다.
+ * UserApiClient.Companion 의 확장함수
  */
 suspend fun UserApiClient.Companion.loginWithKakao(context: Context): OAuthToken {
     return if (instance.isKakaoTalkLoginAvailable(context)) {
@@ -35,6 +36,7 @@ suspend fun UserApiClient.Companion.loginWithKakao(context: Context): OAuthToken
 
 /**
  * 카카오톡으로 로그인 시도
+ * UserApiClient.Companion 의 확장함수
  */
 suspend fun UserApiClient.Companion.loginWithKakaoTalk(context: Context): OAuthToken {
     return suspendCoroutine<OAuthToken> { continuation ->
@@ -52,6 +54,7 @@ suspend fun UserApiClient.Companion.loginWithKakaoTalk(context: Context): OAuthT
 
 /**
  * 카카오 계정으로 로그인 시도
+ * UserApiClient.Companion 의 확장함수
  */
 suspend fun UserApiClient.Companion.loginWithKakaoAccount(context: Context): OAuthToken {
     return suspendCoroutine<OAuthToken> { continuation ->
