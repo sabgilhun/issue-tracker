@@ -2,15 +2,23 @@ package com.example.issue_tracker.ui.login
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.issue_tracker.R
 import com.example.issue_tracker.databinding.FragmentLoginBinding
 import com.example.issue_tracker.ui.HomeActivity
+import com.example.issue_tracker.ui.common.loginWithKakao
+import com.kakao.sdk.common.model.ClientError
+import com.kakao.sdk.common.model.ClientErrorCause
+import com.kakao.sdk.user.UserApiClient
+import kotlinx.coroutines.launch
 
 class LoginFragment : Fragment() {
 
