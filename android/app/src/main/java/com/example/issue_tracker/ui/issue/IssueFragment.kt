@@ -40,7 +40,7 @@ class IssueFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val findNavController = findNavController()
-        goToIssueFilterFragment(findNavController)
+        goToFragments(findNavController)
         goToSearchIssueFragment(findNavController)
         viewModel.getIssue()
         adapter = IssueAdapter(viewModel)
@@ -89,9 +89,12 @@ class IssueFragment : Fragment() {
         }
     }
 
-    private fun goToIssueFilterFragment(findNavController: NavController) {
+    private fun goToFragments(findNavController: NavController) {
         binding.btnIssueFilter.setOnClickListener {
             findNavController.navigate(R.id.action_issueFragment_to_issueFilterFragment)
+        }
+        binding.fabIssueAdd.setOnClickListener {
+            findNavController.navigate(R.id.action_issueFragment_to_issueAddFragment)
         }
     }
 

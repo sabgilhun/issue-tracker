@@ -14,6 +14,9 @@
             android:id="@+id/action_issueFragment_to_issueFilterFragment"
             app:destination="@id/issueFilterFragment" />
         <action
+            android:id="@+id/action_issueFragment_to_issueAddFragment"
+            app:destination="@id/issueAddFragment" />
+        <action
             android:id="@+id/action_issueFragment_to_issueSearchFragment"
             app:destination="@id/issueSearchFragment" />
     </fragment>
@@ -67,6 +70,11 @@
             android:id="@+id/action_mileStoneAddFragment_to_mileStoneFragment"
             app:destination="@id/mileStoneFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/issueAddFragment"
+        android:name="com.example.issue_tracker.ui.issue.IssueAddFragment"
+        android:label="IssueAddFragment"
+        tools:layout="@layout/fragment_issue_add" />
     <fragment
         android:id="@+id/issueSearchFragment"
         android:name="com.example.issue_tracker.ui.issue.IssueSearchFragment"
