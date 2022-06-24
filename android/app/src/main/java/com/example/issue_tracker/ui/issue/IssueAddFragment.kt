@@ -100,7 +100,7 @@ class IssueAddFragment : Fragment() {
 
     private fun goBackIssue(findNavController: NavController) {
         binding.ivGoBack.setOnClickListener {
-            findNavController.navigate(R.id.action_issueFilterFragment_to_issueFragment)
+            findNavController.navigate(R.id.action_issueAddFragment_to_issueFragment)
         }
     }
 }
