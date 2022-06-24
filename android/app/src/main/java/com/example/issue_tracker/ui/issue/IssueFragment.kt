@@ -40,8 +40,9 @@ class IssueFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val findNavController = findNavController()
-        goToFragments(findNavController)
+        goToIssueFilterFragments(findNavController)
         goToSearchIssueFragment(findNavController)
+        goToIssueAddFragment(findNavController)
         viewModel.getIssue()
         adapter = IssueAdapter(viewModel)
         val swipeHelperCallback = SwipeHelperCallback(adapter, viewModel).apply {
@@ -72,6 +73,7 @@ class IssueFragment : Fragment() {
         }
 
         binding.btnCloseLongClick.setOnClickListener {
+            viewModel.clearCheckedIdList()
             viewModel.changeClickedState()
         }
 
@@ -89,10 +91,13 @@ class IssueFragment : Fragment() {
         }
     }
 
-    private fun goToFragments(findNavController: NavController) {
+    private fun goToIssueFilterFragments(findNavController: NavController) {
         binding.btnIssueFilter.setOnClickListener {
             findNavController.navigate(R.id.action_issueFragment_to_issueFilterFragment)
         }
+    }
+
+    private fun goToIssueAddFragment(findNavController: NavController) {
         binding.fabIssueAdd.setOnClickListener {
             findNavController.navigate(R.id.action_issueFragment_to_issueAddFragment)
         }

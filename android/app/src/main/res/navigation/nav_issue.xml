@@ -74,7 +74,11 @@
         android:id="@+id/issueAddFragment"
         android:name="com.example.issue_tracker.ui.issue.IssueAddFragment"
         android:label="IssueAddFragment"
-        tools:layout="@layout/fragment_issue_add" />
+        tools:layout="@layout/fragment_issue_add" >
+        <action
+            android:id="@+id/action_issueAddFragment_to_issueFragment"
+            app:destination="@id/issueFragment" />
+    </fragment>
     <fragment
         android:id="@+id/issueSearchFragment"
         android:name="com.example.issue_tracker.ui.issue.IssueSearchFragment"
