@@ -43,5 +43,19 @@ class LoginFragment : Fragment() {
             val intent = Intent(context, HomeActivity::class.java)
             startActivity(intent)
         }
+        binding.cbKakaoLogin.setOnClickListener {
+            lifecycleScope.launch {
+                try {
+                    val oAuthToken = UserApiClient.loginWithKakao(requireContext())
+                    Log.d("Kakao", oAuthToken.toString())
+                } catch (error: Throwable) {
+                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
+                        Log.d("Kakao", "사용자가 명시적으로 취소")
+                    } else {
+                        Log.e("Kakao", "인증 에러 발생", error)
+                    }
+                }
+            }
+        }
     }
 }
