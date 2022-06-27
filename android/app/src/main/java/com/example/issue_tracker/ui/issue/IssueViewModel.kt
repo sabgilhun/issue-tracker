@@ -42,8 +42,10 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
 
     // 이슈를 닫는 로직
     // 서버에 issueId 를 보내면 닫히고 남은 이슈 리스트를 가져오는 로직으로 변경 예정
-    suspend fun closeIssue(issueId: Int) {
-        _closeIssue.emit(issueId.toString())
+    fun closeIssue(issueId: Int) {
+        viewModelScope.launch {
+            _closeIssue.emit(issueId.toString())
+        }
     }
 
     // 체크박스를 통해 선택된 issueIdList 닫기를 서버에 전송하는 로직
