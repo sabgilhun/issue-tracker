@@ -2,10 +2,12 @@ package com.example.issue_tracker.ui.issue
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.issue_tracker.common.ResponseResult
 import com.example.issue_tracker.common.addElement
 import com.example.issue_tracker.common.removeAllElement
 import com.example.issue_tracker.common.removeElement
 import com.example.issue_tracker.model.Issue
+import com.example.issue_tracker.model.IssueDTO
 import com.example.issue_tracker.repository.IssueRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -16,8 +18,8 @@ import javax.inject.Inject
 class IssueViewModel @Inject constructor(private val issueRepository: IssueRepository) :
     ViewModel() {
 
-    private val _issueList = MutableStateFlow<MutableList<Issue>>(mutableListOf())
-    val issueList: StateFlow<MutableList<Issue>> = _issueList
+    private val _issueList = MutableStateFlow<MutableList<IssueDTO>>(mutableListOf())
+    val issueList: StateFlow<MutableList<IssueDTO>> = _issueList
 
     // 임시 StateFlow
     private val _closeIssue = MutableSharedFlow<String>()
@@ -30,20 +32,38 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     private val _checkedIssueIdListTemp = MutableStateFlow<List<Int>>(mutableListOf())
     val checkedIssueIdListTemp: StateFlow<List<Int>> = _checkedIssueIdListTemp
 
+    private val _errorMessage = MutableSharedFlow<String>()
+    val errorMessage: SharedFlow<String> = _errorMessage
+
     // 이슈 리스트를 가져오는 함수
     // API 로 가져와 처리하는 로직으로 변경 예정
-    fun getIssue() {
+//    fun getDummyIssue() {
+//        viewModelScope.launch {
+//            issueRepository.getDummyIssue().collect { issue ->
+//                _issueList.value = issue
+//            }
+//        }
+//    }
+
+    fun getIssues() {
         viewModelScope.launch {
-            issueRepository.getIssue().collect { issue ->
-                _issueList.value = issue
+            when (val issueList = issueRepository.getIssue()) {
+                is ResponseResult.Success -> {
+                    _issueList.value = issueList.data
+                }
+                is ResponseResult.Error -> {
+                    _errorMessage.emit(issueList.error)
+                }
             }
         }
     }
 
     // 이슈를 닫는 로직
     // 서버에 issueId 를 보내면 닫히고 남은 이슈 리스트를 가져오는 로직으로 변경 예정
-    suspend fun closeIssue(issueId: Int) {
-        _closeIssue.emit(issueId.toString())
+    fun closeIssue(issueId: Int) {
+        viewModelScope.launch {
+            _closeIssue.emit(issueId.toString())
+        }
     }
 
     // 체크박스를 통해 선택된 issueIdList 닫기를 서버에 전송하는 로직

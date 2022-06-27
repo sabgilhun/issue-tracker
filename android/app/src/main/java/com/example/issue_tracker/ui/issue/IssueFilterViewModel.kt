@@ -2,7 +2,7 @@ package com.example.issue_tracker.ui.issue
 
 import androidx.lifecycle.ViewModel
 import com.example.issue_tracker.common.addElement
-import com.example.issue_tracker.model.Label
+import com.example.issue_tracker.model.LabelDTO
 import com.example.issue_tracker.model.MileStone
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -13,7 +13,7 @@ import javax.inject.Inject
 @HiltViewModel
 class IssueFilterViewModel @Inject constructor() : ViewModel() {
 
-    private val _labelList = MutableStateFlow<MutableList<Label>>(mutableListOf())
+    private val _labelList = MutableStateFlow<MutableList<LabelDTO>>(mutableListOf())
     val labelList = _labelList.asStateFlow()
 
     private val _mileStoneList = MutableStateFlow<MutableList<MileStone>>(mutableListOf())
@@ -33,8 +33,8 @@ class IssueFilterViewModel @Inject constructor() : ViewModel() {
     val mileStoneChoose = _mileStoneChoose.asStateFlow()
 
     fun addDummyData() {
-        _labelList.addElement(Label(1, "feature", "Contents1", "#FFFFFF"))
-        _labelList.addElement(Label(2, "fix", "Contents2", "#FFFFFF"))
+        _labelList.addElement(LabelDTO(1, "feature", "Contents1", "#FFFFFF"))
+        _labelList.addElement(LabelDTO(2, "fix", "Contents2", "#FFFFFF"))
         _mileStoneList.addElement(MileStone(1, "코코아 코스", "Contents1", "2022-06-13"))
         _mileStoneList.addElement(MileStone(1, "마스터즈 코스", "Contents2", "2022-06-13"))
     }

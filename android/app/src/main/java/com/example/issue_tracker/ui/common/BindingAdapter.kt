@@ -4,7 +4,7 @@ import android.widget.CheckBox
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 
-@BindingAdapter("checkBoxVisible")
-fun checkBoxVisible(view: CheckBox, isLongClicked: Boolean?) {
-    view.isVisible = isLongClicked == true
+@BindingAdapter("isVisible")
+fun isVisible(view: CheckBox, isClicked: Boolean?) {
+    view.isVisible = isClicked == true
 }
