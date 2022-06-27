@@ -8,7 +8,7 @@
 
         <variable
             name="label"
-            type="com.example.issue_tracker.model.Label" />
+            type="com.example.issue_tracker.model.LabelDTO" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

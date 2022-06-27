@@ -1,17 +1,25 @@
 package com.example.issue_tracker.repository
 
+import com.example.issue_tracker.common.ResponseResult
+import com.example.issue_tracker.common.toClientIssue
 import com.example.issue_tracker.model.Issue
 import com.example.issue_tracker.model.Label
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import com.example.issue_tracker.model.LabelDTO
+import com.example.issue_tracker.network.APIService
 import javax.inject.Inject
 
-class IssueRepositoryImpl @Inject constructor(): IssueRepository {
+class IssueRepositoryImpl @Inject constructor(private val apiService: APIService): IssueRepository {
 
-    override suspend fun getIssue(): Flow<MutableList<Issue>> {
-        return flow {
-            emit(getTempDummyData())
-        }
+    // 테스트용 Issue 더미데이터
+    override suspend fun getDummyIssue(): MutableList<Issue> {
+        return getTempDummyData()
+    }
+
+    // 실제 서버에서 가져올 Issue 데이터
+    override suspend fun getIssue(): ResponseResult<MutableList<Issue>> {
+        val response = apiService.getIssues().toClientIssue()
+        return if (response.isNullOrEmpty()) ResponseResult.Success(response)
+        else ResponseResult.Error("이슈를 불러오지 못했습니다.")
     }
 
     // 테스트를 위한 더미 데이터

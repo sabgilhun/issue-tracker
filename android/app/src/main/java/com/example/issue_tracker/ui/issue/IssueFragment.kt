@@ -43,7 +43,7 @@ class IssueFragment : Fragment() {
         goToIssueFilterFragments(findNavController)
         goToSearchIssueFragment(findNavController)
         goToIssueAddFragment(findNavController)
-        viewModel.getIssue()
+        viewModel.getIssues()
         adapter = IssueAdapter(viewModel)
         val swipeHelperCallback = SwipeHelperCallback(adapter, viewModel).apply {
             setClamp(resources.displayMetrics.widthPixels.toFloat() / 4)
@@ -88,6 +88,12 @@ class IssueFragment : Fragment() {
             Toast.makeText(requireContext(), "${viewModel.checkedIssueIdListTemp.value} 번 이슈가 닫혔습니다.", Toast.LENGTH_SHORT).show()
             viewModel.clearCheckedIdList()
             viewModel.changeClickedState()
+        }
+
+        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
+            viewModel.errorMessage.collect { errorMessage ->
+                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            }
         }
     }
 

@@ -4,6 +4,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.example.issue_tracker.model.Issue
+import com.example.issue_tracker.model.IssueDTO
+import com.example.issue_tracker.model.Label
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
@@ -41,4 +44,26 @@ fun <E> MutableStateFlow<MutableList<E>>.removeElement(element: E) {
 fun <E> MutableStateFlow<MutableList<E>>.removeAllElement() {
     val tempMutableList = mutableListOf<E>()
     this.value = tempMutableList
+}
+
+fun ArrayList<IssueDTO>.toClientIssue(): MutableList<Issue> {
+    val temp = mutableListOf<Issue>()
+    this.forEach {
+        val issue = it.map { issueDTOItem ->
+            Issue(
+                issueId = issueDTOItem.issueId,
+                mileStone = issueDTOItem.milestoneTitle,
+                title = issueDTOItem.title,
+                contents = issueDTOItem.description,
+                label = Label(
+                    issueDTOItem.label.id,
+                    issueDTOItem.label.name,
+                    issueDTOItem.label.description,
+                    issueDTOItem.label.backgroundColor
+                )
+            )
+        }
+        temp.add(issue)
+    }
+    return temp
 }
