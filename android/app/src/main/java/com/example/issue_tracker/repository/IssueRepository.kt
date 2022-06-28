@@ -8,5 +8,5 @@ interface IssueRepository {
 
     suspend fun getDummyIssue(): MutableList<Issue>
 
-    suspend fun getIssue(): ResponseResult<MutableList<IssueDTO>>
+    suspend fun getIssue(): ResponseResult<MutableList<Issue>>
 }

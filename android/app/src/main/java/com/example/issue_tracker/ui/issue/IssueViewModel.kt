@@ -18,8 +18,8 @@ import javax.inject.Inject
 class IssueViewModel @Inject constructor(private val issueRepository: IssueRepository) :
     ViewModel() {
 
-    private val _issueList = MutableStateFlow<MutableList<IssueDTO>>(mutableListOf())
-    val issueList: StateFlow<MutableList<IssueDTO>> = _issueList
+    private val _issueList = MutableStateFlow<MutableList<Issue>>(mutableListOf())
+    val issueList: StateFlow<MutableList<Issue>> = _issueList
 
     // 임시 StateFlow
     private val _closeIssue = MutableSharedFlow<String>()
@@ -34,6 +34,8 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
 
     private val _errorMessage = MutableSharedFlow<String>()
     val errorMessage: SharedFlow<String> = _errorMessage
+
+    val checkLongClicked = MutableStateFlow<Boolean>(true)
 
     // 이슈 리스트를 가져오는 함수
     // API 로 가져와 처리하는 로직으로 변경 예정
@@ -86,6 +88,7 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
             it.copy(isLongClicked = !it.isLongClicked) // LongClicked 값만 변경 후 깊은 복사 수행하여 새로운 객체 만들기
         }
         _issueList.value = list.toMutableList() // 아예 새로 만든 객체를 setValue 해주어 StateFlow 가 notify 할 수 있도록 한다.
+        checkLongClicked.value = !checkLongClicked.value
     }
 
     fun addChecked(issueId: Int) {

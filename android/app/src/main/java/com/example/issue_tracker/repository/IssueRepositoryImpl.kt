@@ -1,11 +1,15 @@
 package com.example.issue_tracker.repository
 
+import android.util.Log
 import com.example.issue_tracker.common.ResponseResult
 import com.example.issue_tracker.common.toClientIssue
 import com.example.issue_tracker.model.Issue
 import com.example.issue_tracker.model.Label
 import com.example.issue_tracker.model.LabelDTO
 import com.example.issue_tracker.network.APIService
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class IssueRepositoryImpl @Inject constructor(private val apiService: APIService): IssueRepository {
@@ -17,8 +21,15 @@ class IssueRepositoryImpl @Inject constructor(private val apiService: APIService
 
     // 실제 서버에서 가져올 Issue 데이터
     override suspend fun getIssue(): ResponseResult<MutableList<Issue>> {
-        val response = apiService.getIssues().toClientIssue()
-        return if (response.isNullOrEmpty()) ResponseResult.Success(response)
+        
+        coroutineScope {
+            launch {
+                val response = apiService.getIssues().issues.toClientIssue()
+                Log.d("Repository", response.toString())
+            }
+        }
+        val response = apiService.getIssues().issues.toClientIssue()
+        return if (response.isNotEmpty()) ResponseResult.Success(response)
         else ResponseResult.Error("이슈를 불러오지 못했습니다.")
     }
 
