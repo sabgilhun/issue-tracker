@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.issue_tracker.databinding.ItemLabelRecyclerViewBinding
 import com.example.issue_tracker.model.Label
-import com.example.issue_tracker.model.LabelDTO
 
 class LabelListAdapter : ListAdapter<Label, LabelListAdapter.LabelViewHolder>(LabelDiffCallback) {
 

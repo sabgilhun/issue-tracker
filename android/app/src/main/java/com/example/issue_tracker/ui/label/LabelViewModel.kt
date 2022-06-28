@@ -3,7 +3,6 @@ package com.example.issue_tracker.ui.label
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issue_tracker.model.Label
-import com.example.issue_tracker.model.LabelDTO
 import com.example.issue_tracker.repository.LabelRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

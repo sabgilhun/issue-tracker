@@ -8,9 +8,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.issue_tracker.databinding.ItemIssueRecyclerViewBinding
 import com.example.issue_tracker.model.Issue
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 class IssueAdapter(
     private val viewModel: IssueViewModel

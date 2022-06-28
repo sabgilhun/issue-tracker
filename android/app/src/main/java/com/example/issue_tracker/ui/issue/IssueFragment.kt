@@ -82,8 +82,10 @@ class IssueFragment : Fragment() {
         }
 
         viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
-            viewModel.errorMessage.collect { errorMessage ->
-                Toast.makeText(requireContext(), errorMessage, Toast.LENGTH_SHORT).show()
+            viewModel.error.collect {
+                if (it.throwable != null) {
+                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
