@@ -2,7 +2,10 @@ package com.example.issue_tracker.model
 
 import com.google.gson.annotations.SerializedName
 
-class IssueDTO : ArrayList<IssueDTOItem>()
+data class IssueDTO (
+    @SerializedName("issues")
+    val issues: List<IssueDTOItem>
+    )
 
 data class IssueDTOItem(
     @SerializedName("description")
