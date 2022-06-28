@@ -5,7 +5,6 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.issue_tracker.model.Issue
-import com.example.issue_tracker.model.IssueDTO
 import com.example.issue_tracker.model.IssueDTOItem
 import com.example.issue_tracker.model.Label
 import kotlinx.coroutines.CoroutineScope

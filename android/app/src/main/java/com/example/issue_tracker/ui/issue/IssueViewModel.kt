@@ -2,16 +2,22 @@ package com.example.issue_tracker.ui.issue
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.issue_tracker.common.ResponseResult
 import com.example.issue_tracker.common.addElement
 import com.example.issue_tracker.common.removeAllElement
 import com.example.issue_tracker.common.removeElement
 import com.example.issue_tracker.model.Issue
-import com.example.issue_tracker.model.IssueDTO
+import com.example.issue_tracker.network.CEHModel
 import com.example.issue_tracker.repository.IssueRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import retrofit2.HttpException
+import java.net.SocketException
+import java.net.UnknownHostException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -32,31 +38,23 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     private val _checkedIssueIdListTemp = MutableStateFlow<List<Int>>(mutableListOf())
     val checkedIssueIdListTemp: StateFlow<List<Int>> = _checkedIssueIdListTemp
 
-    private val _errorMessage = MutableSharedFlow<String>()
-    val errorMessage: SharedFlow<String> = _errorMessage
+    private val _error = MutableStateFlow<CEHModel>(CEHModel(null,""))
+    val error: SharedFlow<CEHModel> = _error
 
     val checkLongClicked = MutableStateFlow<Boolean>(true)
 
-    // 이슈 리스트를 가져오는 함수
-    // API 로 가져와 처리하는 로직으로 변경 예정
-//    fun getDummyIssue() {
-//        viewModelScope.launch {
-//            issueRepository.getDummyIssue().collect { issue ->
-//                _issueList.value = issue
-//            }
-//        }
-//    }
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        when (throwable) {
+            is SocketException -> _error.value = CEHModel(throwable, "네트워크 연결이 끊겼습니다.")
+            is HttpException -> _error.value = CEHModel(throwable, "Http 관련 오류입니다")
+            is UnknownHostException -> _error.value = CEHModel(throwable, "UnknownHost 오류입니다.")
+            else -> _error.value = CEHModel(throwable, "알 수 없는 오류입니다.")
+        }
+    }
 
     fun getIssues() {
-        viewModelScope.launch {
-            when (val issueList = issueRepository.getIssue()) {
-                is ResponseResult.Success -> {
-                    _issueList.value = issueList.data
-                }
-                is ResponseResult.Error -> {
-                    _errorMessage.emit(issueList.error)
-                }
-            }
+        viewModelScope.launch(exceptionHandler) {
+            _issueList.value = issueRepository.getIssue()
         }
     }
 
