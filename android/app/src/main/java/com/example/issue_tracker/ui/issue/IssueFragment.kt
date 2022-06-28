@@ -43,6 +43,7 @@ class IssueFragment : Fragment() {
         goToIssueFilterFragments(findNavController)
         goToSearchIssueFragment(findNavController)
         goToIssueAddFragment(findNavController)
+        changeActionBarState()
         viewModel.getIssues()
         adapter = IssueAdapter(viewModel)
         val swipeHelperCallback = SwipeHelperCallback(adapter, viewModel).apply {
@@ -59,16 +60,6 @@ class IssueFragment : Fragment() {
         viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
             viewModel.issueList.collect {
                 adapter.submitList(it)
-                when (it[0].isLongClicked) {
-                    true -> {
-                        binding.tbIssueFragment.visibility = View.GONE
-                        binding.tbIssueFragmentLongClick.visibility = View.VISIBLE
-                    }
-                    false -> {
-                        binding.tbIssueFragment.visibility = View.VISIBLE
-                        binding.tbIssueFragmentLongClick.visibility = View.GONE
-                    }
-                }
             }
         }
 
@@ -112,6 +103,14 @@ class IssueFragment : Fragment() {
     private fun goToSearchIssueFragment(findNavController: NavController) {
         binding.btnIssueSearch.setOnClickListener {
             findNavController.navigate(R.id.action_issueFragment_to_issueSearchFragment)
+        }
+    }
+
+    private fun changeActionBarState() {
+        viewLifecycleOwner.repeatOnLifecycleExtension {
+            viewModel.checkLongClicked.collect {
+                binding.isClicked = it
+            }
         }
     }
 }

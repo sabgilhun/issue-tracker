@@ -28,17 +28,18 @@ class RetrofitObject {
 
     @Provides
     @Singleton
-    fun retrofit(): Retrofit {
+    fun retrofit(): APIService {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .client(okHttpClient())
             .build()
+            .create(APIService::class.java)
     }
 
-    @Provides
-    @Singleton
-    fun service(): APIService {
-        return retrofit().create(APIService::class.java)
-    }
+//    @Provides
+//    @Singleton
+//    fun service(): APIService {
+//        return retrofit().create(APIService::class.java)
+//    }
 }
