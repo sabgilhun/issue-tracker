@@ -7,6 +7,7 @@ import com.example.issue_tracker.common.removeAllElement
 import com.example.issue_tracker.common.removeElement
 import com.example.issue_tracker.model.Issue
 import com.example.issue_tracker.network.CEHModel
+import com.example.issue_tracker.network.CoroutineException
 import com.example.issue_tracker.repository.IssueRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -15,9 +16,6 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import retrofit2.HttpException
-import java.net.SocketException
-import java.net.UnknownHostException
 import javax.inject.Inject
 
 @HiltViewModel
@@ -44,12 +42,7 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     val checkLongClicked = MutableStateFlow<Boolean>(true)
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        when (throwable) {
-            is SocketException -> _error.value = CEHModel(throwable, "네트워크 연결이 끊겼습니다.")
-            is HttpException -> _error.value = CEHModel(throwable, "Http 관련 오류입니다")
-            is UnknownHostException -> _error.value = CEHModel(throwable, "UnknownHost 오류입니다.")
-            else -> _error.value = CEHModel(throwable, "알 수 없는 오류입니다.")
-        }
+        _error.value = CoroutineException.throwableCheck(throwable)
     }
 
     fun getIssues() {
