@@ -1,23 +1,21 @@
 package com.example.issue_tracker.repository
 
-import com.example.issue_tracker.common.toClientIssue
 import com.example.issue_tracker.model.Issue
 import com.example.issue_tracker.model.Label
+import com.example.issue_tracker.model.toClientIssue
 import com.example.issue_tracker.network.APIService
 import javax.inject.Inject
 
-class IssueRepositoryImpl @Inject constructor(private val apiService: APIService): IssueRepository {
+class IssueRepositoryImpl @Inject constructor(
+    private val apiService: APIService,
+) : IssueRepository {
 
     // 테스트용 Issue 더미데이터
-    override suspend fun getDummyIssue(): MutableList<Issue> {
-        return getTempDummyData()
-    }
+    override suspend fun getDummyIssue(): MutableList<Issue> = getTempDummyData()
 
     // 실제 서버에서 가져올 Issue 데이터
-    override suspend fun getIssue(): MutableList<Issue> {
-
-        return apiService.getIssues().issues.toClientIssue()
-    }
+    override suspend fun getIssue(): MutableList<Issue> =
+        apiService.getIssues().issues.toClientIssue()
 
     // 테스트를 위한 더미 데이터
     private fun getTempDummyData(): MutableList<Issue> {
@@ -129,6 +127,14 @@ class IssueRepositoryImpl @Inject constructor(private val apiService: APIService
                 "#D5D5DB"
             )
         )
-        return mutableListOf(firstIssue, secondIssue, secondIssue2, secondIssue3, secondIssue4, secondIssue5, secondIssue6, secondIssue7, secondIssue8)
+        return mutableListOf(firstIssue,
+            secondIssue,
+            secondIssue2,
+            secondIssue3,
+            secondIssue4,
+            secondIssue5,
+            secondIssue6,
+            secondIssue7,
+            secondIssue8)
     }
 }

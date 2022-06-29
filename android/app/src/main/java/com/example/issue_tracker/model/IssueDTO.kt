@@ -2,10 +2,10 @@ package com.example.issue_tracker.model
 
 import com.google.gson.annotations.SerializedName
 
-data class IssueDTO (
+data class IssueDTO(
     @SerializedName("issues")
-    val issues: List<IssueDTOItem>
-    )
+    val issues: List<IssueDTOItem>,
+)
 
 data class IssueDTOItem(
     @SerializedName("description")
@@ -17,7 +17,7 @@ data class IssueDTOItem(
     @SerializedName("milestoneTitle")
     val milestoneTitle: String,
     @SerializedName("title")
-    val title: String
+    val title: String,
 )
 
 data class LabelDTO(
@@ -28,5 +28,29 @@ data class LabelDTO(
     @SerializedName("id")
     val id: Int,
     @SerializedName("name")
-    val name: String
+    val name: String,
 )
+
+fun List<IssueDTOItem>.toClientIssue(): MutableList<Issue> {
+    return this.map { issueDTOItem ->
+        val issueId = requireNotNull(issueDTOItem.issueId)
+        val mileStone = issueDTOItem.milestoneTitle
+        val title = requireNotNull(issueDTOItem.title)
+        val contents = issueDTOItem.description
+        val label = Label(
+            labelId = requireNotNull(issueDTOItem.label.id),
+            labelTitle = requireNotNull(issueDTOItem.label.name),
+            labelColor = issueDTOItem.label.backgroundColor,
+            labelContents = issueDTOItem.label.description
+        )
+
+        Issue(
+            issueId = issueId,
+            mileStone = mileStone,
+            title = title,
+            contents = contents,
+            label = label
+        )
+    }.toMutableList()
+}
+

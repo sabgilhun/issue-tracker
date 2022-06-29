@@ -15,7 +15,6 @@ class LabelRepositoryImpl @Inject constructor() : LabelRepository {
         _labelList.addElement(labelList)
     }
 
-    override fun getLabelList(): Flow<List<Label>> {
-        return _labelList
-    }
+    override fun getLabelList(): Flow<List<Label>> = _labelList
+
 }

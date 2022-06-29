@@ -36,7 +36,7 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     private val _checkedIssueIdListTemp = MutableStateFlow<List<Int>>(mutableListOf())
     val checkedIssueIdListTemp: StateFlow<List<Int>> = _checkedIssueIdListTemp
 
-    private val _error = MutableStateFlow<CEHModel>(CEHModel(null,""))
+    private val _error = MutableStateFlow<CEHModel>(CEHModel(null, ""))
     val error: SharedFlow<CEHModel> = _error
 
     val checkLongClicked = MutableStateFlow<Boolean>(true)
@@ -78,7 +78,8 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
         val list = _issueList.value.map {
             it.copy(isLongClicked = !it.isLongClicked) // LongClicked 값만 변경 후 깊은 복사 수행하여 새로운 객체 만들기
         }
-        _issueList.value = list.toMutableList() // 아예 새로 만든 객체를 setValue 해주어 StateFlow 가 notify 할 수 있도록 한다.
+        // 아예 새로 만든 객체를 setValue 해주어 StateFlow 가 notify 할 수 있도록 한다.
+        _issueList.value = list.toMutableList()
         checkLongClicked.value = !checkLongClicked.value
     }
 

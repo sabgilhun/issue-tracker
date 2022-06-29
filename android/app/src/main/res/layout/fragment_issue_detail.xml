@@ -81,7 +81,7 @@
 
         <com.example.issue_tracker.ui.label.CustomLabel
             android:id="@+id/cl_opened_issue"
-            isVisible="@{isOpened}"
+            visible="@{isOpened}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -93,7 +93,7 @@
 
         <com.example.issue_tracker.ui.label.CustomLabel
             android:id="@+id/cl_closed_issue"
-            isVisible="@{!isOpened}"
+            visible="@{!isOpened}"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

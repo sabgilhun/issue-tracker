@@ -16,7 +16,6 @@ import javax.inject.Inject
 class IssueDetailFragment @Inject constructor() : Fragment() {
 
     private lateinit var binding: FragmentIssueDetailBinding
-
     private val viewModel: IssueDetailViewModel by viewModels()
 
     override fun onCreateView(
@@ -31,8 +30,5 @@ class IssueDetailFragment @Inject constructor() : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
-
     }
 }

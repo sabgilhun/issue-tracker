@@ -13,8 +13,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class LabelViewModel @Inject constructor(
-    private val labelRepository: LabelRepository
-): ViewModel() {
+    private val labelRepository: LabelRepository,
+) : ViewModel() {
 
     private val _labelList = MutableStateFlow<List<Label>>(mutableListOf())
     val labelList = _labelList.asStateFlow()

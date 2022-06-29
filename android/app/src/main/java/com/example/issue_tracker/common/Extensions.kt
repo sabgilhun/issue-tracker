@@ -48,20 +48,3 @@ fun <E> MutableStateFlow<MutableList<E>>.removeAllElement() {
     val tempMutableList = mutableListOf<E>()
     this.value = tempMutableList
 }
-
-fun List<IssueDTOItem>.toClientIssue(): MutableList<Issue> {
-    return this.map { issueDTOItem ->
-        Issue(
-            issueId = issueDTOItem.issueId,
-            mileStone = issueDTOItem.milestoneTitle,
-            title = issueDTOItem.title,
-            contents = issueDTOItem.description,
-            label = Label(
-                issueDTOItem.label.id,
-                issueDTOItem.label.name,
-                issueDTOItem.label.description,
-                issueDTOItem.label.backgroundColor
-            )
-        )
-    }.toMutableList()
-}
