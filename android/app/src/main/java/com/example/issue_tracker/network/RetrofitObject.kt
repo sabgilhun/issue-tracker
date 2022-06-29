@@ -12,10 +12,8 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RetrofitObject {
-    companion object {
-        private const val BASE_URL = "http://52.79.243.28:8080/"
-    }
+object RetrofitObject {
+    private const val BASE_URL = "http://52.79.243.28:8080/"
 
     @Provides
     @Singleton
@@ -36,10 +34,4 @@ class RetrofitObject {
             .build()
             .create(APIService::class.java)
     }
-
-//    @Provides
-//    @Singleton
-//    fun service(): APIService {
-//        return retrofit().create(APIService::class.java)
-//    }
 }

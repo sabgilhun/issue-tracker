@@ -4,7 +4,11 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
 
-@BindingAdapter("isVisible")
-fun isVisible(view: View, isClicked: Boolean?) {
-    view.isVisible = isClicked == true
+@BindingAdapter("visible")
+fun setVisible(view: View, isClicked: Boolean?) {
+    view.visibility = if (isClicked == true) {
+        View.VISIBLE
+    } else {
+        View.GONE
+    }
 }

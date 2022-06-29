@@ -7,9 +7,12 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.example.issue_tracker.model.Issue
 import com.example.issue_tracker.model.IssueDTOItem
 import com.example.issue_tracker.model.Label
+import com.example.issue_tracker.network.CEHModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.launch
+import kotlin.coroutines.CoroutineContext
 
 
 fun LifecycleOwner.repeatOnLifecycleExtension(
@@ -44,21 +47,4 @@ fun <E> MutableStateFlow<MutableList<E>>.removeElement(element: E) {
 fun <E> MutableStateFlow<MutableList<E>>.removeAllElement() {
     val tempMutableList = mutableListOf<E>()
     this.value = tempMutableList
-}
-
-fun List<IssueDTOItem>.toClientIssue(): MutableList<Issue> {
-    return this.map { issueDTOItem ->
-        Issue(
-            issueId = issueDTOItem.issueId,
-            mileStone = issueDTOItem.milestoneTitle,
-            title = issueDTOItem.title,
-            contents = issueDTOItem.description,
-            label = Label(
-                issueDTOItem.label.id,
-                issueDTOItem.label.name,
-                issueDTOItem.label.description,
-                issueDTOItem.label.backgroundColor
-            )
-        )
-    }.toMutableList()
 }

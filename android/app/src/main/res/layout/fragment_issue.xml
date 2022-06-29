@@ -32,7 +32,7 @@
                 android:id="@+id/tb_issue_fragment"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
-                isVisible="@{isClicked}">
+                visible="@{isClicked}">
 
                 <ImageButton
                     android:id="@+id/btn_issue_filter"
@@ -72,7 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:background="@color/primary_blue"
-                isVisible="@{!isClicked}"
+                visible="@{!isClicked}"
                 >
 
                 <ImageButton

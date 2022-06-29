@@ -10,7 +10,7 @@ import com.example.issue_tracker.databinding.ItemIssueRecyclerViewBinding
 import com.example.issue_tracker.model.Issue
 
 class IssueAdapter(
-    private val viewModel: IssueViewModel
+    private val viewModel: IssueViewModel,
 ) : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(
     IssueDiffCallback
 ) {

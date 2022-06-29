@@ -27,8 +27,8 @@ class IssueFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
+        savedInstanceState: Bundle?,
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_issue, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         binding.viewModel = viewModel
@@ -76,7 +76,9 @@ class IssueFragment : Fragment() {
 
         binding.btnAppBarCloseIssue.setOnClickListener {
             viewModel.closeIssueByCheckBox(viewModel.checkedIssueIdList.value)
-            Toast.makeText(requireContext(), "${viewModel.checkedIssueIdListTemp.value} 번 이슈가 닫혔습니다.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(),
+                "${viewModel.checkedIssueIdListTemp.value} 번 이슈가 닫혔습니다.",
+                Toast.LENGTH_SHORT).show()
             viewModel.clearCheckedIdList()
             viewModel.changeClickedState()
         }
