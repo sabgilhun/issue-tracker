@@ -21,9 +21,7 @@ class LabelViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            labelRepository.getLabelList().collect {
-                _labelList.value = it
-            }
+            _labelList.value = labelRepository.getLabelList()
         }
     }
 }

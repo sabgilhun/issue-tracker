@@ -1,7 +1,7 @@
 package com.example.issue_tracker.network
 
 import com.example.issue_tracker.model.IssueDTO
-import com.example.issue_tracker.model.LabelDTO
+import com.example.issue_tracker.model.LabelListDTO
 import retrofit2.http.GET
 
 interface APIService {
@@ -10,6 +10,6 @@ interface APIService {
     suspend fun getIssues(): IssueDTO
 
     @GET("labels")
-    suspend fun getLabels(): LabelDTO
+    suspend fun getLabels(): LabelListDTO
 
 }
