@@ -4,7 +4,6 @@ import com.example.issue_tracker.common.addElement
 import com.example.issue_tracker.model.Label
 import com.example.issue_tracker.model.toLabelList
 import com.example.issue_tracker.network.APIService
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import javax.inject.Inject
 

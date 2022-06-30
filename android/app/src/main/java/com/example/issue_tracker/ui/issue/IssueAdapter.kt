@@ -1,6 +1,5 @@
 package com.example.issue_tracker.ui.issue
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -29,9 +28,7 @@ class IssueAdapter(
         fun bind(issue: Issue) {
             binding.issue = issue
             binding.tvCloseIssue.setOnClickListener {
-                // TODO 닫기 버튼 클릭 시 로직 구현
                 viewModel.closeIssue(issue.issueId)
-                Log.d("닫기", issue.issueId.toString())
             }
 
             binding.cvSwipeView.setOnLongClickListener {

@@ -11,10 +11,7 @@ import com.example.issue_tracker.network.CoroutineException
 import com.example.issue_tracker.repository.IssueRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
-import kotlinx.coroutines.flow.MutableSharedFlow
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
-import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -73,13 +70,13 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     }
 
     fun changeClickedState() {
-
         // 내부 값을 바꾸는 것이 아니라 issue 객체까지도 새로 만들어야 한다.
-        val list = _issueList.value.map {
-            it.copy(isLongClicked = !it.isLongClicked) // LongClicked 값만 변경 후 깊은 복사 수행하여 새로운 객체 만들기
-        }
         // 아예 새로 만든 객체를 setValue 해주어 StateFlow 가 notify 할 수 있도록 한다.
-        _issueList.value = list.toMutableList()
+        _issueList.update { origin ->
+            origin.map { issue ->
+                issue.copy(isLongClicked = !issue.isLongClicked) // LongClicked 값만 변경 후 깊은 복사 수행하여 새로운 객체 만들기
+            }.toMutableList()
+        }
         checkLongClicked.value = !checkLongClicked.value
     }
 

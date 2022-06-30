@@ -1,6 +1,5 @@
 package com.example.issue_tracker.network
 
-import kotlinx.coroutines.flow.MutableStateFlow
 import retrofit2.HttpException
 import java.net.SocketException
 import java.net.UnknownHostException
