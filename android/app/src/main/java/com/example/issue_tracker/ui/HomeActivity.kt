@@ -4,15 +4,12 @@ import android.content.Context
 import android.os.Bundle
 import android.view.MotionEvent
 import android.view.inputmethod.InputMethodManager
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
 import com.example.issue_tracker.R
 import com.example.issue_tracker.databinding.ActivityHomeBinding
-import com.example.issue_tracker.ui.issue.IssueFragment
-import com.example.issue_tracker.ui.issue.IssueViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

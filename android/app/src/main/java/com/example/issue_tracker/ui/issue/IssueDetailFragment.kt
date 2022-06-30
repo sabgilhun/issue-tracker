@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
 import com.example.issue_tracker.R
 import com.example.issue_tracker.databinding.FragmentIssueDetailBinding
 import dagger.hilt.android.AndroidEntryPoint
