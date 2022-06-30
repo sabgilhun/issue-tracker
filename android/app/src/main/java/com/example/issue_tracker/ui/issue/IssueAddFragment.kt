@@ -9,7 +9,6 @@ import android.widget.PopupMenu
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.issue_tracker.R
@@ -27,8 +26,8 @@ class IssueAddFragment : Fragment() {
     private val labelPopUpMenu by lazy {
         val labelList = viewModel.labelList.value
         PopupMenu(requireContext(), binding.ibFilterButtonLabel).apply {
-            for (index in labelList.indices) {
-                menu.add(Menu.NONE, index, index, labelList[index].labelTitle)
+            labelList.forEachIndexed { index, item ->
+                menu.add(Menu.NONE, index, index, item.labelTitle)
             }
         }
     }
@@ -36,8 +35,8 @@ class IssueAddFragment : Fragment() {
     private val mileStonePopUpMenu by lazy {
         val mileStoneList = viewModel.mileStoneList.value
         PopupMenu(requireContext(), binding.ibFilterButtonIssueMileStone).apply {
-            for (index in mileStoneList.indices) {
-                menu.add(Menu.NONE, index, index, mileStoneList[index].title)
+            mileStoneList.forEachIndexed { index, item ->
+                menu.add(Menu.NONE, index, index, item.title)
             }
         }
     }

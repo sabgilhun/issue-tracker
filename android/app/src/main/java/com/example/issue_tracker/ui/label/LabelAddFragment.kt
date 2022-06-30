@@ -9,7 +9,6 @@ import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.issue_tracker.R
@@ -28,7 +27,8 @@ class LabelAddFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_label_add, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_label_add, container, false)
         return binding.root
     }
 
@@ -37,16 +37,14 @@ class LabelAddFragment : Fragment() {
         binding.viewModel = viewModel
 
         val findNavController = findNavController()
-
         labelColorChange()
         labelTextChange()
         setUpTextLabelError()
         setClickListener(findNavController)
-
     }
 
     private fun labelColorChange() {
-        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
+        viewLifecycleOwner.repeatOnLifecycleExtension {
             viewModel.label.collect {
                 binding.label = it
             }
@@ -54,7 +52,7 @@ class LabelAddFragment : Fragment() {
     }
 
     private fun labelTextChange() {
-        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
+        viewLifecycleOwner.repeatOnLifecycleExtension {
             viewModel.labelTitle.collect {
                 binding.customLabel.setLabelTitle(it)
             }

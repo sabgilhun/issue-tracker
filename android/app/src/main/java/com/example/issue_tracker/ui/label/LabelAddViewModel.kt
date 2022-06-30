@@ -37,21 +37,25 @@ class LabelAddViewModel @Inject constructor(
             append(colorG)
             append(colorB)
         }
-
-        _label.value = Label(null, labelTitle.value, labelDescription.value, randomColorString)
+        _label.value = Label(
+            labelId = null,
+            labelTitle = labelTitle.value,
+            labelContents = labelDescription.value,
+            labelColor = randomColorString
+        )
     }
 
     fun saveLabel() = if (_label.value === defaultLabel) {
-        labelRepository.addLabelList(Label(null,
-            labelTitle.value,
-            labelDescription.value,
-            INITIAL_COLOR))
+        labelRepository.addLabelList(Label(
+            labelId = null,
+            labelTitle = labelTitle.value,
+            labelContents = labelDescription.value,
+            labelColor = INITIAL_COLOR))
     } else {
         labelRepository.addLabelList(_label.value)
     }
 
     private fun convertIntToHex(number: Int) = String.format("%02x", number)
-
 
     companion object {
         const val INITIAL_COLOR = "#FF828282"

@@ -11,9 +11,7 @@ import com.example.issue_tracker.model.Issue
 
 class IssueAdapter(
     private val viewModel: IssueViewModel,
-) : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(
-    IssueDiffCallback
-) {
+) : ListAdapter<Issue, IssueAdapter.IssueViewHolder>(IssueDiffCallback) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): IssueViewHolder {
         val binding =
             ItemIssueRecyclerViewBinding.inflate(LayoutInflater.from(parent.context), parent, false)
