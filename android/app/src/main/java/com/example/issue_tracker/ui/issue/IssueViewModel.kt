@@ -33,8 +33,8 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     private val _checkedIssueIdListTemp = MutableStateFlow<List<Int>>(mutableListOf())
     val checkedIssueIdListTemp: StateFlow<List<Int>> = _checkedIssueIdListTemp
 
-    private val _error = MutableStateFlow<CEHModel>(CEHModel(null, ""))
-    val error: SharedFlow<CEHModel> = _error
+    private val _error = MutableStateFlow(CEHModel(null, ""))
+    val error: SharedFlow<CEHModel> = _error.asSharedFlow()
 
     val checkLongClicked = MutableStateFlow<Boolean>(true)
 

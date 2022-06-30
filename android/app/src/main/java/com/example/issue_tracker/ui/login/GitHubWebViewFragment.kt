@@ -2,25 +2,28 @@ package com.example.issue_tracker.ui.login
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
-import android.graphics.Bitmap
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.WebChromeClient
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
 import androidx.databinding.DataBindingUtil
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.issue_tracker.R
 import com.example.issue_tracker.databinding.FragmentGitHubWebViewBinding
+import com.example.issue_tracker.model.GitHubOAuthRequest
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GitHubWebViewFragment : Fragment() {
 
     lateinit var binding: FragmentGitHubWebViewBinding
+    private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -35,7 +38,7 @@ class GitHubWebViewFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.githubWebView.run {
-            webViewClient = CustomWebViewClient()  // WebViewClient() 의 경우 페이지가 정상적으로 load 되지만 CustomWebViewClient일 경우 로드되지 않음
+            webViewClient = CustomWebViewClient()
             loadUrl("https://github.com/login/oauth/authorize?client_id=" + getString(R.string.git_hub_id))
         }
     }
@@ -47,7 +50,12 @@ class GitHubWebViewFragment : Fragment() {
             view: WebView?,
             request: WebResourceRequest?
         ): Boolean {
-            Log.d("웹뷰", request?.url.toString())
+            Log.d("Git", request?.url.toString())
+            if (request?.url.toString().startsWith("http://52.79.243.28:8080/")) {
+                val authCode = request?.url.toString().split("=")[1]
+                Log.d("Git, AuthCode", authCode)
+                viewModel.requestGitHubLogin(GitHubOAuthRequest(authCode))
+            }
             return super.shouldOverrideUrlLoading(view, request)
         }
     }
