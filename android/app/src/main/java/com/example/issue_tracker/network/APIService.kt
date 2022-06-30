@@ -7,6 +7,7 @@ import com.example.issue_tracker.model.SignUpResponse
 import retrofit2.http.Body
 import retrofit2.http.GET
 import retrofit2.http.POST
+import retrofit2.http.Query
 
 interface APIService {
 
@@ -18,4 +19,9 @@ interface APIService {
 
     @POST("register")
     suspend fun requestRegister(@Body signUpRequest: SignUpRequest): SignUpResponse
+
+    @GET("https://github.com/login/oauth/authorize")
+    suspend fun requestGitHubLogin(
+        @Query("client_id") clientId: String
+    )
 }

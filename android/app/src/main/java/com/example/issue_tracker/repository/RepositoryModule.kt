@@ -30,6 +30,12 @@ abstract class RepositoryModule {
 
     @Singleton
     @Binds
+    abstract fun bindSignUpRepository(
+        singUpRepositoryImpl: SingUpRepositoryImpl,
+    ): SingUpRepository
+
+    @Singleton
+    @Binds
     abstract fun bindLoginRepository(
         loginRepositoryImpl: LoginRepositoryImpl,
     ): LoginRepository

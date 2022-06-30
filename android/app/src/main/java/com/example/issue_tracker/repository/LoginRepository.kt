@@ -1,9 +1,6 @@
 package com.example.issue_tracker.repository
 
-import com.example.issue_tracker.model.SignUpRequest
-import com.example.issue_tracker.model.SignUpResponse
-
 interface LoginRepository {
 
-    suspend fun requestSignUp(signUpRequest: SignUpRequest): SignUpResponse
+    suspend fun requestGitHubLogin(clientId: String)
 }
