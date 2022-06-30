@@ -19,8 +19,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityHomeBinding
-    private val viewModel: IssueViewModel by viewModels()
-    private val issueFragment = IssueFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,7 +30,6 @@ class HomeActivity : AppCompatActivity() {
         binding.issueBottomNavigation.setupWithNavController(findNavController(R.id.nav_home_fragment))
     }
 
-    // 화면 아무 곳이나 클릭 하면 키보드 숨김
     override fun onTouchEvent(event: MotionEvent?): Boolean {
         val imm: InputMethodManager =
             this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager

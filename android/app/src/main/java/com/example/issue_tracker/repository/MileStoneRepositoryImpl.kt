@@ -10,10 +10,7 @@ class MileStoneRepositoryImpl @Inject constructor() : MileStoneRepository {
 
     private val _mileStoneList = MutableStateFlow<MutableList<MileStone>>(mutableListOf())
 
-    override fun addLabelList(mileStone: MileStone) {
-        _mileStoneList.addElement(mileStone)
-    }
+    override fun addLabelList(mileStone: MileStone) = _mileStoneList.addElement(mileStone)
 
     override fun getLabelList(): Flow<List<MileStone>> = _mileStoneList
-
 }

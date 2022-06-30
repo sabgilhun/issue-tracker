@@ -4,7 +4,5 @@ import com.example.issue_tracker.model.Issue
 
 interface IssueRepository {
 
-    suspend fun getDummyIssue(): MutableList<Issue>
-
-    suspend fun getIssue(): MutableList<Issue>
+    suspend fun getIssue(): List<Issue>
 }

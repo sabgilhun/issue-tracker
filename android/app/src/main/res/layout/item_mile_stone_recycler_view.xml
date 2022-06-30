@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="com.example.issue_tracker.R" />
 
         <variable
@@ -55,59 +56,57 @@
             android:id="@+id/iv_calendar"
             android:layout_width="15dp"
             android:layout_height="15dp"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="9dp"
             android:src="@drawable/ic_calendar"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_recycler_description"
-            android:layout_marginStart="16dp" />
+            app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_recycler_description" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            tools:text="완료일"
             android:layout_marginTop="8dp"
             android:text="@{mileStone.dueDate}"
             app:layout_constraintStart_toEndOf="@id/iv_calendar"
-            app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_recycler_description" />
+            app:layout_constraintTop_toBottomOf="@id/tv_mile_stone_recycler_description"
+            tools:text="완료일" />
 
         <com.example.issue_tracker.ui.label.CustomLabel
             android:id="@+id/cl_opened_issue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:labelOpenCount="@{mileStone.openedIssueCount}"
-            app:labelImage="@{R.drawable.ic_opened_issue_image}"
-            app:labelColorResource="@{R.color.primary_blueish}"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/iv_calendar"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
-            />
+            android:layout_marginTop="16dp"
+            app:labelColorResource="@{R.color.primary_blueish}"
+            app:labelImage="@{R.drawable.ic_opened_issue_image}"
+            app:labelOpenCount="@{mileStone.openedIssueCount}"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/iv_calendar" />
 
         <com.example.issue_tracker.ui.label.CustomLabel
             android:id="@+id/cl_closed_issue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:labelCloseCount="@{mileStone.closedIssueCount}"
-            app:labelImage="@{R.drawable.ic_closed_issue_image}"
-            app:labelColorResource="@{R.color.primary_purple}"
-            app:layout_constraintStart_toEndOf="@id/cl_opened_issue"
-            app:layout_constraintTop_toBottomOf="@id/iv_calendar"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
-            />
+            android:layout_marginTop="16dp"
+            app:labelCloseCount="@{mileStone.closedIssueCount}"
+            app:labelColorResource="@{R.color.primary_purple}"
+            app:labelImage="@{R.drawable.ic_closed_issue_image}"
+            app:layout_constraintStart_toEndOf="@id/cl_opened_issue"
+            app:layout_constraintTop_toBottomOf="@id/iv_calendar" />
 
         <View
             android:id="@+id/view_item_label_bottom"
             android:layout_width="0dp"
             android:layout_height="1dp"
-            android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:background="@color/gray01"
-            app:layout_constraintTop_toBottomOf="@id/cl_opened_issue"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cl_opened_issue" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

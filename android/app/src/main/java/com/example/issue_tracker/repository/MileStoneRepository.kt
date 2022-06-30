@@ -8,5 +8,4 @@ interface MileStoneRepository {
     fun addLabelList(mileStone: MileStone)
 
     fun getLabelList(): Flow<List<MileStone>>
-
 }

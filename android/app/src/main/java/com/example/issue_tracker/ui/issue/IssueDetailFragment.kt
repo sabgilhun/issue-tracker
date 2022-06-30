@@ -16,7 +16,6 @@ import javax.inject.Inject
 class IssueDetailFragment @Inject constructor() : Fragment() {
 
     private lateinit var binding: FragmentIssueDetailBinding
-    private val viewModel: IssueDetailViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -26,9 +25,5 @@ class IssueDetailFragment @Inject constructor() : Fragment() {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_issue_detail, container, false)
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
     }
 }
