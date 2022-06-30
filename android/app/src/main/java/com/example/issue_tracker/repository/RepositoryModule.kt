@@ -27,4 +27,10 @@ abstract class RepositoryModule {
     abstract fun bindMileStoneRepository(
         mileStoneRepositoryImpl: MileStoneRepositoryImpl,
     ): MileStoneRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindLoginRepository(
+        loginRepositoryImpl: LoginRepositoryImpl,
+    ): LoginRepository
 }

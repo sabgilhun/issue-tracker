@@ -8,13 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.issue_tracker.R
 import com.example.issue_tracker.databinding.FragmentSignUpBinding
+import com.example.issue_tracker.model.SignUpRequest
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
+    private val viewModel: SignUpViewModel by viewModels()
     private var idFlag = false
     private var passwordFlag = false
     private var passwordCheckFlag = false
@@ -36,6 +40,18 @@ class SignUpFragment : Fragment() {
         binding.passwordRecheckTextInputLayout.editText?.addTextChangedListener(
             passwordRecheckListener
         )
+        binding.nextButton.setOnClickListener {
+            requestSignUp()
+        }
+    }
+
+    private fun requestSignUp() {
+        val request = SignUpRequest(
+            binding.idTextInputEditText.text?.toString(),
+            binding.passwordRecheckTextInputEditText.text?.toString(),
+            binding.nickNameTextInputEditText.text?.toString()
+        )
+        viewModel.requestSignUp(request)
     }
 
     private val idListener = object : TextWatcher {
