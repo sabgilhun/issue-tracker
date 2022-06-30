@@ -26,7 +26,7 @@ class SignUpFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
@@ -34,13 +34,13 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.nextButton.isEnabled = false
+        binding.signUpButton.isEnabled = false
         binding.idTextInputLayout.editText?.addTextChangedListener(idListener)
         binding.passwordTextInputLayout.editText?.addTextChangedListener(passwordListener)
         binding.passwordRecheckTextInputLayout.editText?.addTextChangedListener(
             passwordRecheckListener
         )
-        binding.nextButton.setOnClickListener {
+        binding.signUpButton.setOnClickListener {
             requestSignUp()
         }
     }
@@ -155,7 +155,7 @@ class SignUpFragment : Fragment() {
     }
 
     fun flagCheck() {
-        binding.nextButton.isEnabled = idFlag && passwordFlag && passwordCheckFlag
+        binding.signUpButton.isEnabled = idFlag && passwordFlag && passwordCheckFlag
     }
 
     companion object {
