@@ -68,4 +68,6 @@
     <string name="filter_milestone">마일스톤</string>
     <string name="issue_tracker_drawable">issueTrackerDrawable</string>
     <string name="issue_close">닫기</string>
+    <string name="label_default_description">새로운 기능 추가</string>
+    <string name="save_label_complete">성공적으로 저장하였습니다</string>
 </resources>

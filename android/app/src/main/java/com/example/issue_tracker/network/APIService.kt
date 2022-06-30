@@ -15,6 +15,6 @@ interface APIService {
     @GET("labels")
     suspend fun getLabels(): LabelDTO
 
-    @POST("label")
+    @POST("labels")
     suspend fun addLabels(@Body label: LabelDTO.LabelDTOItem): Response<Unit>
 }
