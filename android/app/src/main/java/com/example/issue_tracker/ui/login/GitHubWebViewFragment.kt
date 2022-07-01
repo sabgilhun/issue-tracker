@@ -2,6 +2,7 @@ package com.example.issue_tracker.ui.login
 
 import android.annotation.SuppressLint
 import android.annotation.TargetApi
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -14,15 +15,21 @@ import android.webkit.WebViewClient
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
+import androidx.navigation.Navigation
 import com.example.issue_tracker.R
+import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentGitHubWebViewBinding
 import com.example.issue_tracker.model.GitHubOAuthRequest
+import com.example.issue_tracker.ui.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class GitHubWebViewFragment : Fragment() {
 
     lateinit var binding: FragmentGitHubWebViewBinding
+    private lateinit var navigator: NavController
     private val viewModel: LoginViewModel by viewModels()
 
     override fun onCreateView(
@@ -37,6 +44,7 @@ class GitHubWebViewFragment : Fragment() {
     @SuppressLint("SetJavaScriptEnabled")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        navigator = Navigation.findNavController(view)
         binding.githubWebView.run {
             webViewClient = CustomWebViewClient()
             loadUrl("https://github.com/login/oauth/authorize?client_id=" + getString(R.string.git_hub_id))
@@ -50,11 +58,18 @@ class GitHubWebViewFragment : Fragment() {
             view: WebView?,
             request: WebResourceRequest?
         ): Boolean {
-            Log.d("Git", request?.url.toString())
-            if (request?.url.toString().startsWith("http://52.79.243.28:8080/")) {
+            if (request?.url.toString().startsWith("http://3.34.136.141:8080/")) {
                 val authCode = request?.url.toString().split("=")[1]
-                Log.d("Git, AuthCode", authCode)
                 viewModel.requestGitHubLogin(GitHubOAuthRequest(authCode))
+                viewLifecycleOwner.repeatOnLifecycleExtension {
+                    viewModel.accessToken.collect { accessToken ->
+                        if (!accessToken.isNullOrEmpty()) {
+                            Log.d("TEST2", accessToken.toString())
+                            val intent = Intent(requireContext(), HomeActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                }
             }
             return super.shouldOverrideUrlLoading(view, request)
         }
