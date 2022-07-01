@@ -46,7 +46,12 @@ class IssueAddViewModel @Inject constructor() : ViewModel() {
     }
 
     companion object {
-        val defaultLabel = Label(null, null, null, null)
+        val defaultLabel = Label(
+            Label.INITIAL_ID,
+            Label.INITIAL_TITLE,
+            Label.INITIAL_DESCRIPTION,
+            Label.INITIAL_COLOR
+        )
         val defaultMileStone = MileStone(null, null, null, null)
     }
 }
