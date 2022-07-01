@@ -11,6 +11,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.issue_tracker.R
 import com.example.issue_tracker.common.repeatOnLifecycleExtension
@@ -34,7 +35,8 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_login, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
@@ -42,30 +44,29 @@ class LoginFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val navigationControl = findNavController()
-        binding.btnToSignUp.setOnClickListener {
-            navigationControl.navigate(R.id.action_loginFragment_to_signUpFragment)
-        }
-        binding.btnSingIn.setOnClickListener {
-            val intent = Intent(context, HomeActivity::class.java)
-            startActivity(intent)
-        }
-        viewLifecycleOwner.repeatOnLifecycleExtension {
-            viewModel.error.collect {
-                if (it.throwable != null) {
-                    Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()
-                }
+        setClicks(navigationControl)
+    }
+
+    private fun setClicks(navigationControl: NavController) {
+        with(binding) {
+            btnToSignUp.setOnClickListener {
+                navigationControl.navigate(R.id.action_loginFragment_to_signUpFragment)
             }
-        }
-        binding.cbKakaoLogin.setOnClickListener {
-            lifecycleScope.launch {
-                try {
-                    val oAuthToken = UserApiClient.loginWithKakao(requireContext())
-                    Log.d("Kakao", oAuthToken.toString())
-                } catch (error: Throwable) {
-                    if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
-                        Log.d("Kakao", "사용자가 명시적으로 취소")
-                    } else {
-                        Log.e("Kakao", "인증 에러 발생", error)
+            btnSingIn.setOnClickListener {
+                val intent = Intent(context, HomeActivity::class.java)
+                startActivity(intent)
+            }
+            cbKakaoLogin.setOnClickListener {
+                lifecycleScope.launch {
+                    try {
+                        val oAuthToken = UserApiClient.loginWithKakao(requireContext())
+                        Log.d("Kakao", oAuthToken.toString())
+                    } catch (error: Throwable) {
+                        if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
+                            Log.d("Kakao", "사용자가 명시적으로 취소")
+                        } else {
+                            Log.e("Kakao", "인증 에러 발생", error)
+                        }
                     }
                 }
             }

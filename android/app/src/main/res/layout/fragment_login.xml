@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <import type="com.example.issue_tracker.R" />
     </data>
 
@@ -21,7 +22,8 @@
             android:src="@drawable/ic_text_issue_tracker"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/issue_tracker_drawable"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/email_input_layout"
@@ -90,10 +92,10 @@
             android:layout_width="199dp"
             android:layout_height="48dp"
             android:layout_marginTop="90dp"
+            app:buttonImage="@{R.drawable.custom_github_logo}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/btn_sing_in"
-            app:buttonImage="@{R.drawable.custom_github_logo}"
             app:text="깃헙 계정으로 로그인" />
 
         <com.example.issue_tracker.ui.login.LoginCustomButton
@@ -101,10 +103,10 @@
             android:layout_width="199dp"
             android:layout_height="48dp"
             android:layout_marginTop="16dp"
+            app:buttonImage="@{R.drawable.custom_google_logo}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/cb_github_login"
-            app:buttonImage="@{R.drawable.custom_google_logo}"
             app:text="구글 계정으로 로그인" />
 
         <com.example.issue_tracker.ui.login.LoginCustomButton

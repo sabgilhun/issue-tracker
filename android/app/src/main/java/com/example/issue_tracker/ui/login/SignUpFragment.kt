@@ -27,7 +27,8 @@ class SignUpFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_sign_up, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
@@ -149,7 +150,6 @@ class SignUpFragment : Fragment() {
         }
     }
 
-    // 이메일 정규식 확인
     private fun checkEmailRegex(id: String): Boolean {
         return emailValidation.matches(id)
     }

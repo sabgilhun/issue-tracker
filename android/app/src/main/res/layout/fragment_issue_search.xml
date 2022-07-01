@@ -68,11 +68,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_margin="10dp"
-                    android:hint="@string/label_search_issue_hint"
                     android:background="@drawable/edittext_rounded_corner"
+                    android:hint="@string/label_search_issue_hint"
                     android:importantForAutofill="no"
-                    tools:targetApi="O"
-                    android:inputType="text" />
+                    android:inputType="text"
+                    tools:targetApi="O" />
 
             </com.google.android.material.appbar.MaterialToolbar>
         </com.google.android.material.appbar.AppBarLayout>

@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
@@ -57,7 +56,7 @@ class IssueFragment : Fragment() {
             false
         }
 
-        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
+        viewLifecycleOwner.repeatOnLifecycleExtension {
             viewModel.issueList.collect {
                 adapter.submitList(it)
             }
@@ -68,7 +67,7 @@ class IssueFragment : Fragment() {
             viewModel.changeClickedState()
         }
 
-        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
+        viewLifecycleOwner.repeatOnLifecycleExtension {
             viewModel.closeIssue.collect {
                 Toast.makeText(requireContext(), "$it 번 이슈가 닫혔습니다.", Toast.LENGTH_SHORT).show()
             }
@@ -83,7 +82,7 @@ class IssueFragment : Fragment() {
             viewModel.changeClickedState()
         }
 
-        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
+        viewLifecycleOwner.repeatOnLifecycleExtension {
             viewModel.error.collect {
                 if (it.throwable != null) {
                     Toast.makeText(requireContext(), it.errorMessage, Toast.LENGTH_SHORT).show()

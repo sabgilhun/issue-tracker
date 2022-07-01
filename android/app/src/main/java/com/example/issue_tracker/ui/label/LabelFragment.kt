@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.issue_tracker.R
@@ -27,7 +26,8 @@ class LabelFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_label, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_label, container, false)
         return binding.root
     }
 
@@ -41,7 +41,7 @@ class LabelFragment : Fragment() {
     }
 
     private fun setRecyclerViewAdapter() {
-        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
+        viewLifecycleOwner.repeatOnLifecycleExtension {
             viewModel.labelList.collect { labelList ->
                 adapter.submitList(labelList)
             }

@@ -7,7 +7,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.issue_tracker.R
@@ -27,7 +26,8 @@ class MileStoneFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_mile_stone, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_mile_stone, container, false)
         return binding.root
     }
 
@@ -48,7 +48,7 @@ class MileStoneFragment : Fragment() {
     }
 
     private fun observeMileStoneList() {
-        viewLifecycleOwner.repeatOnLifecycleExtension(Lifecycle.State.STARTED) {
+        viewLifecycleOwner.repeatOnLifecycleExtension {
             viewModel.mileStoneList.collect { mileStoneList ->
                 adapter.submitList(mileStoneList)
             }

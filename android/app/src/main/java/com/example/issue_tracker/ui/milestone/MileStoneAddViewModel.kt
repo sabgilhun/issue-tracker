@@ -28,10 +28,11 @@ class MileStoneAddViewModel @Inject constructor(
     }
 
     fun saveData() = if (_mileStone.value === defaultMileStone) {
-        repository.addLabelList(MileStone(null,
-            mileStoneTitle.value,
-            mileStoneDescription.value,
-            INITIAL_DATE))
+        repository.addLabelList(MileStone(
+            mileStoneId = null,
+            title = mileStoneTitle.value,
+            description = mileStoneDescription.value,
+            dueDate = INITIAL_DATE))
     } else {
         repository.addLabelList(_mileStone.value)
     }
@@ -40,5 +41,4 @@ class MileStoneAddViewModel @Inject constructor(
         private const val INITIAL_DATE = "선택사항 (yyyy-mm-dd)"
         val defaultMileStone = MileStone(null, "", "", INITIAL_DATE)
     }
-
 }
