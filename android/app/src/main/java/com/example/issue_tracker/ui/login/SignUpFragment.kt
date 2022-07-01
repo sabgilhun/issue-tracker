@@ -8,13 +8,17 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.example.issue_tracker.R
 import com.example.issue_tracker.databinding.FragmentSignUpBinding
+import com.example.issue_tracker.model.SignUpRequest
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
     private lateinit var binding: FragmentSignUpBinding
+    private val viewModel: SignUpViewModel by viewModels()
     private var idFlag = false
     private var passwordFlag = false
     private var passwordCheckFlag = false
@@ -31,12 +35,24 @@ class SignUpFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.nextButton.isEnabled = false
+        binding.signUpButton.isEnabled = false
         binding.idTextInputLayout.editText?.addTextChangedListener(idListener)
         binding.passwordTextInputLayout.editText?.addTextChangedListener(passwordListener)
         binding.passwordRecheckTextInputLayout.editText?.addTextChangedListener(
             passwordRecheckListener
         )
+        binding.signUpButton.setOnClickListener {
+            requestSignUp()
+        }
+    }
+
+    private fun requestSignUp() {
+        val request = SignUpRequest(
+            binding.idTextInputEditText.text?.toString(),
+            binding.passwordRecheckTextInputEditText.text?.toString(),
+            binding.nickNameTextInputEditText.text?.toString()
+        )
+        viewModel.requestSignUp(request)
     }
 
     private val idListener = object : TextWatcher {
@@ -139,7 +155,7 @@ class SignUpFragment : Fragment() {
     }
 
     fun flagCheck() {
-        binding.nextButton.isEnabled = idFlag && passwordFlag && passwordCheckFlag
+        binding.signUpButton.isEnabled = idFlag && passwordFlag && passwordCheckFlag
     }
 
     companion object {
