@@ -19,8 +19,8 @@ import javax.inject.Inject
 class IssueViewModel @Inject constructor(private val issueRepository: IssueRepository) :
     ViewModel() {
 
-    private val _issueList = MutableStateFlow<MutableList<Issue>>(mutableListOf())
-    val issueList: StateFlow<MutableList<Issue>> = _issueList
+    private val _issueList = MutableStateFlow<List<Issue>>(mutableListOf())
+    val issueList: StateFlow<List<Issue>> = _issueList
 
     // 임시 StateFlow
     private val _closeIssue = MutableSharedFlow<String>()
@@ -39,7 +39,7 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     val checkLongClicked = MutableStateFlow<Boolean>(true)
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        _error.value = CoroutineException.throwableCheck(throwable)
+        _error.value = CoroutineException.checkThrowable(throwable)
     }
 
     fun getIssues() {
