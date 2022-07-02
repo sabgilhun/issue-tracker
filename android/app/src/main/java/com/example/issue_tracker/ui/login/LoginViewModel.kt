@@ -1,12 +1,12 @@
 package com.example.issue_tracker.ui.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issue_tracker.model.GitHubOAuthRequest
 import com.example.issue_tracker.network.CEHModel
 import com.example.issue_tracker.network.CoroutineException
 import com.example.issue_tracker.repository.LoginRepository
+import com.example.issue_tracker.ui.common.MainApplication
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -32,8 +32,11 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
     fun requestGitHubLogin(gitHubOAuthRequest: GitHubOAuthRequest) {
         viewModelScope.launch(exceptionHandler) {
             val response = loginRepository.requestGitHubLogin(gitHubOAuthRequest)
-            _accessToken.value = response.accessToken.token
-            Log.d("AccessToken: ", response.accessToken.token)
+            val accessToken =  response.accessToken.token
+            _accessToken.value = accessToken
+
+            // SharedPreference 에 accessToken 저장
+            MainApplication.prefs.setString("accessToken", accessToken)
         }
     }
 }
