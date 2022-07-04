@@ -17,7 +17,27 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitObject {
-    private const val BASE_URL = "http://3.34.136.141:8080/"
+    private const val BASE_URL = "http://13.124.177.85:8080/"
+
+    @Provides
+    @Singleton
+    fun loginOkHttpClient(): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(HttpLoggingInterceptor().apply {
+                level = HttpLoggingInterceptor.Level.BODY
+            }).build()
+    }
+
+    @Provides
+    @Singleton
+    fun loginRetrofit(): LoginAPIService {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL)
+            .addConverterFactory(GsonConverterFactory.create())
+            .client(loginOkHttpClient())
+            .build()
+            .create(LoginAPIService::class.java)
+    }
 
     @Provides
     @Singleton

@@ -15,15 +15,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.issue_tracker.R
+import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentLoginBinding
 import com.example.issue_tracker.model.LoginRequest
 import com.example.issue_tracker.ui.HomeActivity
-import com.example.issue_tracker.ui.common.MainApplication
 import com.example.issue_tracker.ui.common.loginWithKakao
 import com.kakao.sdk.common.model.ClientError
 import com.kakao.sdk.common.model.ClientErrorCause
 import com.kakao.sdk.user.UserApiClient
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -59,15 +60,20 @@ class LoginFragment : Fragment() {
                 navigationControl.navigate(R.id.action_loginFragment_to_signUpFragment)
             }
             btnSingIn.setOnClickListener {
-                MainApplication.prefs.removeString("accessToken")
                 viewModel.requestLogin(
                     LoginRequest(
-                        binding.emailInputEdittext.text.toString(),
-                        binding.passwordInputEditText.text.toString()
+                        binding.emailInputEdittext.text?.toString(),
+                        binding.passwordInputEditText.text?.toString()
                     )
                 )
-                val intent = Intent(context, HomeActivity::class.java)
-                startActivity(intent)
+                viewLifecycleOwner.repeatOnLifecycleExtension {
+                    viewModel.accessToken.collect { accessToken ->
+                        if (!accessToken.isNullOrEmpty()) {
+                            val intent = Intent(requireContext(), HomeActivity::class.java)
+                            startActivity(intent)
+                        }
+                    }
+                }
             }
             cbKakaoLogin.setOnClickListener {
                 lifecycleScope.launch {

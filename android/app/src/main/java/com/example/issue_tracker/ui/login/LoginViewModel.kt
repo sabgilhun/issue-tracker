@@ -1,6 +1,5 @@
 package com.example.issue_tracker.ui.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issue_tracker.model.GitHubOAuthRequest
@@ -47,7 +46,6 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
             val response = loginRepository.requestLogin(loginRequest)
             val accessToken =  response.accessToken.token
             _accessToken.value = accessToken
-            Log.d("accessToken", accessToken)
 
             // SharedPreference 에 accessToken 저장
             MainApplication.prefs.setString("accessToken", accessToken)
