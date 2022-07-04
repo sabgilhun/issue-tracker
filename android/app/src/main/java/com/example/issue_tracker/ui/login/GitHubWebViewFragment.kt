@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -52,11 +53,7 @@ class GitHubWebViewFragment : Fragment() {
 
     inner class CustomWebViewClient : WebViewClient() {
 
-        @TargetApi(Build.VERSION_CODES.N)
-        override fun shouldOverrideUrlLoading(
-            view: WebView?,
-            request: WebResourceRequest?
-        ): Boolean {
+        private fun checkUrl(request: WebResourceRequest?) {
             if (request?.url.toString().startsWith("http://13.124.177.85:8080/")) {
                 val authCode = request?.url.toString().split("=")[1]
                 viewModel.requestGitHubLogin(GitHubOAuthRequest(authCode))
@@ -69,6 +66,17 @@ class GitHubWebViewFragment : Fragment() {
                     }
                 }
             }
+            else {
+                Toast.makeText(requireContext(), "서버 URL 을 확인해주세요.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        @TargetApi(Build.VERSION_CODES.N)
+        override fun shouldOverrideUrlLoading(
+            view: WebView?,
+            request: WebResourceRequest?
+        ): Boolean {
+            checkUrl(request)
             return super.shouldOverrideUrlLoading(view, request)
         }
     }
