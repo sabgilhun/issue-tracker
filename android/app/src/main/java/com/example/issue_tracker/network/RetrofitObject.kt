@@ -1,12 +1,10 @@
 package com.example.issue_tracker.network
 
-import android.util.Log
 import com.example.issue_tracker.ui.common.MainApplication
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.flow.first
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Response

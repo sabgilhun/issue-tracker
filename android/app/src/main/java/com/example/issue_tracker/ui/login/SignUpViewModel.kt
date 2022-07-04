@@ -1,6 +1,5 @@
 package com.example.issue_tracker.ui.login
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issue_tracker.model.SignUpRequest
@@ -20,7 +19,7 @@ class SignUpViewModel @Inject constructor(private val singUpRepository: SingUpRe
     fun requestSignUp(signUpRequest: SignUpRequest) {
         viewModelScope.launch {
             val response = singUpRepository.requestSignUp(signUpRequest)
-            Log.d("로그인", response.toString())
+            _signUpResponse.emit(response)
         }
     }
 }

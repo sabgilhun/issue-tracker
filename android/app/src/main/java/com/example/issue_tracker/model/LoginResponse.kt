@@ -3,7 +3,7 @@ package com.example.issue_tracker.model
 
 import com.google.gson.annotations.SerializedName
 
-data class OAuthResponse(
+data class LoginResponse(
     @SerializedName("accessToken")
     val accessToken: AccessToken,
     @SerializedName("refreshToken")
