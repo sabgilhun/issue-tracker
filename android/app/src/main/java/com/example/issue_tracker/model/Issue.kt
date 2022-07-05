@@ -26,11 +26,13 @@ data class Label(
     val labelTitle: String,
     val labelContents: String?,
     val labelColor: String,
+    var isSwiped: Boolean = false,
+    var isLongClicked: Boolean = false,
 ) {
     companion object {
         const val INITIAL_ID = 0
         const val INITIAL_COLOR = "#FF828282"
-        const val INITIAL_TITLE = "feature"
+        const val INITIAL_TITLE = ""
         const val INITIAL_DESCRIPTION = "새로운 기능 추가"
 
         fun of(item: LabelDTO.LabelDTOItem): Label {
@@ -58,6 +60,8 @@ data class MileStone(
     val openedIssueCount: Int = 0,
     val closedIssueCount: Int = 0,
     val progress: String = "",
+    var isSwiped: Boolean = false,
+    var isLongClicked: Boolean = false,
 ) {
     companion object {
         const val INITIAL_COUNTS = 0

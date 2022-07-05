@@ -45,7 +45,11 @@ class IssueFragment : Fragment() {
         changeActionBarState()
         viewModel.getIssues()
         adapter = IssueAdapter(viewModel)
-        val swipeHelperCallback = SwipeHelperCallback(adapter, viewModel).apply {
+        val swipeHelperCallback = SwipeHelperCallback(
+            getIssueSwiped = { item -> viewModel.getIssueSwiped(item) },
+            changeIssueSwiped = { item, isSwiped -> viewModel.changeIssueSwiped(item, isSwiped) },
+            clampView = R.id.cv_swipe_view
+        ).apply {
             setClamp(resources.displayMetrics.widthPixels.toFloat() / 4)
         }
         binding.rvIssue.adapter = adapter
