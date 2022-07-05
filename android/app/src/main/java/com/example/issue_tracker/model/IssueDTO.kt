@@ -18,7 +18,7 @@ data class IssueDTO(
         @SerializedName("title")
         val title: String,
         @SerializedName("isOpened")
-        val isOpened: Boolean
+        val isOpened: Boolean,
     )
 }
 
@@ -35,5 +35,25 @@ data class LabelDTO(
         val id: Int,
         @SerializedName("name")
         val name: String,
+    )
+}
+
+data class MileStoneDTO(
+    @SerializedName("milestones")
+    val milestones: List<MileStoneDTOItem>,
+) {
+    data class MileStoneDTOItem(
+        @SerializedName("milestoneId")
+        val milestoneId: Int,
+        @SerializedName("title")
+        val title: String,
+        @SerializedName("description")
+        val description: String?,
+        @SerializedName("dueDate")
+        val dueDate: String?,
+        @SerializedName("openedIssuesCount")
+        val openedIssuesCount: Int,
+        @SerializedName("closedIssuesCount")
+        val closedIssuesCount: Int,
     )
 }

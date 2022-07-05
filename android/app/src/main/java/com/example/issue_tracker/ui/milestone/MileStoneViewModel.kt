@@ -21,9 +21,7 @@ class MileStoneViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            repository.getLabelList().collect {
-                _mileStoneList.value = it
-            }
+            _mileStoneList.value = repository.getMileStoneList()
         }
     }
 }
