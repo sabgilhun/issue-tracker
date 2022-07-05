@@ -24,4 +24,17 @@ class MileStoneViewModel @Inject constructor(
             _mileStoneList.value = repository.getMileStoneList()
         }
     }
+
+    fun changeLabelSwiped(index: Int, isSwiped: Boolean) {
+        _mileStoneList.value[index].isSwiped = isSwiped
+    }
+
+    fun getLabelSwiped(index: Int) = mileStoneList.value[index].isSwiped
+
+    fun changeClickedState() {
+        val list = _mileStoneList.value.map {
+            it.copy(isLongClicked = !it.isLongClicked)
+        }
+        _mileStoneList.value = list.toMutableList()
+    }
 }
