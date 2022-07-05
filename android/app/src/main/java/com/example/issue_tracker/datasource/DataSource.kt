@@ -16,4 +16,6 @@ interface DataSource {
     suspend fun addLabels(label: LabelDTO.LabelDTOItem): Response<Unit>
 
     suspend fun closeIssue(issueId: Int): IssueCloseResponse
+
+    suspend fun addIssue(issueAddRequest: IssueAddRequest)
 }

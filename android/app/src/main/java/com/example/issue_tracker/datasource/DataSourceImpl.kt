@@ -1,9 +1,6 @@
 package com.example.issue_tracker.datasource
 
-import com.example.issue_tracker.model.IssueCloseResponse
-import com.example.issue_tracker.model.IssueDTO
-import com.example.issue_tracker.model.LabelDTO
-import com.example.issue_tracker.model.MileStoneDTO
+import com.example.issue_tracker.model.*
 import com.example.issue_tracker.network.APIService
 import retrofit2.Response
 import javax.inject.Inject
@@ -24,4 +21,8 @@ class DataSourceImpl @Inject constructor(
 
     override suspend fun closeIssue(issueId: Int): IssueCloseResponse =
         apiService.closeIssue(issueId)
+
+    override suspend fun addIssue(issueAddRequest: IssueAddRequest) {
+        apiService.addIssie(issueAddRequest)
+    }
 }

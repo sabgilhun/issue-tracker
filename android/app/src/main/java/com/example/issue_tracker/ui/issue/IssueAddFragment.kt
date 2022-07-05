@@ -10,16 +10,14 @@ import android.widget.PopupMenu
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.issue_tracker.R
 import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentIssueAddBinding
-import com.example.issue_tracker.ui.milestone.MileStoneViewModel
+import com.example.issue_tracker.model.IssueAddRequest
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class IssueAddFragment : Fragment() {
@@ -41,23 +39,23 @@ class IssueAddFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val findNavController = findNavController()
-        viewModel.loadData()
+        viewModel.loadLabelAndMileStone()
         observeMenuButtons()
         observeClickedMenuText()
         goBackIssue(findNavController)
+        addIssue(findNavController)
     }
 
     private fun observeMenuButtons() {
         with(binding) {
             ibFilterButtonLabel.setOnClickListener {
                 val labelList = viewModel.labelList.value
-                Log.d("issueViewModel", labelList.toString())
-                val labelPopupMenu = PopupMenu(requireContext(), binding.ibFilterButtonLabel).apply {
-                    labelList.forEachIndexed { index, item ->
-                        menu.add(Menu.NONE, index, index, item.labelTitle)
-                        Log.d("issueViewModel",index.toString())
+                val labelPopupMenu =
+                    PopupMenu(requireContext(), binding.ibFilterButtonLabel).apply {
+                        labelList.forEachIndexed { index, item ->
+                            menu.add(Menu.NONE, index, index, item.labelTitle)
+                        }
                     }
-                }
                 labelPopupMenu.setOnMenuItemClickListener { item ->
                     viewModel.findClickedLabelMenu(item.itemId)
                     false
@@ -66,13 +64,12 @@ class IssueAddFragment : Fragment() {
             }
             ibFilterButtonIssueMileStone.setOnClickListener {
                 val mileStoneList = viewModel.mileStoneList.value
-                Log.d("issueViewModel", mileStoneList.toString())
-                val mileStonePopupMenu = PopupMenu(requireContext(), binding.ibFilterButtonIssueMileStone).apply {
-                    mileStoneList.forEachIndexed { index, item ->
-                        menu.add(Menu.NONE, index, index, item.title)
-                        Log.d("issueViewModel",index.toString())
+                val mileStonePopupMenu =
+                    PopupMenu(requireContext(), binding.ibFilterButtonIssueMileStone).apply {
+                        mileStoneList.forEachIndexed { index, item ->
+                            menu.add(Menu.NONE, index, index, item.title)
+                        }
                     }
-                }
                 mileStonePopupMenu.setOnMenuItemClickListener { item ->
                     viewModel.findClickedMileStoneMenu(item.itemId)
                     false
@@ -99,6 +96,23 @@ class IssueAddFragment : Fragment() {
 
     private fun goBackIssue(findNavController: NavController) {
         binding.ivGoBack.setOnClickListener {
+            findNavController.navigate(R.id.action_issueAddFragment_to_issueFragment)
+        }
+    }
+
+    private fun addIssue(findNavController: NavController) {
+        binding.btnIssueSave.setOnClickListener {
+            viewModel.addIssue(
+                IssueAddRequest(
+                    viewModel.labelChoose.value.labelId,
+                    viewModel.mileStoneChoose.value.mileStoneId,
+                    IssueAddRequest.INITIAL_AUTHOR_ID,
+                    IssueAddRequest.INITIAL_ASSIGNEE_ID,
+                    binding.etIssueTitle.text.toString(),
+                    binding.etIssueContent.text.toString(),
+                    IssueAddRequest.INITIAL_IS_OPENED
+                )
+            )
             findNavController.navigate(R.id.action_issueAddFragment_to_issueFragment)
         }
     }

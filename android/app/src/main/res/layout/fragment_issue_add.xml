@@ -61,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:backgroundTint="@android:color/transparent"
-                    android:enabled="false"
+                    android:enabled="true"
                     android:outlineProvider="none"
                     android:text="@string/label_save" />
 
