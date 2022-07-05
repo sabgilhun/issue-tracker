@@ -59,6 +59,7 @@ class MileStoneFragment : Fragment(), ActionMode.Callback {
         val findNavController = findNavController()
         setUpAddMileStoneButton(findNavController)
         observeMileStoneList()
+        removeClamp()
     }
 
     private fun setUpAddMileStoneButton(navController: NavController) {
@@ -72,6 +73,16 @@ class MileStoneFragment : Fragment(), ActionMode.Callback {
             viewModel.mileStoneList.collect { mileStoneList ->
                 adapter.submitList(mileStoneList)
             }
+        }
+    }
+
+    private fun removeClamp() {
+        binding.rvMileStone.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_MOVE) {
+                swipeHelperCallback.removePreviousClamp(binding.rvMileStone)
+                v.performClick()
+            }
+            false
         }
     }
 

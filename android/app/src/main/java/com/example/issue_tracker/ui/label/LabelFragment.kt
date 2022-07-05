@@ -56,6 +56,7 @@ class LabelFragment : Fragment(), ActionMode.Callback {
 
         ItemTouchHelper(swipeHelperCallback).attachToRecyclerView(binding.rvLabelList)
         setRecyclerViewAdapter()
+        removeClamp()
         setClickListener(findNavController)
     }
 
@@ -70,6 +71,16 @@ class LabelFragment : Fragment(), ActionMode.Callback {
     private fun setClickListener(findNavController: NavController) {
         binding.ibAddNewLabel.setOnClickListener {
             findNavController.navigate(R.id.action_labelFragment_to_labelAddFragment)
+        }
+    }
+
+    private fun removeClamp() {
+        binding.rvLabelList.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_DOWN || event.action == MotionEvent.ACTION_MOVE) {
+                swipeHelperCallback.removePreviousClamp(binding.rvLabelList)
+                v.performClick()
+            }
+            false
         }
     }
 
