@@ -1,22 +1,27 @@
 package com.example.issue_tracker.ui.issue
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.issue_tracker.common.addElement
 import com.example.issue_tracker.model.Label
 import com.example.issue_tracker.model.MileStone
+import com.example.issue_tracker.repository.LabelRepository
+import com.example.issue_tracker.repository.MileStoneRepository
 import com.example.issue_tracker.ui.milestone.MileStoneAddViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class IssueAddViewModel @Inject constructor() : ViewModel() {
+class IssueAddViewModel @Inject constructor(private val labelRepository: LabelRepository, private val mileStoneRepository: MileStoneRepository) : ViewModel() {
 
-    private val _labelList = MutableStateFlow<MutableList<Label>>(mutableListOf())
+    private val _labelList = MutableStateFlow<List<Label>>(mutableListOf())
     val labelList = _labelList.asStateFlow()
 
-    private val _mileStoneList = MutableStateFlow<MutableList<MileStone>>(mutableListOf())
+    private val _mileStoneList = MutableStateFlow<List<MileStone>>(mutableListOf())
     val mileStoneList = _mileStoneList.asStateFlow()
 
     private val _labelChoose = MutableStateFlow(defaultLabel)
@@ -25,24 +30,22 @@ class IssueAddViewModel @Inject constructor() : ViewModel() {
     private val _mileStoneChoose = MutableStateFlow(defaultMileStone)
     val mileStoneChoose = _mileStoneChoose.asStateFlow()
 
-    init {
-        addDummyData()
-    }
-
-    private fun addDummyData() {
-        _labelList.addElement(Label(1, "feature", "Contents1", "#FFFFFF"))
-        _labelList.addElement(Label(2, "fix", "Contents2", "#FFFFFF"))
-        _mileStoneList.addElement(MileStone(1, "코코아 코스", "Contents1", "2022-06-13"))
-        _mileStoneList.addElement(MileStone(1, "마스터즈 코스", "Contents2", "2022-06-13"))
+    fun loadData() {
+        viewModelScope.launch {
+            _labelList.value = labelRepository.getLabelList()
+            _mileStoneList.value = mileStoneRepository.getMileStoneList()
+        }
     }
 
     fun findClickedLabelMenu(id: Int) {
         val clickedMenu = labelList.value[id].copy()
+        Log.d("issueViewModel", clickedMenu.toString())
         _labelChoose.value = clickedMenu
     }
 
     fun findClickedMileStoneMenu(id: Int) {
         val clickedMenu = mileStoneList.value[id].copy()
+        Log.d("issueViewModel", clickedMenu.toString())
         _mileStoneChoose.value = clickedMenu
     }
 
