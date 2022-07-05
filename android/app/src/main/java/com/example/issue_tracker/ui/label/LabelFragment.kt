@@ -31,8 +31,11 @@ class LabelFragment : Fragment(), ActionMode.Callback {
     private val swipeHelperCallback: SwipeHelperCallback by lazy {
         SwipeHelperCallback(
             getIssueSwiped = { item -> viewModel.getLabelSwiped(item) },
-            changeIssueSwiped = { item, isSwiped -> viewModel.changeLabelSwiped(item, isSwiped) }
-        )
+            changeIssueSwiped = { item, isSwiped -> viewModel.changeLabelSwiped(item, isSwiped) },
+            clampView = R.id.cv_label_swipe_view
+        ).apply {
+            setClamp(resources.displayMetrics.widthPixels.toFloat() / 4)
+        }
     }
 
     private var actionMode: ActionMode? = null

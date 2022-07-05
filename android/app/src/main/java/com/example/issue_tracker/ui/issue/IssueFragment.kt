@@ -47,7 +47,8 @@ class IssueFragment : Fragment() {
         adapter = IssueAdapter(viewModel)
         val swipeHelperCallback = SwipeHelperCallback(
             getIssueSwiped = { item -> viewModel.getIssueSwiped(item) },
-            changeIssueSwiped = { item, isSwiped -> viewModel.changeIssueSwiped(item, isSwiped) }
+            changeIssueSwiped = { item, isSwiped -> viewModel.changeIssueSwiped(item, isSwiped) },
+            clampView = R.id.cv_swipe_view
         ).apply {
             setClamp(resources.displayMetrics.widthPixels.toFloat() / 4)
         }
