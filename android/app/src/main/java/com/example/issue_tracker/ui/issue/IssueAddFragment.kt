@@ -61,12 +61,12 @@ class IssueAddFragment : Fragment() {
                     }
                 }
             }
-        }
-        repeatOnLifecycleExtension {
-            viewModel.mileStonePopupMenu.collect { popUpMenu ->
-                popUpMenu?.setOnMenuItemClickListener { item ->
-                    viewModel.findClickedMileStoneMenu(item.itemId)
-                    false
+            repeatOnLifecycleExtension {
+                viewModel.mileStonePopupMenu.collect { popUpMenu ->
+                    popUpMenu?.setOnMenuItemClickListener { item ->
+                        viewModel.findClickedMileStoneMenu(item.itemId)
+                        false
+                    }
                 }
             }
         }
