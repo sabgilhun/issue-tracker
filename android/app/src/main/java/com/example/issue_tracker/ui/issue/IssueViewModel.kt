@@ -22,9 +22,8 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     private val _issueList = MutableStateFlow<List<Issue>>(mutableListOf())
     val issueList: StateFlow<List<Issue>> = _issueList
 
-    // 임시 StateFlow
-    private val _closeIssue = MutableSharedFlow<String>()
-    val closeIssue: SharedFlow<String> = _closeIssue
+    private val _closeIssueMessage = MutableSharedFlow<String>()
+    val closeIssueMessage: SharedFlow<String> = _closeIssueMessage
 
     private val _checkedIssueIdList = MutableStateFlow<MutableList<Int>>(mutableListOf())
     val checkedIssueIdList: StateFlow<MutableList<Int>> = _checkedIssueIdList
@@ -48,11 +47,12 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
         }
     }
 
-    // 이슈를 닫는 로직
-    // 서버에 issueId 를 보내면 닫히고 남은 이슈 리스트를 가져오는 로직으로 변경 예정
     fun closeIssue(issueId: Int) {
-        viewModelScope.launch {
-            _closeIssue.emit(issueId.toString())
+        viewModelScope.launch(exceptionHandler) {
+            val response = issueRepository.closeIssue(issueId)
+            when (response.statusCode) {
+                200 -> _closeIssueMessage.emit(response.message)
+            }
         }
     }
 

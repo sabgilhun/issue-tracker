@@ -17,6 +17,8 @@ data class IssueDTO(
         val milestoneTitle: String,
         @SerializedName("title")
         val title: String,
+        @SerializedName("isOpened")
+        val isOpened: Boolean
     )
 }
 
