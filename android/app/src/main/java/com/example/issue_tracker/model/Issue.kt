@@ -30,7 +30,7 @@ data class Label(
     companion object {
         const val INITIAL_ID = 0
         const val INITIAL_COLOR = "#FF828282"
-        const val INITIAL_TITLE = "feature"
+        const val INITIAL_TITLE = ""
         const val INITIAL_DESCRIPTION = "새로운 기능 추가"
 
         fun of(item: LabelDTO.LabelDTOItem): Label {

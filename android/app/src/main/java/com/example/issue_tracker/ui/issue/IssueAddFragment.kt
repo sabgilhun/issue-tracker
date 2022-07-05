@@ -2,10 +2,8 @@ package com.example.issue_tracker.ui.issue
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.PopupMenu
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -15,31 +13,12 @@ import com.example.issue_tracker.R
 import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentIssueAddBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class IssueAddFragment : Fragment() {
 
     private lateinit var binding: FragmentIssueAddBinding
     private val viewModel: IssueAddViewModel by viewModels()
-
-    private val labelPopUpMenu by lazy {
-        val labelList = viewModel.labelList.value
-        PopupMenu(requireContext(), binding.ibFilterButtonLabel).apply {
-            labelList.forEachIndexed { index, item ->
-                menu.add(Menu.NONE, index, index, item.labelTitle)
-            }
-        }
-    }
-
-    private val mileStonePopUpMenu by lazy {
-        val mileStoneList = viewModel.mileStoneList.value
-        PopupMenu(requireContext(), binding.ibFilterButtonIssueMileStone).apply {
-            mileStoneList.forEachIndexed { index, item ->
-                menu.add(Menu.NONE, index, index, item.title)
-            }
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -64,22 +43,32 @@ class IssueAddFragment : Fragment() {
     private fun observeMenuButtons() {
         with(binding) {
             ibFilterButtonLabel.setOnClickListener {
-                labelPopUpMenu.show()
+                viewModel.labelPopupMenu.value?.show()
             }
             ibFilterButtonIssueMileStone.setOnClickListener {
-                mileStonePopUpMenu.show()
+                viewModel.mileStonePopupMenu.value?.show()
             }
         }
     }
 
     private fun findClickedMenu() {
-        labelPopUpMenu.setOnMenuItemClickListener { item ->
-            viewModel.findClickedLabelMenu(item.itemId)
-            false
+        with(viewLifecycleOwner) {
+            repeatOnLifecycleExtension {
+                viewModel.labelPopupMenu.collect { popUpMenu ->
+                    popUpMenu?.setOnMenuItemClickListener { item ->
+                        viewModel.findClickedLabelMenu(item.itemId)
+                        false
+                    }
+                }
+            }
         }
-        mileStonePopUpMenu.setOnMenuItemClickListener { item ->
-            viewModel.findClickedMileStoneMenu(item.itemId)
-            false
+        repeatOnLifecycleExtension {
+            viewModel.mileStonePopupMenu.collect { popUpMenu ->
+                popUpMenu?.setOnMenuItemClickListener { item ->
+                    viewModel.findClickedMileStoneMenu(item.itemId)
+                    false
+                }
+            }
         }
     }
 
@@ -93,6 +82,26 @@ class IssueAddFragment : Fragment() {
             repeatOnLifecycleExtension {
                 viewModel.mileStoneChoose.collect {
                     binding.mileStone = it
+                }
+            }
+            repeatOnLifecycleExtension {
+                viewModel.labelList.collect {
+                    context?.let { context ->
+                        viewModel.makeLabelPopUpMenu(
+                            context,
+                            binding.ibFilterButtonLabel
+                        )
+                    }
+                }
+            }
+            repeatOnLifecycleExtension {
+                viewModel.mileStoneList.collect {
+                    context?.let { context ->
+                        viewModel.makeMileStonePopUpMenu(
+                            context,
+                            binding.ibFilterButtonIssueMileStone
+                        )
+                    }
                 }
             }
         }
