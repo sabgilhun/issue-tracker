@@ -51,11 +51,26 @@ data class Label(
 }
 
 data class MileStone(
-    val mileStoneId: Int?,
-    val title: String?,
+    val mileStoneId: Int,
+    val title: String,
     val description: String?,
     val dueDate: String?,
     val openedIssueCount: Int = 0,
     val closedIssueCount: Int = 0,
     val progress: String = "",
-)
+) {
+    companion object {
+        const val INITIAL_COUNTS = 0
+        const val INITIAL_VALUE = ""
+
+        fun of(item: MileStoneDTO.MileStoneDTOItem) = MileStone(
+            mileStoneId = item.milestoneId,
+            title = item.title,
+            description = item.description,
+            dueDate = item.dueDate,
+            openedIssueCount = item.openedIssuesCount,
+            closedIssueCount = item.closedIssuesCount,
+            progress = INITIAL_VALUE
+        )
+    }
+}
