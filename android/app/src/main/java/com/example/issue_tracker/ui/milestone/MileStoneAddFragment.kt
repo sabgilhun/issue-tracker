@@ -5,6 +5,7 @@ import android.text.Editable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
@@ -14,6 +15,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.issue_tracker.R
 import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentMileStoneAddBinding
+import com.example.issue_tracker.network.CEHModel
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -55,7 +57,6 @@ class MileStoneAddFragment : Fragment() {
         setUpTextLabelError()
         setUpAddMileStoneButton(findNavController)
         observeDate()
-        saveMileStone(findNavController)
     }
 
     private fun setUpDatePicker() {
@@ -80,22 +81,27 @@ class MileStoneAddFragment : Fragment() {
     }
 
     private fun observeDate() {
-        viewLifecycleOwner.repeatOnLifecycleExtension {
-            viewModel.mileStone.collect { mileStone ->
-                binding.mileStone = mileStone
+        with(viewLifecycleOwner) {
+            repeatOnLifecycleExtension {
+                viewModel.mileStone.collect { mileStone ->
+                    binding.mileStone = mileStone
+                }
+            }
+            repeatOnLifecycleExtension {
+                viewModel.error.collect { CEHModel ->
+                    showToast(CEHModel)
+                }
             }
         }
     }
 
-    private fun saveMileStone(navController: NavController) {
-        binding.btnMileStoneSave.setOnClickListener {
-            kotlin.runCatching {
-                viewModel.saveData()
-            }.onSuccess {
-                navController.navigate(R.id.action_mileStoneAddFragment_to_mileStoneFragment)
-            }.onFailure {
-                errorSnackBar?.show()
-            }
+    private fun showToast(error: CEHModel) {
+        if (error.errorMessage == CEHModel.INITIAL_MESSAGE) {
+            Toast.makeText(requireContext(),
+                getString(R.string.save_label_complete),
+                Toast.LENGTH_SHORT).show()
+        } else {
+            Toast.makeText(requireContext(), error.errorMessage, Toast.LENGTH_SHORT).show()
         }
     }
 }

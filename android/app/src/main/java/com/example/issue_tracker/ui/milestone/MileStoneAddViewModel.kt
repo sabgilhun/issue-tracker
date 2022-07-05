@@ -5,9 +5,15 @@ import androidx.lifecycle.viewModelScope
 import com.example.issue_tracker.common.timeStampToDateString
 import com.example.issue_tracker.model.MileStone
 import com.example.issue_tracker.model.MileStoneDTO
+import com.example.issue_tracker.network.CEHModel
+import com.example.issue_tracker.network.CoroutineException
 import com.example.issue_tracker.repository.MileStoneRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -24,6 +30,18 @@ class MileStoneAddViewModel @Inject constructor(
 
     val mileStoneDescription: MutableStateFlow<String> = MutableStateFlow("")
 
+    private val _error = MutableSharedFlow<CEHModel>(
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
+    val error = _error.asSharedFlow()
+
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        viewModelScope.launch {
+            _error.tryEmit(CoroutineException.checkThrowable(throwable))
+        }
+    }
+
     fun onPickedDate(timeStamp: Long) {
         val timeStampFormatted = timeStampToDateString(timeStamp)
         _mileStone.value =
@@ -36,7 +54,7 @@ class MileStoneAddViewModel @Inject constructor(
     }
 
     fun saveData() {
-        viewModelScope.launch {
+        viewModelScope.launch(exceptionHandler) {
             if (_mileStone.value === defaultMileStone) {
                 repository.addMileStone(MileStoneDTO.MileStoneDTOItem(
                     milestoneId = MileStone.INITIAL_COUNTS,
