@@ -68,8 +68,8 @@ class IssueFragment : Fragment() {
         }
 
         viewLifecycleOwner.repeatOnLifecycleExtension {
-            viewModel.closeIssue.collect {
-                Toast.makeText(requireContext(), "$it 번 이슈가 닫혔습니다.", Toast.LENGTH_SHORT).show()
+            viewModel.closeIssueMessage.collect { closeIssueMessage ->
+                Toast.makeText(requireContext(), closeIssueMessage, Toast.LENGTH_SHORT).show()
             }
         }
 

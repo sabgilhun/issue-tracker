@@ -5,13 +5,13 @@ import android.annotation.TargetApi
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.webkit.WebResourceRequest
 import android.webkit.WebView
 import android.webkit.WebViewClient
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -53,24 +53,30 @@ class GitHubWebViewFragment : Fragment() {
 
     inner class CustomWebViewClient : WebViewClient() {
 
-        @TargetApi(Build.VERSION_CODES.N)
-        override fun shouldOverrideUrlLoading(
-            view: WebView?,
-            request: WebResourceRequest?
-        ): Boolean {
-            if (request?.url.toString().startsWith("http://3.34.136.141:8080/")) {
+        private fun checkUrl(request: WebResourceRequest?) {
+            if (request?.url.toString().startsWith("http://13.124.177.85:8080/")) {
                 val authCode = request?.url.toString().split("=")[1]
                 viewModel.requestGitHubLogin(GitHubOAuthRequest(authCode))
                 viewLifecycleOwner.repeatOnLifecycleExtension {
                     viewModel.accessToken.collect { accessToken ->
                         if (!accessToken.isNullOrEmpty()) {
-                            Log.d("TEST2", accessToken.toString())
                             val intent = Intent(requireContext(), HomeActivity::class.java)
                             startActivity(intent)
                         }
                     }
                 }
             }
+            else {
+                Toast.makeText(requireContext(), "서버 URL 을 확인해주세요.", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+        @TargetApi(Build.VERSION_CODES.N)
+        override fun shouldOverrideUrlLoading(
+            view: WebView?,
+            request: WebResourceRequest?
+        ): Boolean {
+            checkUrl(request)
             return super.shouldOverrideUrlLoading(view, request)
         }
     }

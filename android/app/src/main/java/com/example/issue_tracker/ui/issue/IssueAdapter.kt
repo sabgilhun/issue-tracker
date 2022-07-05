@@ -27,6 +27,7 @@ class IssueAdapter(
             binding.issue = issue
             binding.tvCloseIssue.setOnClickListener {
                 viewModel.closeIssue(issue.issueId)
+                viewModel.getIssues()
             }
 
             binding.cvSwipeView.setOnLongClickListener {

@@ -1,5 +1,6 @@
 package com.example.issue_tracker.datasource
 
+import com.example.issue_tracker.model.IssueCloseResponse
 import com.example.issue_tracker.model.IssueDTO
 import com.example.issue_tracker.model.LabelDTO
 import com.example.issue_tracker.network.APIService
@@ -13,4 +14,6 @@ class DataSourceImpl @Inject constructor(
     override suspend fun addLabels(label: LabelDTO.LabelDTOItem) = apiService.addLabels(label)
 
     override suspend fun getLabels(): LabelDTO = apiService.getLabels()
+
+    override suspend fun closeIssue(issueId: Int): IssueCloseResponse = apiService.closeIssue(issueId)
 }
