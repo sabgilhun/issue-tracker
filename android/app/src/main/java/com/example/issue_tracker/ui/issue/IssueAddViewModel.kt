@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.example.issue_tracker.common.addElement
 import com.example.issue_tracker.model.Label
 import com.example.issue_tracker.model.MileStone
+import com.example.issue_tracker.ui.milestone.MileStoneAddViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -52,6 +53,12 @@ class IssueAddViewModel @Inject constructor() : ViewModel() {
             Label.INITIAL_DESCRIPTION,
             Label.INITIAL_COLOR
         )
-        val defaultMileStone = MileStone(null, null, null, null)
+        val defaultMileStone =
+            MileStone(
+                MileStone.INITIAL_COUNTS,
+                MileStone.INITIAL_VALUE,
+                MileStone.INITIAL_VALUE,
+                MileStone.INITIAL_VALUE,
+            )
     }
 }
