@@ -26,6 +26,8 @@ data class Label(
     val labelTitle: String,
     val labelContents: String?,
     val labelColor: String,
+    var isSwiped: Boolean = false,
+    var isLongClicked: Boolean = false,
 ) {
     companion object {
         const val INITIAL_ID = 0
@@ -58,6 +60,8 @@ data class MileStone(
     val openedIssueCount: Int = 0,
     val closedIssueCount: Int = 0,
     val progress: String = "",
+    var isSwiped: Boolean = false,
+    var isLongClicked: Boolean = false,
 ) {
     companion object {
         const val INITIAL_COUNTS = 0
