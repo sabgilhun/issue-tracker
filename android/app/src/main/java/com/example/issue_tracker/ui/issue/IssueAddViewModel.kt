@@ -1,9 +1,7 @@
 package com.example.issue_tracker.ui.issue
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.issue_tracker.common.addElement
 import com.example.issue_tracker.model.IssueAddRequest
 import com.example.issue_tracker.model.Label
 import com.example.issue_tracker.model.MileStone
@@ -12,7 +10,6 @@ import com.example.issue_tracker.network.CoroutineException
 import com.example.issue_tracker.repository.IssueRepository
 import com.example.issue_tracker.repository.LabelRepository
 import com.example.issue_tracker.repository.MileStoneRepository
-import com.example.issue_tracker.ui.milestone.MileStoneAddViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
