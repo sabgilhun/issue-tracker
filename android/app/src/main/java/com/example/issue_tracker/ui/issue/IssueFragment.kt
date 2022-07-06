@@ -44,7 +44,7 @@ class IssueFragment : Fragment() {
         goToSearchIssueFragment(findNavController)
         goToIssueAddFragment(findNavController)
         changeActionBarState()
-        viewModel.getIssues(IssueFilterRequest())
+        viewModel.getIssues()
         adapter = IssueAdapter(viewModel)
         val swipeHelperCallback = SwipeHelperCallback(
             getIssueSwiped = { item -> viewModel.getIssueSwiped(item) },

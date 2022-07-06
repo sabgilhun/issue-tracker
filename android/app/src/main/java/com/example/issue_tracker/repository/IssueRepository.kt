@@ -8,7 +8,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface IssueRepository {
 
-    suspend fun getIssue(issueFilterRequest: IssueFilterRequest): Flow<List<Issue>>
+    fun changeIssueFilterRequest(issueFilterRequest: IssueFilterRequest)
+
+    suspend fun getIssue(): Flow<List<Issue>>
 
     suspend fun closeIssue(issueId: Int): IssueCloseResponse
 

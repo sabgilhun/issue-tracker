@@ -50,9 +50,9 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
         _error.value = CoroutineException.checkThrowable(throwable)
     }
 
-    fun getIssues(issueFilterRequest: IssueFilterRequest) {
+    fun getIssues() {
         viewModelScope.launch(exceptionHandler) {
-            issueRepository.getIssue(issueFilterRequest).collect {
+            issueRepository.getIssue().collect {
                 _issueList.value = it.toMutableList()
                 Log.d("Issue", it.toString())
             }
