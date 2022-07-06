@@ -38,6 +38,12 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
 
     val checkLongClicked = MutableStateFlow<Boolean>(true)
 
+    private val _searchWord = MutableSharedFlow<String>()
+    val searchWord = _searchWord.debounce { 400 }
+
+    private val _searchIssueList = MutableStateFlow<List<Issue>>(mutableListOf())
+    val searchIssueList: StateFlow<List<Issue>> = _searchIssueList
+
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         _error.value = CoroutineException.checkThrowable(throwable)
     }
@@ -56,6 +62,20 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
             val response = issueRepository.closeIssue(issueId)
             when (response.statusCode) {
                 200 -> _closeIssueMessage.emit(response.message)
+            }
+        }
+    }
+
+    fun handleSearchWord(word: String) {
+        viewModelScope.launch(exceptionHandler) {
+            _searchWord.emit(word)
+        }
+    }
+
+    fun getSearchIssue(word: String) {
+        viewModelScope.launch(exceptionHandler) {
+            issueRepository.searchIssue(word).collect {
+                _searchIssueList.value = it
             }
         }
     }

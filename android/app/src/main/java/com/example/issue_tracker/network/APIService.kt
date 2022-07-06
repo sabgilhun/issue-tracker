@@ -26,4 +26,7 @@ interface APIService {
 
     @POST("issues")
     suspend fun addIssie(@Body request: IssueAddRequest)
+
+    @GET("issues")
+    suspend fun searchIssues(@Query("title") word: String): IssueDTO
 }

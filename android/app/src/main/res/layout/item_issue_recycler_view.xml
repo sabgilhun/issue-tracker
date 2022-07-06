@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
         <variable
             name="issue"
             type="com.example.issue_tracker.model.Issue" />

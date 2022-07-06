@@ -27,4 +27,12 @@ class IssueRepositoryImpl @Inject constructor(
     override suspend fun addIssue(issueAddRequest: IssueAddRequest) {
         return dataSource.addIssue(issueAddRequest)
     }
+
+    override suspend fun searchIssue(word: String): Flow<List<Issue>> {
+        return dataSource.searchIssue(word).map { issueDTO ->
+            issueDTO.issues.map { issueDTOItem ->
+                Issue.of(issueDTOItem)
+            }
+        }
+    }
 }

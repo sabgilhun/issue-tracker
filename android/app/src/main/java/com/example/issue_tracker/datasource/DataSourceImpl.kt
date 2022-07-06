@@ -33,4 +33,10 @@ class DataSourceImpl @Inject constructor(
     override suspend fun addIssue(issueAddRequest: IssueAddRequest) {
         apiService.addIssie(issueAddRequest)
     }
+
+    override suspend fun searchIssue(word: String): Flow<IssueDTO> {
+        return flow {
+            emit(apiService.searchIssues(word))
+        }
+    }
 }
