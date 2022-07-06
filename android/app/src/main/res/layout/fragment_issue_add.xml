@@ -56,21 +56,12 @@
                     android:textSize="24sp" />
 
                 <Button
-                    android:id="@+id/btn_issue_pre_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="80dp"
-                    android:background="@android:color/transparent"
-                    android:outlineProvider="none"
-                    android:text="@string/text_pre_view" />
-
-                <Button
                     android:id="@+id/btn_issue_save"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
                     android:backgroundTint="@android:color/transparent"
-                    android:enabled="false"
+                    android:enabled="true"
                     android:outlineProvider="none"
                     android:text="@string/label_save" />
 

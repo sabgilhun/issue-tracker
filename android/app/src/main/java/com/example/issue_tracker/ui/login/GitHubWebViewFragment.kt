@@ -54,7 +54,7 @@ class GitHubWebViewFragment : Fragment() {
     inner class CustomWebViewClient : WebViewClient() {
 
         private fun checkUrl(request: WebResourceRequest?) {
-            if (request?.url.toString().startsWith("http://13.124.177.85:8080/")) {
+            if (request?.url.toString().startsWith("http://13.209.73.68:8080/")) {
                 val authCode = request?.url.toString().split("=")[1]
                 viewModel.requestGitHubLogin(GitHubOAuthRequest(authCode))
                 viewLifecycleOwner.repeatOnLifecycleExtension {

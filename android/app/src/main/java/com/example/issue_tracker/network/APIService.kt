@@ -1,9 +1,6 @@
 package com.example.issue_tracker.network
 
-import com.example.issue_tracker.model.IssueCloseResponse
-import com.example.issue_tracker.model.IssueDTO
-import com.example.issue_tracker.model.LabelDTO
-import com.example.issue_tracker.model.MileStoneDTO
+import com.example.issue_tracker.model.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -26,4 +23,10 @@ interface APIService {
 
     @PATCH("issues/{issueId}/status")
     suspend fun closeIssue(@Path("issueId") issueId: Int): IssueCloseResponse
+
+    @POST("issues")
+    suspend fun addIssie(@Body request: IssueAddRequest)
+
+    @GET("issues")
+    suspend fun searchIssues(@Query("title") word: String): IssueDTO
 }

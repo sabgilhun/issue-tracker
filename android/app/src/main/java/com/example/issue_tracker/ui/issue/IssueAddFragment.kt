@@ -2,8 +2,10 @@ package com.example.issue_tracker.ui.issue
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.PopupMenu
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -12,7 +14,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.issue_tracker.R
 import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentIssueAddBinding
+import com.example.issue_tracker.model.IssueAddRequest
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class IssueAddFragment : Fragment() {
@@ -34,40 +38,42 @@ class IssueAddFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val findNavController = findNavController()
+        viewModel.loadLabelAndMileStone()
         observeMenuButtons()
-        findClickedMenu()
         observeClickedMenuText()
         goBackIssue(findNavController)
+        addIssue(findNavController)
     }
 
     private fun observeMenuButtons() {
         with(binding) {
             ibFilterButtonLabel.setOnClickListener {
-                viewModel.labelPopupMenu.value?.show()
+                val labelList = viewModel.labelList.value
+                val labelPopupMenu =
+                    PopupMenu(requireContext(), binding.ibFilterButtonLabel).apply {
+                        labelList.forEachIndexed { index, item ->
+                            menu.add(Menu.NONE, index, index, item.labelTitle)
+                        }
+                    }
+                labelPopupMenu.setOnMenuItemClickListener { item ->
+                    viewModel.findClickedLabelMenu(item.itemId)
+                    false
+                }
+                labelPopupMenu.show()
             }
             ibFilterButtonIssueMileStone.setOnClickListener {
-                viewModel.mileStonePopupMenu.value?.show()
-            }
-        }
-    }
-
-    private fun findClickedMenu() {
-        with(viewLifecycleOwner) {
-            repeatOnLifecycleExtension {
-                viewModel.labelPopupMenu.collect { popUpMenu ->
-                    popUpMenu?.setOnMenuItemClickListener { item ->
-                        viewModel.findClickedLabelMenu(item.itemId)
-                        false
+                val mileStoneList = viewModel.mileStoneList.value
+                val mileStonePopupMenu =
+                    PopupMenu(requireContext(), binding.ibFilterButtonIssueMileStone).apply {
+                        mileStoneList.forEachIndexed { index, item ->
+                            menu.add(Menu.NONE, index, index, item.title)
+                        }
                     }
+                mileStonePopupMenu.setOnMenuItemClickListener { item ->
+                    viewModel.findClickedMileStoneMenu(item.itemId)
+                    false
                 }
-            }
-            repeatOnLifecycleExtension {
-                viewModel.mileStonePopupMenu.collect { popUpMenu ->
-                    popUpMenu?.setOnMenuItemClickListener { item ->
-                        viewModel.findClickedMileStoneMenu(item.itemId)
-                        false
-                    }
-                }
+                mileStonePopupMenu.show()
             }
         }
     }
@@ -84,31 +90,28 @@ class IssueAddFragment : Fragment() {
                     binding.mileStone = it
                 }
             }
-            repeatOnLifecycleExtension {
-                viewModel.labelList.collect {
-                    context?.let { context ->
-                        viewModel.makeLabelPopUpMenu(
-                            context,
-                            binding.ibFilterButtonLabel
-                        )
-                    }
-                }
-            }
-            repeatOnLifecycleExtension {
-                viewModel.mileStoneList.collect {
-                    context?.let { context ->
-                        viewModel.makeMileStonePopUpMenu(
-                            context,
-                            binding.ibFilterButtonIssueMileStone
-                        )
-                    }
-                }
-            }
         }
     }
 
     private fun goBackIssue(findNavController: NavController) {
         binding.ivGoBack.setOnClickListener {
+            findNavController.navigate(R.id.action_issueAddFragment_to_issueFragment)
+        }
+    }
+
+    private fun addIssue(findNavController: NavController) {
+        binding.btnIssueSave.setOnClickListener {
+            viewModel.addIssue(
+                IssueAddRequest(
+                    viewModel.labelChoose.value.labelId,
+                    viewModel.mileStoneChoose.value.mileStoneId,
+                    IssueAddRequest.INITIAL_AUTHOR_ID,
+                    IssueAddRequest.INITIAL_ASSIGNEE_ID,
+                    binding.etIssueTitle.text.toString(),
+                    binding.etIssueContent.text.toString(),
+                    IssueAddRequest.INITIAL_IS_OPENED
+                )
+            )
             findNavController.navigate(R.id.action_issueAddFragment_to_issueFragment)
         }
     }

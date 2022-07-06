@@ -1,17 +1,22 @@
 package com.example.issue_tracker.datasource
 
-import com.example.issue_tracker.model.IssueCloseResponse
-import com.example.issue_tracker.model.IssueDTO
-import com.example.issue_tracker.model.LabelDTO
-import com.example.issue_tracker.model.MileStoneDTO
+import android.util.Log
+import com.example.issue_tracker.model.*
 import com.example.issue_tracker.network.APIService
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 import javax.inject.Inject
 
 class DataSourceImpl @Inject constructor(
     private val apiService: APIService,
 ) : DataSource {
-    override suspend fun getIssues(): IssueDTO = apiService.getIssues()
+    override suspend fun getIssues(): Flow<IssueDTO> {
+        return flow {
+            emit(apiService.getIssues())
+            Log.d("Issue, DataSource", apiService.getIssues().issues.toString())
+        }
+    }
 
     override suspend fun addLabels(label: LabelDTO.LabelDTOItem) = apiService.addLabels(label)
 
@@ -24,4 +29,14 @@ class DataSourceImpl @Inject constructor(
 
     override suspend fun closeIssue(issueId: Int): IssueCloseResponse =
         apiService.closeIssue(issueId)
+
+    override suspend fun addIssue(issueAddRequest: IssueAddRequest) {
+        apiService.addIssie(issueAddRequest)
+    }
+
+    override suspend fun searchIssue(word: String): Flow<IssueDTO> {
+        return flow {
+            emit(apiService.searchIssues(word))
+        }
+    }
 }

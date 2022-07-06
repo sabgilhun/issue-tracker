@@ -1,5 +1,6 @@
 package com.example.issue_tracker.ui.issue
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issue_tracker.common.addElement
@@ -37,13 +38,22 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
 
     val checkLongClicked = MutableStateFlow<Boolean>(true)
 
+    private val _searchWord = MutableSharedFlow<String>()
+    val searchWord = _searchWord.debounce { 400 }
+
+    private val _searchIssueList = MutableStateFlow<List<Issue>>(mutableListOf())
+    val searchIssueList: StateFlow<List<Issue>> = _searchIssueList
+
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         _error.value = CoroutineException.checkThrowable(throwable)
     }
 
     fun getIssues() {
         viewModelScope.launch(exceptionHandler) {
-            _issueList.value = issueRepository.getIssue()
+            issueRepository.getIssue().collect {
+                _issueList.value = it
+                Log.d("Issue", it.toString())
+            }
         }
     }
 
@@ -52,6 +62,20 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
             val response = issueRepository.closeIssue(issueId)
             when (response.statusCode) {
                 200 -> _closeIssueMessage.emit(response.message)
+            }
+        }
+    }
+
+    fun handleSearchWord(word: String) {
+        viewModelScope.launch(exceptionHandler) {
+            _searchWord.emit(word)
+        }
+    }
+
+    fun getSearchIssue(word: String) {
+        viewModelScope.launch(exceptionHandler) {
+            issueRepository.searchIssue(word).collect {
+                _searchIssueList.value = it
             }
         }
     }

@@ -1,11 +1,12 @@
 package com.example.issue_tracker.datasource
 
 import com.example.issue_tracker.model.*
+import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 
 interface DataSource {
 
-    suspend fun getIssues(): IssueDTO
+    suspend fun getIssues(): Flow<IssueDTO>
 
     suspend fun getLabels(): LabelDTO
 
@@ -16,4 +17,8 @@ interface DataSource {
     suspend fun addLabels(label: LabelDTO.LabelDTOItem): Response<Unit>
 
     suspend fun closeIssue(issueId: Int): IssueCloseResponse
+
+    suspend fun addIssue(issueAddRequest: IssueAddRequest)
+
+    suspend fun searchIssue(word: String): Flow<IssueDTO>
 }

@@ -18,6 +18,7 @@ class IssueAdapter(
     }
 
     override fun onBindViewHolder(holder: IssueViewHolder, position: Int) {
+        holder.itemView.translationX = 0f
         holder.bind(getItem(position))
     }
 
@@ -27,7 +28,6 @@ class IssueAdapter(
             binding.issue = issue
             binding.tvCloseIssue.setOnClickListener {
                 viewModel.closeIssue(issue.issueId)
-                viewModel.getIssues()
             }
 
             binding.cvSwipeView.setOnLongClickListener {

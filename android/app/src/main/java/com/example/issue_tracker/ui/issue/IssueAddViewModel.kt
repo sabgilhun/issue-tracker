@@ -1,17 +1,20 @@
 package com.example.issue_tracker.ui.issue
 
-import android.content.Context
-import android.view.Menu
-import android.view.View
-import android.widget.PopupMenu
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.issue_tracker.model.IssueAddRequest
 import com.example.issue_tracker.model.Label
 import com.example.issue_tracker.model.MileStone
+import com.example.issue_tracker.network.CEHModel
+import com.example.issue_tracker.network.CoroutineException
+import com.example.issue_tracker.repository.IssueRepository
 import com.example.issue_tracker.repository.LabelRepository
 import com.example.issue_tracker.repository.MileStoneRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -20,12 +23,13 @@ import javax.inject.Inject
 class IssueAddViewModel @Inject constructor(
     private val labelRepository: LabelRepository,
     private val mileStoneRepository: MileStoneRepository,
+    private val issueRepository: IssueRepository
 ) : ViewModel() {
 
-    private val _labelList = MutableStateFlow<MutableList<Label>>(mutableListOf())
+    private val _labelList = MutableStateFlow<List<Label>>(mutableListOf())
     val labelList = _labelList.asStateFlow()
 
-    private val _mileStoneList = MutableStateFlow<MutableList<MileStone>>(mutableListOf())
+    private val _mileStoneList = MutableStateFlow<List<MileStone>>(mutableListOf())
     val mileStoneList = _mileStoneList.asStateFlow()
 
     private val _labelChoose = MutableStateFlow(defaultLabel)
@@ -34,21 +38,24 @@ class IssueAddViewModel @Inject constructor(
     private val _mileStoneChoose = MutableStateFlow(defaultMileStone)
     val mileStoneChoose = _mileStoneChoose.asStateFlow()
 
-    private val _labelPopUpMenu = MutableStateFlow<PopupMenu?>(null)
-    val labelPopupMenu = _labelPopUpMenu.asStateFlow()
+    private val _error = MutableStateFlow(CEHModel(null, ""))
+    val error: SharedFlow<CEHModel> = _error.asSharedFlow()
 
-    private val _mileStonePopUpMenu = MutableStateFlow<PopupMenu?>(null)
-    val mileStonePopupMenu = _mileStonePopUpMenu.asStateFlow()
-
-    init {
-        addDummyData()
+    private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
+        _error.value = CoroutineException.checkThrowable(throwable)
     }
 
-    private fun addDummyData() {
-        viewModelScope.launch {
-            _labelList.value = labelRepository.getLabelList().toMutableList()
-            _mileStoneList.value = mileStoneRepository.getMileStoneList().toMutableList()
-        }.onJoin
+    fun addIssue(issueAddRequest: IssueAddRequest) {
+        viewModelScope.launch(exceptionHandler) {
+            issueRepository.addIssue(issueAddRequest)
+        }
+    }
+
+    fun loadLabelAndMileStone() {
+        viewModelScope.launch(exceptionHandler) {
+            _labelList.value = labelRepository.getLabelList()
+            _mileStoneList.value = mileStoneRepository.getMileStoneList()
+        }
     }
 
     fun findClickedLabelMenu(id: Int) {
@@ -59,22 +66,6 @@ class IssueAddViewModel @Inject constructor(
     fun findClickedMileStoneMenu(id: Int) {
         val clickedMenu = mileStoneList.value[id].copy()
         _mileStoneChoose.value = clickedMenu
-    }
-
-    fun makeLabelPopUpMenu(context: Context, view: View) {
-        _labelPopUpMenu.value = PopupMenu(context, view).apply {
-            labelList.value.forEachIndexed { index, item ->
-                menu.add(Menu.NONE, index, index, item.labelTitle)
-            }
-        }
-    }
-
-    fun makeMileStonePopUpMenu(context: Context, view: View) {
-        _mileStonePopUpMenu.value = PopupMenu(context, view).apply {
-            mileStoneList.value.forEachIndexed { index, item ->
-                menu.add(Menu.NONE, index, index, item.title)
-            }
-        }
     }
 
     companion object {
