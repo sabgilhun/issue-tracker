@@ -41,13 +41,15 @@ class IssueAddViewModel @Inject constructor(
     private val _error = MutableStateFlow(CEHModel(null, ""))
     val error: SharedFlow<CEHModel> = _error.asSharedFlow()
 
+    val isSuccess = MutableStateFlow(false)
+
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
         _error.value = CoroutineException.checkThrowable(throwable)
     }
 
     fun addIssue(issueAddRequest: IssueAddRequest) {
         viewModelScope.launch(exceptionHandler) {
-            issueRepository.addIssue(issueAddRequest)
+            isSuccess.value = issueRepository.addIssue(issueAddRequest)
         }
     }
 

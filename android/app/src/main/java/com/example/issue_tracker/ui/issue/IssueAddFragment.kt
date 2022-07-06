@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -40,9 +41,9 @@ class IssueAddFragment : Fragment() {
         val findNavController = findNavController()
         viewModel.loadLabelAndMileStone()
         observeMenuButtons()
-        observeClickedMenuText()
+        observeClickedMenuText(findNavController)
         goBackIssue(findNavController)
-        addIssue(findNavController)
+        addIssue()
     }
 
     private fun observeMenuButtons() {
@@ -78,7 +79,7 @@ class IssueAddFragment : Fragment() {
         }
     }
 
-    private fun observeClickedMenuText() {
+    private fun observeClickedMenuText(findNavController: NavController) {
         with(viewLifecycleOwner) {
             repeatOnLifecycleExtension {
                 viewModel.labelChoose.collect {
@@ -90,6 +91,15 @@ class IssueAddFragment : Fragment() {
                     binding.mileStone = it
                 }
             }
+            repeatOnLifecycleExtension {
+                viewModel.isSuccess.collect {
+                    if (it) {
+                        findNavController.navigate(R.id.action_issueAddFragment_to_issueFragment)
+                    } else {
+                        Toast.makeText(context, "추가가 되지 않았습니다", Toast.LENGTH_SHORT).show()
+                    }
+                }
+            }
         }
     }
 
@@ -99,7 +109,7 @@ class IssueAddFragment : Fragment() {
         }
     }
 
-    private fun addIssue(findNavController: NavController) {
+    private fun addIssue() {
         binding.btnIssueSave.setOnClickListener {
             viewModel.addIssue(
                 IssueAddRequest(
@@ -112,7 +122,6 @@ class IssueAddFragment : Fragment() {
                     IssueAddRequest.INITIAL_IS_OPENED
                 )
             )
-            findNavController.navigate(R.id.action_issueAddFragment_to_issueFragment)
         }
     }
 }

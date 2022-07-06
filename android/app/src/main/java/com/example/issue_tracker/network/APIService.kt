@@ -25,7 +25,7 @@ interface APIService {
     suspend fun closeIssue(@Path("issueId") issueId: Int): IssueCloseResponse
 
     @POST("issues")
-    suspend fun addIssie(@Body request: IssueAddRequest)
+    suspend fun addIssue(@Body request: IssueAddRequest): Response<Unit>
 
     @GET("issues")
     suspend fun searchIssues(@Query("title") word: String): IssueDTO

@@ -18,7 +18,7 @@ interface DataSource {
 
     suspend fun closeIssue(issueId: Int): IssueCloseResponse
 
-    suspend fun addIssue(issueAddRequest: IssueAddRequest)
+    suspend fun addIssue(issueAddRequest: IssueAddRequest): Response<Unit>
 
     suspend fun searchIssue(word: String): Flow<IssueDTO>
 }
