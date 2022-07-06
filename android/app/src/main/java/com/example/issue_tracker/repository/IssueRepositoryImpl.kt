@@ -32,8 +32,9 @@ class IssueRepositoryImpl @Inject constructor(
         return dataSource.closeIssue(issueId)
     }
 
-    override suspend fun addIssue(issueAddRequest: IssueAddRequest) {
-        return dataSource.addIssue(issueAddRequest)
+    override suspend fun addIssue(issueAddRequest: IssueAddRequest): Boolean {
+        val result = dataSource.addIssue(issueAddRequest)
+        return result.isSuccessful
     }
 
     override suspend fun searchIssue(word: String): Flow<List<Issue>> {
