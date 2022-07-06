@@ -66,9 +66,6 @@ class GitHubWebViewFragment : Fragment() {
                     }
                 }
             }
-            else {
-                Toast.makeText(requireContext(), "서버 URL 을 확인해주세요.", Toast.LENGTH_SHORT).show()
-            }
         }
 
         @TargetApi(Build.VERSION_CODES.N)

@@ -75,20 +75,20 @@ class LoginFragment : Fragment() {
                     }
                 }
             }
-            cbKakaoLogin.setOnClickListener {
-                lifecycleScope.launch {
-                    try {
-                        val oAuthToken = UserApiClient.loginWithKakao(requireContext())
-                        Log.d("Kakao", oAuthToken.toString())
-                    } catch (error: Throwable) {
-                        if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
-                            Log.d("Kakao", "사용자가 명시적으로 취소")
-                        } else {
-                            Log.e("Kakao", "인증 에러 발생", error)
-                        }
-                    }
-                }
-            }
+//            cbKakaoLogin.setOnClickListener {
+//                lifecycleScope.launch {
+//                    try {
+//                        val oAuthToken = UserApiClient.loginWithKakao(requireContext())
+//                        Log.d("Kakao", oAuthToken.toString())
+//                    } catch (error: Throwable) {
+//                        if (error is ClientError && error.reason == ClientErrorCause.Cancelled) {
+//                            Log.d("Kakao", "사용자가 명시적으로 취소")
+//                        } else {
+//                            Log.e("Kakao", "인증 에러 발생", error)
+//                        }
+//                    }
+//                }
+//            }
         }
         binding.cbGithubLogin.setOnClickListener {
             navigationControl.navigate(R.id.action_loginFragment_to_gitHubWebViewFragment)

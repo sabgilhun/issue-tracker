@@ -8,6 +8,7 @@ import com.example.issue_tracker.common.closeElement
 import com.example.issue_tracker.common.removeAllElement
 import com.example.issue_tracker.common.removeElement
 import com.example.issue_tracker.model.Issue
+import com.example.issue_tracker.model.IssueFilterRequest
 import com.example.issue_tracker.network.CEHModel
 import com.example.issue_tracker.network.CoroutineException
 import com.example.issue_tracker.repository.IssueRepository

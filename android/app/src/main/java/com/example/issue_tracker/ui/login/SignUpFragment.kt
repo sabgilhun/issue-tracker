@@ -17,6 +17,7 @@ import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentSignUpBinding
 import com.example.issue_tracker.model.SignUpRequest
 import dagger.hilt.android.AndroidEntryPoint
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
@@ -53,6 +54,7 @@ class SignUpFragment : Fragment() {
         viewLifecycleOwner.repeatOnLifecycleExtension {
             viewModel.signUpResponse.collect {
                 if (it.statusCode == 200) {
+                    Toast.makeText(requireContext(), "회원가입에 성공했습니다.", Toast.LENGTH_SHORT).show()
                     goToLoginFragment(findNavController)
                 } else {
                     Toast.makeText(requireContext(), "회원가입에 실패했습니다.", Toast.LENGTH_SHORT).show()

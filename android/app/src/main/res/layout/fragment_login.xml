@@ -98,26 +98,15 @@
             app:layout_constraintTop_toBottomOf="@id/btn_sing_in"
             app:text="깃헙 계정으로 로그인" />
 
-        <com.example.issue_tracker.ui.login.LoginCustomButton
-            android:id="@+id/cb_google_login"
-            android:layout_width="199dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            app:buttonImage="@{R.drawable.custom_google_logo}"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cb_github_login"
-            app:text="구글 계정으로 로그인" />
-
-        <com.example.issue_tracker.ui.login.LoginCustomButton
-            android:id="@+id/cb_kakao_login"
-            android:layout_width="199dp"
-            android:layout_height="48dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/cb_google_login"
-            app:text="카카오 계정으로 로그인" />
+<!--        <com.example.issue_tracker.ui.login.LoginCustomButton-->
+<!--            android:id="@+id/cb_kakao_login"-->
+<!--            android:layout_width="199dp"-->
+<!--            android:layout_height="48dp"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/cb_github_login"-->
+<!--            app:text="카카오 계정으로 로그인" />-->
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
