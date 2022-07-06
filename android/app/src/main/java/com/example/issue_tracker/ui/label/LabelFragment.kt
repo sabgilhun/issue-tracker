@@ -13,6 +13,7 @@ import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentLabelBinding
 import com.example.issue_tracker.ui.common.SwipeHelperCallback
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class LabelFragment : Fragment(), ActionMode.Callback {

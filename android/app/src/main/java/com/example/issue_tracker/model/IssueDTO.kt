@@ -31,7 +31,7 @@ data class LabelDTO(
         val backgroundColor: String,
         @SerializedName("description")
         val description: String,
-        @SerializedName("id")
+        @SerializedName("labelId")
         val id: Int,
         @SerializedName("name")
         val name: String,

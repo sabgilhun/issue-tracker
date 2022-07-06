@@ -1,5 +1,6 @@
 package com.example.issue_tracker.ui.issue
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issue_tracker.common.addElement
@@ -43,7 +44,10 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
 
     fun getIssues() {
         viewModelScope.launch(exceptionHandler) {
-            _issueList.value = issueRepository.getIssue()
+            issueRepository.getIssue().collect {
+                _issueList.value = it
+                Log.d("Issue", it.toString())
+            }
         }
     }
 
