@@ -8,6 +8,7 @@ import com.example.issue_tracker.common.closeElement
 import com.example.issue_tracker.common.removeAllElement
 import com.example.issue_tracker.common.removeElement
 import com.example.issue_tracker.model.Issue
+import com.example.issue_tracker.model.IssueFilterRequest
 import com.example.issue_tracker.network.CEHModel
 import com.example.issue_tracker.network.CoroutineException
 import com.example.issue_tracker.repository.IssueRepository
@@ -49,9 +50,9 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
         _error.value = CoroutineException.checkThrowable(throwable)
     }
 
-    fun getIssues() {
+    fun getIssues(issueFilterRequest: IssueFilterRequest) {
         viewModelScope.launch(exceptionHandler) {
-            issueRepository.getIssue().collect {
+            issueRepository.getIssue(issueFilterRequest).collect {
                 _issueList.value = it.toMutableList()
                 Log.d("Issue", it.toString())
             }

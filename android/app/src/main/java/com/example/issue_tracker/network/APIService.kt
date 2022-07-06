@@ -7,7 +7,12 @@ import retrofit2.http.*
 interface APIService {
 
     @GET("issues")
-    suspend fun getIssues(): IssueDTO
+    suspend fun getIssues(
+        @Query("isOpened") isOpened: Boolean?,
+        @Query("authorId") authorId: Int?,
+        @Query("labelId") labelId: Int?,
+        @Query("milestoneId") milestoneId: Int?
+    ): IssueDTO
 
     @GET("labels")
     suspend fun getLabels(): LabelDTO
@@ -15,7 +20,7 @@ interface APIService {
     @GET("milestones")
     suspend fun getMileStones(): MileStoneDTO
 
-    @POST("labels")
+    @POST("labelswfadfq")
     suspend fun addLabels(@Body label: LabelDTO.LabelDTOItem): Response<Unit>
 
     @POST("milestones")

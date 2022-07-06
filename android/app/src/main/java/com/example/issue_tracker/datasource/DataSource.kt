@@ -6,7 +6,7 @@ import retrofit2.Response
 
 interface DataSource {
 
-    suspend fun getIssues(): Flow<IssueDTO>
+    suspend fun getIssues(issueFilterRequest: IssueFilterRequest): Flow<IssueDTO>
 
     suspend fun getLabels(): LabelDTO
 

@@ -11,10 +11,16 @@ import javax.inject.Inject
 class DataSourceImpl @Inject constructor(
     private val apiService: APIService,
 ) : DataSource {
-    override suspend fun getIssues(): Flow<IssueDTO> {
+    override suspend fun getIssues(issueFilterRequest: IssueFilterRequest): Flow<IssueDTO> {
         return flow {
-            emit(apiService.getIssues())
-            Log.d("Issue, DataSource", apiService.getIssues().issues.toString())
+            emit(
+                apiService.getIssues(
+                    issueFilterRequest.isOpened,
+                    issueFilterRequest.authorId,
+                    issueFilterRequest.labelId,
+                    issueFilterRequest.milestoneId
+                )
+            )
         }
     }
 

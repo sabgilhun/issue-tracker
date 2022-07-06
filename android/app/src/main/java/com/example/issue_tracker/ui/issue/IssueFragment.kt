@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import com.example.issue_tracker.R
 import com.example.issue_tracker.common.repeatOnLifecycleExtension
 import com.example.issue_tracker.databinding.FragmentIssueBinding
+import com.example.issue_tracker.model.IssueFilterRequest
 import com.example.issue_tracker.ui.common.SwipeHelperCallback
 import kotlinx.coroutines.flow.collect
 
@@ -43,7 +44,7 @@ class IssueFragment : Fragment() {
         goToSearchIssueFragment(findNavController)
         goToIssueAddFragment(findNavController)
         changeActionBarState()
-        viewModel.getIssues()
+        viewModel.getIssues(IssueFilterRequest())
         adapter = IssueAdapter(viewModel)
         val swipeHelperCallback = SwipeHelperCallback(
             getIssueSwiped = { item -> viewModel.getIssueSwiped(item) },
