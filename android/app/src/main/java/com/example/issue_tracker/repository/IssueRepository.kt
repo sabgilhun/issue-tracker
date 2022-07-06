@@ -11,7 +11,7 @@ interface IssueRepository {
 
     suspend fun closeIssue(issueId: Int): IssueCloseResponse
 
-    suspend fun addIssue(issueAddRequest: IssueAddRequest)
+    suspend fun addIssue(issueAddRequest: IssueAddRequest): Boolean
 
     suspend fun searchIssue(word: String): Flow<List<Issue>>
 }
