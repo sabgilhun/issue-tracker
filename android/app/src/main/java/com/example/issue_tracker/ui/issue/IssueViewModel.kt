@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.issue_tracker.common.addElement
+import com.example.issue_tracker.common.closeElement
 import com.example.issue_tracker.common.removeAllElement
 import com.example.issue_tracker.common.removeElement
 import com.example.issue_tracker.model.Issue
@@ -20,8 +21,8 @@ import javax.inject.Inject
 class IssueViewModel @Inject constructor(private val issueRepository: IssueRepository) :
     ViewModel() {
 
-    private val _issueList = MutableStateFlow<List<Issue>>(mutableListOf())
-    val issueList: StateFlow<List<Issue>> = _issueList
+    private val _issueList = MutableStateFlow<MutableList<Issue>>(mutableListOf())
+    val issueList: StateFlow<MutableList<Issue>> = _issueList
 
     private val _closeIssueMessage = MutableSharedFlow<String>()
     val closeIssueMessage: SharedFlow<String> = _closeIssueMessage
@@ -51,7 +52,7 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     fun getIssues() {
         viewModelScope.launch(exceptionHandler) {
             issueRepository.getIssue().collect {
-                _issueList.value = it
+                _issueList.value = it.toMutableList()
                 Log.d("Issue", it.toString())
             }
         }
@@ -59,6 +60,7 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
 
     fun closeIssue(issueId: Int) {
         viewModelScope.launch(exceptionHandler) {
+            _issueList.closeElement(issueId)
             val response = issueRepository.closeIssue(issueId)
             when (response.statusCode) {
                 200 -> _closeIssueMessage.emit(response.message)
