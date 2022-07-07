@@ -20,7 +20,7 @@ interface APIService {
     @GET("milestones")
     suspend fun getMileStones(): MileStoneDTO
 
-    @POST("labelswfadfq")
+    @POST("labels")
     suspend fun addLabels(@Body label: LabelDTO.LabelDTOItem): Response<Unit>
 
     @POST("milestones")

@@ -20,7 +20,7 @@ class IssueRepositoryImpl @Inject constructor(
         _issueFilterRequest.value = issueFilterRequest
     }
 
-    override suspend fun getIssue(): Flow<List<Issue>> {
+    override fun getIssue(): Flow<List<Issue>> {
         return dataSource.getIssues(_issueFilterRequest.value).map { issueDTO ->
             issueDTO.issues.map { issueDTOItem ->
                 Issue.of(issueDTOItem)
@@ -37,7 +37,7 @@ class IssueRepositoryImpl @Inject constructor(
         return result.isSuccessful
     }
 
-    override suspend fun searchIssue(word: String): Flow<List<Issue>> {
+    override fun searchIssue(word: String): Flow<List<Issue>> {
         return dataSource.searchIssue(word).map { issueDTO ->
             issueDTO.issues.map { issueDTOItem ->
                 Issue.of(issueDTOItem)

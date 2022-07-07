@@ -36,7 +36,8 @@ class GitHubWebViewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_git_hub_web_view, container, false)
+        binding =
+            DataBindingUtil.inflate(inflater, R.layout.fragment_git_hub_web_view, container, false)
         binding.lifecycleOwner = viewLifecycleOwner
         return binding.root
     }
@@ -49,22 +50,28 @@ class GitHubWebViewFragment : Fragment() {
             webViewClient = CustomWebViewClient()
             loadUrl("https://github.com/login/oauth/authorize?client_id=" + getString(R.string.git_hub_id))
         }
+        setupObservers()
+    }
+
+    private fun setupObservers() {
+        viewLifecycleOwner.repeatOnLifecycleExtension {
+            viewModel.accessToken.collect { accessToken ->
+                if (!accessToken.isNullOrEmpty()) {
+                    val intent = Intent(requireContext(), HomeActivity::class.java)
+                    startActivity(intent)
+                }
+            }
+        }
     }
 
     inner class CustomWebViewClient : WebViewClient() {
 
         private fun checkUrl(request: WebResourceRequest?) {
-            if (request?.url.toString().startsWith("http://13.209.73.68:8080/")) {
-                val authCode = request?.url.toString().split("=")[1]
-                viewModel.requestGitHubLogin(GitHubOAuthRequest(authCode))
-                viewLifecycleOwner.repeatOnLifecycleExtension {
-                    viewModel.accessToken.collect { accessToken ->
-                        if (!accessToken.isNullOrEmpty()) {
-                            val intent = Intent(requireContext(), HomeActivity::class.java)
-                            startActivity(intent)
-                        }
-                    }
-                }
+            val url = request?.url ?: return
+            val code = url.getQueryParameter(GITHUB_OAUTH_CODE_PARAM_KEY)
+
+            if (url.scheme == GITHUB_OAUTH_REDIRECTION_SCHEME && url.host == GITHUB_OAUTH_REDIRECTION_HOST && code != null) {
+                viewModel.requestGitHubLogin(GitHubOAuthRequest(code))
             }
         }
 
@@ -74,7 +81,13 @@ class GitHubWebViewFragment : Fragment() {
             request: WebResourceRequest?
         ): Boolean {
             checkUrl(request)
-            return super.shouldOverrideUrlLoading(view, request)
+            return true // shouldOverrideUrlLoading 함수 반환 값을 return true 로 하면 다음 page 를 load 하지 않는다.
         }
+    }
+
+    companion object {
+        private const val GITHUB_OAUTH_REDIRECTION_SCHEME = "http"
+        private const val GITHUB_OAUTH_REDIRECTION_HOST = "13.209.73.68"
+        private const val GITHUB_OAUTH_CODE_PARAM_KEY = "code"
     }
 }
