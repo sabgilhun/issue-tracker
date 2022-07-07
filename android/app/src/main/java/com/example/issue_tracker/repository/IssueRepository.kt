@@ -10,11 +10,11 @@ interface IssueRepository {
 
     fun changeIssueFilterRequest(issueFilterRequest: IssueFilterRequest)
 
-    suspend fun getIssue(): Flow<List<Issue>>
+    fun getIssue(): Flow<List<Issue>>
 
     suspend fun closeIssue(issueId: Int): IssueCloseResponse
 
     suspend fun addIssue(issueAddRequest: IssueAddRequest): Boolean
 
-    suspend fun searchIssue(word: String): Flow<List<Issue>>
+    fun searchIssue(word: String): Flow<List<Issue>>
 }
