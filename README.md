@@ -45,7 +45,7 @@
 
 | 이슈 필터 | 이슈 검색 | 날짜, 가격 인원 설정 | 숙소 검색 결과 및 지도 |
 |:--------:|:--------:|:--------:|:--------:|
-| <img src=https://user-images.githubusercontent.com/79504043/177961096-11f8f782-cc30-4bba-b5ac-916cb3dc4653.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177962476-bf6a537d-d59e-4ecf-99da-7c0015af883a.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/173237631-c4266b00-acdf-4d61-8c4a-765d69adc19a.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/173238564-e366f104-0b9c-4595-a8b8-8bceb86cfead.gif width=200> |
+| <img src=https://user-images.githubusercontent.com/79504043/177961096-11f8f782-cc30-4bba-b5ac-916cb3dc4653.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177962476-bf6a537d-d59e-4ecf-99da-7c0015af883a.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177966815-7abcda81-aca1-487d-bd36-847e304eacf8.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/173238564-e366f104-0b9c-4595-a8b8-8bceb86cfead.gif width=200> |
 
 ## MAD Scorecard
 <img src="https://user-images.githubusercontent.com/79504043/173233691-3eb89b24-d6ac-41bc-9076-bfe1ea94def6.png">  
