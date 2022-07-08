@@ -45,9 +45,12 @@
 
 | 이슈 필터 | 이슈 검색 | 날짜, 가격 인원 설정 | 숙소 검색 결과 및 지도 |
 |:--------:|:--------:|:--------:|:--------:|
-| <img src=https://user-images.githubusercontent.com/79504043/177961096-11f8f782-cc30-4bba-b5ac-916cb3dc4653.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177962476-bf6a537d-d59e-4ecf-99da-7c0015af883a.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177966815-7abcda81-aca1-487d-bd36-847e304eacf8.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/173238564-e366f104-0b9c-4595-a8b8-8bceb86cfead.gif width=200> |
+| <img src=https://user-images.githubusercontent.com/79504043/177961096-11f8f782-cc30-4bba-b5ac-916cb3dc4653.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177962476-bf6a537d-d59e-4ecf-99da-7c0015af883a.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177966815-7abcda81-aca1-487d-bd36-847e304eacf8.gif width=200> | <img src=https://cdn.discordapp.com/attachments/985744748759359498/994909627873505320/milestoneadd.gif width=200> |
 
 ## MAD Scorecard
 <img src="https://user-images.githubusercontent.com/79504043/173233691-3eb89b24-d6ac-41bc-9076-bfe1ea94def6.png">  
 <img src="https://user-images.githubusercontent.com/79504043/173233699-4cc2ba9d-9c5e-4276-b3ba-682b233aac70.png">  
 <img src="https://user-images.githubusercontent.com/79504043/173233701-1c64b646-42cb-4a04-9847-33215c1c6f22.png"> 
+
+https://discord.com/channels/985712002343239721/985744748759359498/994909628120956938
+https://cdn.discordapp.com/attachments/985744748759359498/994909627873505320/milestoneadd.gif
