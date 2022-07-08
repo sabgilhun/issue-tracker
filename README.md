@@ -39,17 +39,13 @@
 - JWT 앱 전역 보관 및 okHttp Header 추가를 위한 [SharedPreference](https://developer.android.com/reference/androidx/recyclerview/widget/ItemTouchHelper.Callback)
 
 
-
-![일반 회원가입   로그인]()
-
-
-
-
-
-
-| 권한설정 및 위도경도 불러오기  | 키워드 검색 | 날짜, 가격 인원 설정 | 숙소 검색 결과 및 지도 |
+| 회원가입 및 로그인  | GitHub OAuth 로그인 | 이슈 추가 | 이슈 닫기 |
 |:--------:|:--------:|:--------:|:--------:|
-| <img src=https://user-images.githubusercontent.com/79504043/177955806-094f1aa1-c702-48a4-8599-1e05dab5dbe6.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/173237067-44ad303b-fef6-4266-949c-0cd252135e0b.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/173237631-c4266b00-acdf-4d61-8c4a-765d69adc19a.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/173238564-e366f104-0b9c-4595-a8b8-8bceb86cfead.gif width=200> |
+| <img src=https://user-images.githubusercontent.com/79504043/177956772-aebe64bd-bd47-4169-b9cf-1451230d2621.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/173237067-44ad303b-fef6-4266-949c-0cd252135e0b.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177959254-09b40b46-abdd-4479-8300-19c443ab0907.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177958085-562789ac-412f-4346-b292-2a7bd6f6ccb8.gif width=200> |
+
+| 이슈 필터 | 이슈 검색 | 날짜, 가격 인원 설정 | 숙소 검색 결과 및 지도 |
+|:--------:|:--------:|:--------:|:--------:|
+| <img src=https://user-images.githubusercontent.com/79504043/177961096-11f8f782-cc30-4bba-b5ac-916cb3dc4653.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/177962476-bf6a537d-d59e-4ecf-99da-7c0015af883a.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/173237631-c4266b00-acdf-4d61-8c4a-765d69adc19a.gif width=200> | <img src=https://user-images.githubusercontent.com/79504043/173238564-e366f104-0b9c-4595-a8b8-8bceb86cfead.gif width=200> |
 
 ## MAD Scorecard
 <img src="https://user-images.githubusercontent.com/79504043/173233691-3eb89b24-d6ac-41bc-9076-bfe1ea94def6.png">  
