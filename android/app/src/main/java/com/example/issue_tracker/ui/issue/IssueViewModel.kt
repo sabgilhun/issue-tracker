@@ -35,8 +35,8 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     private val _checkedIssueIdListTemp = MutableStateFlow<List<Int>>(mutableListOf())
     val checkedIssueIdListTemp: StateFlow<List<Int>> = _checkedIssueIdListTemp
 
-    private val _error = MutableStateFlow(CEHModel(null, ""))
-    val error: SharedFlow<CEHModel> = _error.asSharedFlow()
+    private val _error = MutableSharedFlow<CEHModel>()
+    val error: SharedFlow<CEHModel> = _error
 
     val checkLongClicked = MutableStateFlow<Boolean>(true)
 
@@ -47,7 +47,9 @@ class IssueViewModel @Inject constructor(private val issueRepository: IssueRepos
     val searchIssueList: StateFlow<List<Issue>> = _searchIssueList
 
     private val exceptionHandler = CoroutineExceptionHandler { _, throwable ->
-        _error.value = CoroutineException.checkThrowable(throwable)
+        viewModelScope.launch {
+            _error.emit(CoroutineException.checkThrowable(throwable))
+        }
     }
 
     fun getIssues() {

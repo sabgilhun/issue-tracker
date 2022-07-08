@@ -87,7 +87,7 @@ class GitHubWebViewFragment : Fragment() {
 
     companion object {
         private const val GITHUB_OAUTH_REDIRECTION_SCHEME = "http"
-        private const val GITHUB_OAUTH_REDIRECTION_HOST = "13.209.73.68"
+        private const val GITHUB_OAUTH_REDIRECTION_HOST = "3.34.97.60"
         private const val GITHUB_OAUTH_CODE_PARAM_KEY = "code"
     }
 }

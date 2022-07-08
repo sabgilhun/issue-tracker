@@ -89,7 +89,7 @@ class IssueFilterFragment : Fragment() {
         binding.tvFilterChooseMileStone.text = viewModel.mileStoneChoose.value
         binding.ibFilterButtonMileStone.setOnClickListener {
             val mileStonePopupMenu = PopupMenu(requireContext(), it)
-            for (i in 0 until viewModel.labelList.value.size) {
+            for (i in 0 until viewModel.mileStoneList.value.size) {
                 mileStonePopupMenu.menu.add(Menu.NONE, i, i, viewModel.mileStoneList.value[i].title)
             }
             mileStonePopupMenu.setOnMenuItemClickListener { item ->
