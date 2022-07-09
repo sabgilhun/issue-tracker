@@ -8,13 +8,9 @@ import dagger.hilt.android.HiltAndroidApp
 
 @HiltAndroidApp
 class MainApplication : Application() {
-    companion object {
-        lateinit var prefs: PreferenceUtil
-    }
 
     override fun onCreate() {
         super.onCreate()
         KakaoSdk.init(this, getString(R.string.kakao_native_app_key))
-        prefs = PreferenceUtil(applicationContext)
     }
 }

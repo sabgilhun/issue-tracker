@@ -1,17 +1,13 @@
 package com.example.issue_tracker.network
 
-import com.example.issue_tracker.ui.common.MainApplication
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import java.io.IOException
 import javax.inject.Singleton
 
 @Module
@@ -51,23 +47,14 @@ object RetrofitObject {
 
     @Provides
     @Singleton
-    fun retrofit(): APIService {
+    fun retrofit(
+        appInterceptor: AppInterceptor,
+    ): APIService {
         return Retrofit.Builder()
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
-            .client(okHttpClient(AppInterceptor()))
+            .client(okHttpClient(appInterceptor))
             .build()
             .create(APIService::class.java)
-    }
-
-    class AppInterceptor : Interceptor {
-        @Throws(IOException::class)
-        override fun intercept(chain: Interceptor.Chain) : Response = with(chain) {
-            val accessToken = MainApplication.prefs.getString("accessToken", "")
-            val newRequest = request().newBuilder()
-                .addHeader("authorization", accessToken)
-                .build()
-            proceed(newRequest)
-        }
     }
 }

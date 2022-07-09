@@ -2,6 +2,7 @@ package com.example.issue_tracker.ui.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.issue_tracker.common.PreferenceUtil
 import com.example.issue_tracker.model.GitHubOAuthRequest
 import com.example.issue_tracker.model.LoginRequest
 import com.example.issue_tracker.network.CEHModel
@@ -18,7 +19,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class LoginViewModel @Inject constructor(private val loginRepository: LoginRepository): ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val loginRepository: LoginRepository,
+    private val preferenceUtil: PreferenceUtil,
+) : ViewModel() {
 
     private val _accessToken = MutableStateFlow<String?>(null)
     val accessToken: StateFlow<String?> = _accessToken
@@ -33,22 +37,22 @@ class LoginViewModel @Inject constructor(private val loginRepository: LoginRepos
     fun requestGitHubLogin(gitHubOAuthRequest: GitHubOAuthRequest) {
         viewModelScope.launch(exceptionHandler) {
             val response = loginRepository.requestGitHubLogin(gitHubOAuthRequest)
-            val accessToken =  response.accessToken.token
+            val accessToken = response.accessToken.token
             _accessToken.value = accessToken
 
             // SharedPreference 에 accessToken 저장
-            MainApplication.prefs.setString("accessToken", accessToken)
+            preferenceUtil.setString("accessToken", accessToken)
         }
     }
 
     fun requestLogin(loginRequest: LoginRequest) {
         viewModelScope.launch(exceptionHandler) {
             val response = loginRepository.requestLogin(loginRequest)
-            val accessToken =  response.accessToken.token
+            val accessToken = response.accessToken.token
             _accessToken.value = accessToken
 
             // SharedPreference 에 accessToken 저장
-            MainApplication.prefs.setString("accessToken", accessToken)
+            preferenceUtil.setString("accessToken", accessToken)
         }
     }
 }
